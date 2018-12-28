@@ -1,0 +1,96 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.AccountSearchViewModel
+@{ int i = 0;
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>User Priviledge</th>
+
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var accounts in Model.Accounts)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@accounts.Name</td>
+                <td>@accounts.Password</td>
+                <td>@accounts.Email</td>
+                <td>@accounts.Category</td>
+
+                <td>
+                    <button class="deletebtn fas fa-trash-alt" data-id="@accounts.ID">
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+<script>
+
+$(".Pagebtn").click(function() {
+    $.ajax({
+            url: "@Url.AccountTable("")",
+    data:
+            {
+            pageNo: $(this).attr("data-pageNo")
+    }
+        })
+    .done(function(response) {
+        $("#tablecontainer").html(response);
+        })
+    .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+});
+
+
+
+$(".deletebtn").click(function () {
+    var confirmation = confirm("Are you sure you want to delete");
+    if (confirmation) {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.DeleteAccount()",
+            data: {
+                ID: $(this).attr("data-id")
+            }
+        })
+        .done(function (response) {
+            $("#tablecontainer").html(response);
+        })
+        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    }
+});
+</script>

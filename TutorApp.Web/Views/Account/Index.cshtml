@@ -1,0 +1,59 @@
+﻿@using TutorApp.Web.Helper;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1> Accounts Page </h1>
+<form method="post" class="container-fluid">
+  
+    <input id="searchtxt" class="searchtext" name="Search" placeholder="Search Here" />
+    <button id="Resetbtn" class="fas fa-sync-alt"></button>
+</form>
+<hr />
+<div id="tablecontainer" class="container-fluid">
+
+    @{
+        Html.RenderAction("_AccountTable");
+    }
+
+</div>
+
+<div id="actioncontainer" class="container-fluid">
+
+</div>
+
+<script>
+         $("#Resetbtn").click(function () {
+              $.ajax({
+               url: "@Url.AccountTable("")",
+
+        })
+        .done(function (response) {
+            $("#tablecontainer").html(response);
+            $("#searchtxt").val("");
+        })
+        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+
+            event.preventDefault();
+         });
+
+
+         $("#searchtxt").on('input', function () {
+            $.ajax({
+            url: "@Url.AccountTable("")",
+            data: {
+                Search: $("input[name=Search]").val()
+
+            }
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        event.preventDefault();
+    });
+
+
+</script>

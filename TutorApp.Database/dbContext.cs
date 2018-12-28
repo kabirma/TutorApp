@@ -10,7 +10,7 @@ using TutorApp.Entities;
 namespace TutorApp.Database
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-    public class dbContext : DbContext
+    public class dbContext : DbContext, IDisposable
     {
         public dbContext() : base("AppDatabase") { }
 
