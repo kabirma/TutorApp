@@ -1,0 +1,276 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.NewTeacherViewModels
+
+@{ 
+    var featureturechecked = Model.IsTeacher ? "checked" : string.Empty;
+    var featurefalsechecked = !Model.IsTeacher ? "checked" : string.Empty;
+
+}
+
+<form method="post" id="createteacher" class="form container-fluid row">
+
+    <div class="col-md-7">
+        <h1>Create Form</h1><br>
+        <input name="ID" type="hidden" value="@Model.ID" />
+        <input value="@Model.TeachingSubjectID" name="TeachingSubjectID" type="hidden" />
+
+        <input type="text" name="Name" placeholder="Type First Name Here" value="@Model.Name" />
+
+        <br />
+
+
+        <input type="text" name="LName" placeholder="Type Last Name Here" value="@Model.LName" />
+
+        <br />
+
+        <input type="text" name="Email" placeholder="Type Email Here" value="@Model.Email" />
+
+        <br />
+        <input type="text" name="Password" placeholder="Type Password Here" value="@Model.Password" />
+
+        <br />
+        <label>Is Teacher?</label><br />
+        <input type="radio" name="IsTeacher" value="True" id="true" @featureturechecked /><label for="true">True</label>
+        <input type="radio" name="IsTeacher" value="False" id="false" @featurefalsechecked /><label for="false">False</label>
+        <br />
+        <div class="select">
+            <select name="Experience">
+                @for (var i = 0; i < 16; i++)
+                {
+                    var selec = Model.Experience == @i.ToString() ? "selected" : string.Empty;
+                    <option value="@i" @selec>
+                        @i year
+                    </option>
+                }
+                @{var selecp = Model.StudentType == "15+" ? "selected" : string.Empty;
+                }
+                <option value="15+" @selecp>
+                    15+ years
+                </option>
+            </select>
+        </div>
+
+        <br />
+        <div class="select">
+            <select name="StudentType">
+                @{var selecsc = Model.StudentType == "School" ? "selected" : string.Empty;
+                }
+                <option value="School" @selecsc>
+                    School
+                </option>
+
+                @{var selecmc = Model.StudentType == "MidSchool" ? "selected" : string.Empty;
+                }
+                <option value="MidSchool" @selecmc>
+                    Mid School
+                </option>
+
+                @{var selechc = Model.StudentType == "HigherSchool" ? "selected" : string.Empty;
+                }
+                <option value="HigherSchool" @selechc>
+                    Higher School
+                </option>
+
+                @{var selecc = Model.StudentType == "College" ? "selected" : string.Empty;
+                }
+                <option value="College" @selecc>
+                    College
+                </option>
+
+                @{var selecug = Model.StudentType == "Undergraduate" ? "selected" : string.Empty;
+                }
+                <option value="Undergraduate" @selecug>
+                    Undergraduate
+                </option>
+
+                @{var selecg = Model.StudentType == "Graduate" ? "selected" : string.Empty;
+                }
+                <option value="Graduate" @selecg>
+                    Graduate
+                </option>
+            </select>
+        </div>
+        <br />
+        <div class="select">
+            <select name="LessonLocation">
+                @{var selecho = Model.StudentType == "Home" ? "selected" : string.Empty;
+                }
+                <option value="Home" @selecho>
+                    Home
+                </option>
+
+                @{var selecot = Model.StudentType == "Outside" ? "selected" : string.Empty;
+                }
+                <option value="Outside" @selecot>
+                    Outside
+                </option>
+
+                @{var selecol = Model.StudentType == "Online" ? "selected" : string.Empty;
+                }
+                <option value="Online" @selecol>
+                    Online
+                </option>
+
+            </select>
+        </div>
+
+        <br />
+        <div class="select">
+            <select name="AvailableHours">
+                @for (var i = 2; i < 9; i++)
+                {
+                    var selecAh = Model.StudentType == @i.ToString() ? "selected" : string.Empty;
+
+                    <option value="@i" @selecAh>
+                        @i Hours
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="select">
+            <select name="Gender">
+                @{var selecml = Model.StudentType == "Male" ? "selected" : string.Empty;
+                }
+                <option value="Male" @selecml>
+                    Male
+                </option>
+
+                @{var selecfl = Model.StudentType == "Female" ? "selected" : string.Empty;
+                }
+                <option value="Female" @selecfl>
+                    Female
+                </option>
+
+            </select>
+        </div>
+
+        <br />
+        <input type="date" name="DOB" value="@Model.DOB" />
+        <br />
+        <input type="text" name="UndergraduateCollage" placeholder="Type Undergraduate Collage Here" value="@Model.UndergraduateCollage" />
+
+        <br />
+        <input type="text" name="UndergraduateMajor" placeholder="Type Undergraduate Major Here" value="@Model.UndergraduateMajor" />
+
+        <br />
+        <input type="text" name="GraduateCollage" placeholder="Type Graduate Collage Here" value="@Model.GraduateCollage" />
+
+        <br />
+        <input type="text" name="GraduateDegree" placeholder="Type Graduate Degree Here" value="@Model.GraduateDegree" />
+
+        <br />
+        <input type="text" name="GraduateCollage2" placeholder="Type Graduate Collage 2 Here" value="@Model.GraduateCollage2" />
+
+        <br />
+        <input type="text" name="GraduateDegree2" placeholder="Type Graduate Degree 2 Here" value="@Model.GraduateDegree2" />
+
+        <br />
+        <br />
+        <div class="select">
+
+            <select name="HoulryRate">
+                <option value="-1">
+                    Select Houlry Rate
+                </option>
+                @for (var i = 5; i < 500; i += 5)
+                {
+                    var selechr = Model.HoulryRate == i ? "selected" : string.Empty;
+
+                    <option value="@i" @selechr>
+                        @i $
+                    </option>
+                }
+            </select>
+            <br />
+            <input type="text" name="PhoneNumber" placeholder="Type PhoneNumber Here" value="@Model.PhoneNumber" />
+
+            <br />
+            <input type="text" name="Address" placeholder="Type Address Here" value="@Model.Address" />
+
+            <br />
+            <input type="text" name="City" placeholder="Type City Here" value="@Model.City" />
+
+            <br />
+            <input type="text" name="State" placeholder="Type State Here" value="@Model.State" />
+
+            <br />
+            <input type="text" name="Country" placeholder="Type Country Here" value="@Model.Country" />
+
+            <br />
+            <input type="text" name="ZipCode" placeholder="Type Zip Code Here" value="@Model.ZipCode" />
+
+            <br />
+            <input type="text" name="Bio" placeholder="Type Bio Detail Here" value="@Model.Bio" />
+
+            <br />
+            <input id="ImageUrl" name="ImageUrl" type="hidden" value="@Model.ImageUrl" />
+            <input type="file" id="ImageUpload" name="Image" />
+<br />
+            <button type="button" id="createbtn">Create Record</button>
+            <button type="button" id="cancelbtn">Cancel</button>
+        </div>
+        <div class="col-md-5 row">
+            <br /><br /><br /><br /><br /><br />
+            <img id="imagefile" class="image" src="@Model.ImageUrl">
+
+
+        </div>
+</form>
+
+<script>
+   $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+    });
+
+    $("#updatebtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.EditTeachers()",
+            data: $("#updatecoursfiled").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+      $("#ImageUpload").change(function () {
+        var element = this;
+        var formData = new FormData();
+        var totalfiles = element.files.length;
+
+        for (var i = 0; i < totalfiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Imageuploader()',
+            dataType: 'json',
+            data: formData,
+            contentType: false,
+            processData: false
+
+        })
+            .done(function (response) {
+                console.log(response);
+
+                if (response.Success) {
+                    $("#imagefile").attr("src", response.ImageUrl);
+
+                    $("#ImageUrl").val(response.ImageUrl);
+                }
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+</script>
+
+
+

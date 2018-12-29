@@ -1,0 +1,194 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.TeacherSearchViewModel
+@{
+
+
+    int i = 0;
+}
+@if (Model != null && Model.Teacher != null && Model.Teacher.Count > 0)
+
+{
+    <table id="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Image</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Gender</th>
+                <th>D.O.B</th>
+                <th>Undergraduate Collage</th>
+                <th>Undergraduate Major</th>
+                <th>Graduate Collage</th>
+                <th>Graduate Degree</th>
+                <th>Graduate Collage 2</th>
+                <th>Graduate Degree 2</th>
+                <th>Is Teacher?</th>
+                <th>Experience</th>
+                <th>Student Level</th>
+                <th>Lesson Location</th>
+                <th>Available Hours</th>
+                <th>Houlry Rate</th>
+                <th>Phone Number</th>
+
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Zip Code</th>
+                <th>Bio</th>
+                <th>Teaching Subject</th>
+
+
+
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Teacher in Model.Teacher)
+            {
+
+                i++;
+            <tr>
+                <td>@i</td>
+
+                <td><img src="@Teacher.ImageUrl" width="150px" height="auto" /></td>
+                <td>@Teacher.Name</td>
+                <td>@Teacher.LName</td>
+                <td>@Teacher.Email</td>
+                <td>@Teacher.Password</td>
+                <td>@Teacher.Gender</td>
+                <td>@Teacher.DOB</td>
+                <td>@Teacher.UndergraduateCollage</td>
+                <td>@Teacher.UndergraduateMajor</td>
+                <td>@Teacher.GraduateCollage</td>
+                <td>@Teacher.GraduateDegree</td>
+                <td>@Teacher.GraduateCollage2</td>
+                <td>@Teacher.GraduateDegree2</td>
+
+                <td>@Teacher.IsTeacher</td>
+                <td>@Teacher.Experience</td>
+                <td>@Teacher.StudentType</td>
+                <td>@Teacher.LessonLocation</td>
+                <td>@Teacher.AvailableHours</td>
+                <td>@Teacher.HoulryRate</td>
+                <td>@Teacher.PhoneNumber</td>
+
+                <td>@Teacher.Address</td>
+                <td>@Teacher.City</td>
+                <td>@Teacher.State</td>
+                <td>@Teacher.Country</td>
+                <td>@Teacher.ZipCode</td>
+                <td>@Teacher.Bio</td>
+
+                <td>
+                    @if (Teacher.TeachingSubjects != null)
+                    {<text>@Teacher.TeachingSubjects.Name</text> }
+                else
+                { <text></text>}
+                </td>
+
+
+
+                <td>
+                    <button class="editbtn fas fa-edit" data-id="@Teacher.ID"></button>
+                    <button class="deletebtn fas fa-trash-alt" data-id="@Teacher.ID"></button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.TeachersTable("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+
+    $(".editbtn").click(function() {
+
+        $.ajax({
+                url: "@Url.EditTeachers()",
+        data:
+                {
+                    ID: $(this).attr("data-id")
+        }
+            })
+        .done(function(response) {
+            $("#actioncontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+    $(".deletebtn").click(function() {
+        var confirmation = confirm("Are you sure you want to delete");
+        if (confirmation)
+        {
+
+        $.ajax({
+                type: "POST",
+        url: "@Url.DeleteTeachers()",
+        data:
+                {
+                    ID: $(this).attr("data-id")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+        }
+    });
+
+
+
+</script>
+

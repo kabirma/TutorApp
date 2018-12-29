@@ -348,6 +348,70 @@ namespace TutorApp.Web.Helper
             return routeURL.ToLower();
         }
 
+        /************************* Teachers ***********************/
+
+        public static string TeachersTable(this UrlHelper helper, string Search)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Teachers",
+                action = "_TeacherTable",
+                Search = Search
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string CreateTeachers(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Teachers",
+                action = "_Create",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string EditTeachers(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Teachers",
+                action = "_Edit",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string DeleteTeachers(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Teachers",
+                action = "_Delete",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
 
     }
 }

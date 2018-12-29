@@ -161,6 +161,7 @@
     <Compile Include="Controllers\FieldTopicsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Controllers\TopicDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -174,6 +175,7 @@
     <Compile Include="ViewModels\FieldTopicViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
+    <Compile Include="ViewModels\TeachersViewModel.cs" />
     <Compile Include="ViewModels\TopicDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +236,10 @@
     <Content Include="Views\TopicDetails\_TopicDetailTable.cshtml" />
     <Content Include="Views\TopicDetails\_Create.cshtml" />
     <Content Include="Views\TopicDetails\_Edit.cshtml" />
+    <Content Include="Views\Teachers\Index.cshtml" />
+    <Content Include="Views\Teachers\_TeacherTable.cshtml" />
+    <Content Include="Views\Teachers\_Create.cshtml" />
+    <Content Include="Views\Teachers\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
