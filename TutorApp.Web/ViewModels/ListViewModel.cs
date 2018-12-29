@@ -15,5 +15,7 @@ namespace TutorApp.Web.ViewModels
 
 
         public List<CoursesField> CourseField { get; set; }
+
+        public List<FieldTopics> TopicField { get; set; }
     }
 }

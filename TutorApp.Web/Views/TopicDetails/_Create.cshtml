@@ -1,0 +1,94 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+
+
+<form method="post" id="createtopicdetail" class="form container-fluid row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+        <h1>Create Form</h1>
+        <br />
+        <div class="select">
+            <select name="CategoryID">
+                @foreach (var categ in Model.TopicField)
+                {
+                    <option value="@categ.ID">
+                        @categ.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+
+        <input type="text" name="Name" placeholder="Type Name Here" />
+        <br />
+        <input type="text" name="Description" placeholder="Type Descripiton Here" />
+        <br />
+
+        <br />
+        <input id="ImageUrl" name="Imageurl" type="hidden" />
+        <input type="file" id="ImageUpload" name="Image" />
+        <br />
+        <button type="button" id="createbtn">Create Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+    <div class="col-md-4">
+        <br /><br />
+        <img id="imagefile" class="image" src="https://vignette.wikia.nocookie.net/undertale-rho/images/5/5f/Placeholder.jpg/revision/latest?cb=20180213155916">
+    </div>
+</form>
+
+<script>
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+    });
+
+
+    $("#createbtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.CreateTopicDetails()",
+            data: $("#createtopicdetail").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+     $("#ImageUpload").change(function () {
+        var element = this;
+        var formData = new FormData();
+        var totalfiles = element.files.length;
+
+        for (var i = 0; i < totalfiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Imageuploader()',
+            dataType: 'json',
+            data: formData,
+            contentType: false,
+            processData: false
+
+        })
+        .done(function (response) {
+            console.log(response);
+
+            if (response.Success) {
+                $("#imagefile").attr("src", response.ImageUrl);
+
+                $("#ImageUrl").val(response.ImageUrl);
+            }
+            })
+       .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+</script>
+
