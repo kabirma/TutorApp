@@ -152,5 +152,72 @@ namespace TutorApp.Web.Helper
 
             return routeURL.ToLower();
         }
+
+        /******************* Course Field **********************/
+
+        public static string CourseFieldTable(this UrlHelper helper, string Search)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "CourseField",
+                action = "_CourseFieldTable",
+                Search = Search
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string CreateCourseField(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "CourseField",
+                action = "_Create",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string EditCourseField(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "CourseField",
+                action = "_Edit",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string DeleteCourseField(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "CourseField",
+                action = "_Delete",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+
     }
 }

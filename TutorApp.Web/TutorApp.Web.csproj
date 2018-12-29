@@ -156,6 +156,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CourseFieldController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\BlogViewModel.cs" />
+    <Compile Include="ViewModels\CourseFieldViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
@@ -216,6 +218,10 @@
     <Content Include="Views\Courses\_Create.cshtml" />
     <Content Include="Views\Courses\_Coursestable.cshtml" />
     <Content Include="Views\Courses\_Edit.cshtml" />
+    <Content Include="Views\CourseField\Index.cshtml" />
+    <Content Include="Views\CourseField\_CourseFieldTable.cshtml" />
+    <Content Include="Views\CourseField\_Create.cshtml" />
+    <Content Include="Views\CourseField\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
