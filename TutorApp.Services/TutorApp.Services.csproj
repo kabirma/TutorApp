@@ -51,6 +51,7 @@
     <Compile Include="BlogServices.cs" />
     <Compile Include="CourseServices.cs" />
     <Compile Include="CoursesFieldServices.cs" />
+    <Compile Include="FieldTopicsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

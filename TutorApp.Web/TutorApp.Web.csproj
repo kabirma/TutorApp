@@ -158,6 +158,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CourseFieldController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\FieldTopicsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,6 +170,7 @@
     <Compile Include="ViewModels\BlogViewModel.cs" />
     <Compile Include="ViewModels\CourseFieldViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
+    <Compile Include="ViewModels\FieldTopicViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
   </ItemGroup>
@@ -222,6 +224,10 @@
     <Content Include="Views\CourseField\_CourseFieldTable.cshtml" />
     <Content Include="Views\CourseField\_Create.cshtml" />
     <Content Include="Views\CourseField\_Edit.cshtml" />
+    <Content Include="Views\FieldTopics\Index.cshtml" />
+    <Content Include="Views\FieldTopics\_FieldTopicTable.cshtml" />
+    <Content Include="Views\FieldTopics\_Create.cshtml" />
+    <Content Include="Views\FieldTopics\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

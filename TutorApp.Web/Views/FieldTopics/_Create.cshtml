@@ -3,13 +3,13 @@
 
 
 
-<form method="post" id="createCourseField" class="form container-fluid row">
+<form method="post" id="createFieldTopic" class="form container-fluid row">
 
     <div class="col-md-12">
         <h1>Create Form</h1><br>
         <div class="select">
             <select name="CategoryID">
-                @foreach (var categ in Model.Courses)
+                @foreach (var categ in Model.CourseField)
                 {
                     <option value="@categ.ID">
                         @categ.Name
@@ -28,15 +28,15 @@
 
         <br />
 
-      
 
 
-     
+
+
 
         <button type="button" id="createbtn">Create Record</button>
         <button type="button" id="cancelbtn">Cancel</button>
     </div>
-    
+
 </form>
 
 <script>
@@ -49,8 +49,8 @@
 
         $.ajax({
             type: "POST",
-            url: "@Url.CreateCourseField()",
-            data: $("#createCourseField").serialize()
+            url: "@Url.CreateFieldTopics()",
+            data: $("#createFieldTopic").serialize()
         })
             .done(function (response) {
                 $("#tablecontainer").html(response);
@@ -59,6 +59,7 @@
             .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
     });
 
-  
+
 
 </script>
+
