@@ -9,13 +9,13 @@ namespace TutorApp.Entities
     public class Blogs : BaseEntity
     {
         public string Description { get; set; }
-        public Teachers Writer { get; set; }
+        public virtual Teachers Writer { get; set; }
         public string Date { get; set; }
         public string Imageurl { get; set; }
-        public Courses Category { get; set; }
-        public Courses Category2 { get; set; }
-        public Courses Category3 { get; set; }
-        public Courses Category4 { get; set; }
-        public Courses Category5 { get; set; }
+        public virtual Courses Category { get; set; }
+        public virtual Courses Category2 { get; set; }
+        public virtual Courses Category3 { get; set; }
+        public virtual Courses Category4 { get; set; }
+        public virtual Courses Category5 { get; set; }
     }
 }

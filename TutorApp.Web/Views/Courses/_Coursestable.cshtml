@@ -1,0 +1,127 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.CoursesSearchViewModel
+@{
+   
+    var i = 0;
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var courses in Model.Courses)
+        {
+            i++;
+        <tr>
+            <td>@i</td>
+            <td><img src="@courses.Imageurl" width="200px" height="auto"/></td>
+            <td>@courses.Name</td>
+            <td>@courses.Description</td>
+            <td>
+                <button class="editbtn fas fa-edit" data-id="@courses.ID"></button>
+                <button class="deletebtn fas fa-trash-alt" data-id="@courses.ID"></button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.CoursesTable("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+});
+
+
+
+        $(".editbtn").click(function () {
+
+            $.ajax({
+                url: "@Url.EditCourse()",
+                data: {
+                    ID: $(this).attr("data-id")
+                }
+            })
+                .done(function (response) {
+                    $("#actioncontainer").html("");
+                    $("#actioncontainer").html(response);
+                })
+                .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#actioncontainer").offset().top
+            }, 1000);
+        });
+
+        $(".deletebtn").click(function () {
+            var confirmation = confirm("Are you sure you want to delete");
+            if (confirmation) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.DeleteCourse()",
+                    data: {
+                        ID: $(this).attr("data-id")
+                    }
+                })
+                    .done(function (response) {
+                        $("#tablecontainer").html(response);
+                    })
+                    .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+            }
+        });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

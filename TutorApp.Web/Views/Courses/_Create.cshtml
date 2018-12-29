@@ -1,0 +1,82 @@
+﻿@using TutorApp.Web.Helper;
+
+<h2>Operations</h2>
+<form method="post" id="createcourse" class="form container-fluid row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+        <h1>Create Form</h1>
+        <br />
+        <input type="text" name="Name" placeholder="Type Name Here" />
+        <br />
+        <input type="text" name="Description" placeholder="Type Descripiton Here" />
+        <br />
+        
+        <br />
+        <input id="ImageUrl" name="Imageurl" type="hidden" />
+        <input type="file" id="ImageUpload" name="Image" />
+        <br />
+        <button type="button" id="createbtn">Create Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+    <div class="col-md-4">
+        <br /><br />
+        <img id="imagefile" class="image" src="https://vignette.wikia.nocookie.net/undertale-rho/images/5/5f/Placeholder.jpg/revision/latest?cb=20180213155916">
+    </div>
+</form>
+
+
+<script>
+    $("#createbtn").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.CreateCourses()",
+            data: $("#createcourse").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+        $([document.documentElement, document.body]).animate({
+            scrolltop: $("#tablecontainer").offset().top
+        }, 1000);
+    });
+
+
+    $("#ImageUpload").change(function () {
+        var element = this;
+        var formData = new FormData();
+        var totalfiles = element.files.length;
+
+        for (var i = 0; i < totalfiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Imageuploader()',
+            dataType: 'json',
+            data: formData,
+            contentType: false,
+            processData: false
+
+        })
+        .done(function (response) {
+            console.log(response);
+
+            if (response.Success) {
+                $("#imagefile").attr("src", response.ImageUrl);
+
+                $("#ImageUrl").val(response.ImageUrl);
+            }
+            })
+       .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+</script>
