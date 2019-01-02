@@ -1,0 +1,152 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.VideoSearchViewModel
+@{
+
+
+    int i = 0;
+}
+@if (Model != null && Model.Video != null && Model.Video.Count > 0)
+
+{
+    <table id="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Path</th>
+
+                <th>Uploaded By</th>
+                <th>Category</th>
+
+
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Video in Model.Video)
+            {
+
+                i++;
+            <tr>
+                <td>@i</td>
+                <td>@Video.Name</td>
+                <td>@Video.Description</td>
+                <td>@Video.Date</td>
+                <td>@Video.FilePath</td>
+                <td>
+                    @if (Video.Writer != null)
+                    {<text>@Video.Writer.Name</text> }
+                else
+                { <text></text>}
+                </td>
+                <td>
+                    @if (Video.Category != null)
+                    {<text>@Video.Category.Name</text> }
+                else
+                { <text></text>}
+                </td>
+
+
+                <td>
+                    <button class="editbtn fas fa-edit" data-id="@Video.ID"></button>
+                    <button class="deletebtn fas fa-trash-alt" data-id="@Video.ID"></button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.VideoTable("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+
+    $(".editbtn").click(function() {
+
+        $.ajax({
+                url: "@Url.EditVideo()",
+        data:
+                {
+                    ID: $(this).attr("data-id")
+        }
+            })
+        .done(function(response) {
+            $("#actioncontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+    $(".deletebtn").click(function() {
+        var confirmation = confirm("Are you sure you want to delete");
+        if (confirmation)
+        {
+
+        $.ajax({
+                type: "POST",
+        url: "@Url.DeleteVideo()",
+        data:
+                {
+                    ID: $(this).attr("data-id")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+        }
+    });
+
+
+
+</script>
+
+

@@ -1,0 +1,90 @@
+﻿@using TutorApp.Web.Helper;
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    <br />
+    <br />
+    <br />
+    <h1>Video Table</h1>
+    <form method="post" class="container-fluid">
+
+        <button type="button" id="newbtn">New Record</button>
+        <input id="searchtxt" class="searchtext" name="Search" placeholder="Search Here" />
+        <button id="Resetbtn">Reset</button>
+    </form>
+    <hr />
+    <div id="tablecontainer" class="container-fluid">
+
+        @{
+
+            Html.RenderAction("_VideoTable");
+
+
+        }
+
+
+    </div>
+
+    <div id="actioncontainer" class="container-fluid">
+
+    </div>
+
+</div> <br />
+<script>
+        $("#Resetbtn").click(function () {
+              $.ajax({
+               url: "@Url.VideoTable("")",
+
+        })
+        .done(function (response) {
+            $("#tablecontainer").html(response);
+            $("#searchtxt").val("");
+        })
+        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+
+            event.preventDefault();
+         });
+
+
+    $("#newbtn").click(function() {
+
+        $.ajax({
+                url: "@Url.CreateVideo()",
+
+        })
+        .done(function(response) {
+            $("#actioncontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#actioncontainer").offset().top
+        }, 1000);
+    });
+
+      $("#searchtxt").on('input', function () {
+       $.ajax({
+            url: "@Url.VideoTable("")",
+            data: {
+                Search: $("input[name=Search]").val()
+
+            }
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        event.preventDefault();
+        });
+
+
+
+</script>

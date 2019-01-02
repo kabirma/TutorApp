@@ -8,7 +8,8 @@ namespace TutorApp.Web.ViewModels
 {
     public class ListViewModel
     {
-      
+        public List<VideosCategory> VideoCategory { get; set; }
+
         public List<Teachers> Teacher { get; set; }
 
         public List<Courses> Courses { get; set; }
