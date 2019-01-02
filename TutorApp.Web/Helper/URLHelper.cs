@@ -413,5 +413,202 @@ namespace TutorApp.Web.Helper
             return routeURL.ToLower();
         }
 
+        /************************* Video Category ***********************/
+
+        public static string VideoCategoryTable(this UrlHelper helper, string Search)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "VideoCategory",
+                action = "_VideoCategtable",
+                Search = Search
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string CreateVideoCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "VideoCategory",
+                action = "_Create",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string EditVideoCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "VideoCategory",
+                action = "_Edit",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string DeleteVideoCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "VideoCategory",
+                action = "_Delete",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+
+        /************************* Student ***********************/
+
+        public static string StudentTable(this UrlHelper helper, string Search)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Student",
+                action = "_Studenttable",
+                Search = Search
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string CreateStudent(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Student",
+                action = "_Create",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string EditStudent(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Student",
+                action = "_Edit",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string DeleteStudent(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Student",
+                action = "_Delete",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+
+        /************************* FileCategory ***********************/
+
+        public static string FileCategoryTable(this UrlHelper helper, string Search)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "FileCategory",
+                action = "_FileCategtable",
+                Search = Search
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string CreateFileCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "FileCategory",
+                action = "_Create",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string EditFileCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "FileCategory",
+                action = "_Edit",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string DeleteFileCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "FileCategory",
+                action = "_Delete",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
     }
 }

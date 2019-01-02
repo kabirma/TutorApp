@@ -1,0 +1,50 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Entities.FilesCategory
+<h2>Operations</h2>
+<form method="post" id="updateFileCategory" class="form container-fluid row">
+
+    <div class="col-md-11">
+        <h1>Edit Form</h1><br>
+
+        <input name="ID" type="hidden" value="@Model.ID" />
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name" /><br />
+        <label>Description</label>
+        <input type="text" name="Description" value="@Model.Description" /><br />
+        <br />
+
+        <button type="button" id="updatebtn">Update Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+
+
+</form>
+
+<script>
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+        $([document.documentElement, document.body]).animate({
+            scrolldown: $("#tablecontainer").offset().top
+        }, 1000);
+    });
+
+
+    $("#updatebtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.EditFileCategory()",
+            data: $("#updateFileCategory").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+
+</script>
+
+

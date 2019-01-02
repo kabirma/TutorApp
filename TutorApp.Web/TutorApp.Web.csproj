@@ -159,10 +159,13 @@
     <Compile Include="Controllers\CourseFieldController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\FieldTopicsController.cs" />
+    <Compile Include="Controllers\FileCategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Controllers\TopicDetailsController.cs" />
+    <Compile Include="Controllers\VideoCategoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,10 +176,13 @@
     <Compile Include="ViewModels\CourseFieldViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\FieldTopicViewModel.cs" />
+    <Compile Include="ViewModels\FileCategViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\TeachersViewModel.cs" />
     <Compile Include="ViewModels\TopicDetailViewModel.cs" />
+    <Compile Include="ViewModels\VideoCategViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -240,6 +246,18 @@
     <Content Include="Views\Teachers\_TeacherTable.cshtml" />
     <Content Include="Views\Teachers\_Create.cshtml" />
     <Content Include="Views\Teachers\_Edit.cshtml" />
+    <Content Include="Views\VideoCategory\Index.cshtml" />
+    <Content Include="Views\VideoCategory\_VideoCategtable.cshtml" />
+    <Content Include="Views\VideoCategory\_Create.cshtml" />
+    <Content Include="Views\VideoCategory\_Edit.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\_Studenttable.cshtml" />
+    <Content Include="Views\Student\_Create.cshtml" />
+    <Content Include="Views\Student\_Edit.cshtml" />
+    <Content Include="Views\FileCategory\Index.cshtml" />
+    <Content Include="Views\FileCategory\_FileCategtable.cshtml" />
+    <Content Include="Views\FileCategory\_Create.cshtml" />
+    <Content Include="Views\FileCategory\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
