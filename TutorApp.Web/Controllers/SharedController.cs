@@ -26,5 +26,23 @@ namespace TutorApp.Web.Controllers
             catch (Exception ex) { result.Data = new { Success = false, Message = ex.Message }; }
             return result;
         }
+
+
+        public JsonResult UploadFile()
+        {
+            JsonResult result = new JsonResult();
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            try
+            {
+                var file = Request.Files[0];
+                var filename = Guid.NewGuid() + Path.GetExtension(file.FileName);
+
+                var path = Path.Combine(Server.MapPath("/Content/Files/"), filename);
+                file.SaveAs(path);
+                result.Data = new { Success = true, FileUrl = string.Format("/Content/Files/{0}", filename) };
+            }
+            catch (Exception ex) { result.Data = new { Success = false, Message = ex.Message }; }
+            return result;
+        }
     }
 }

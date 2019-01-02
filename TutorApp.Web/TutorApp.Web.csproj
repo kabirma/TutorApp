@@ -161,6 +161,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\FieldTopicsController.cs" />
     <Compile Include="Controllers\FileCategoryController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\FieldTopicViewModel.cs" />
     <Compile Include="ViewModels\FileCategViewModel.cs" />
+    <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
@@ -270,6 +272,10 @@
     <Content Include="Views\Answer\_AnswerTable.cshtml" />
     <Content Include="Views\Answer\_Create.cshtml" />
     <Content Include="Views\Answer\_Edit.cshtml" />
+    <Content Include="Views\Files\Index.cshtml" />
+    <Content Include="Views\Files\_FileTable.cshtml" />
+    <Content Include="Views\Files\_Create.cshtml" />
+    <Content Include="Views\Files\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

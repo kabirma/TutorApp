@@ -21,5 +21,6 @@ namespace TutorApp.Web.ViewModels
 
 
         public List<Questions> Question { get; set; }
+        public List<FilesCategory> FileCategory { get; set; }
     }
 }

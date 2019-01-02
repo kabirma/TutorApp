@@ -24,6 +24,21 @@ namespace TutorApp.Web.Helper
             return routeURL.ToLower();
         }
 
+        public static string Fileuploader(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Shared",
+                action = "UploadFile",
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
         /********************* Account **********************/
         public static string AccountTable(this UrlHelper helper, string Search)
         {
@@ -731,6 +746,73 @@ namespace TutorApp.Web.Helper
             routeURL = helper.RouteUrl("Default", new
             {
                 controller = "Answer",
+                action = "_Delete",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+
+
+        /************************* File ***********************/
+
+        public static string FileTable(this UrlHelper helper, string Search)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Files",
+                action = "_FileTable",
+                Search = Search
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string CreateFile(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Files",
+                action = "_Create",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string EditFile(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Files",
+                action = "_Edit",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string DeleteFile(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Files",
                 action = "_Delete",
 
             });
