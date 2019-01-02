@@ -161,7 +161,7 @@ namespace TutorApp.Services
         {
             var context = new dbContext();
 
-            return context.TopicDetailTable.Find(ID);
+            return context.TopicDetailTable.Include(x=>x.Category).SingleOrDefault(x => x.ID == ID);
 
         }
 
@@ -171,7 +171,7 @@ namespace TutorApp.Services
             using (var context = new dbContext())
             {
 
-                return context.TopicDetailTable.Find(ID);
+                return context.TopicDetailTable.Include(x=>x.Category).SingleOrDefault(x => x.ID == ID);
             }
         }
 

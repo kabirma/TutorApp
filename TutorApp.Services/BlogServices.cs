@@ -140,7 +140,7 @@ namespace TutorApp.Services
         {
             var context = new dbContext();
 
-            return context.BlogTable.Find(ID);
+            return context.BlogTable.Include(x=>x.Category).Include(x => x.Category2).Include(x => x.Category3).Include(x => x.Category4).Include(x => x.Category5).SingleOrDefault(x => x.ID == ID);
 
         }
 
@@ -150,7 +150,7 @@ namespace TutorApp.Services
             using (var context = new dbContext())
             {
 
-                return context.BlogTable.Find(ID);
+                return context.BlogTable.Include(x=>x.Category).Include(x => x.Category2).Include(x => x.Category3).Include(x => x.Category4).Include(x => x.Category5).SingleOrDefault(x => x.ID == ID);
             }
         }
 

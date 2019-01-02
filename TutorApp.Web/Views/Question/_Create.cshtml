@@ -1,0 +1,77 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+
+
+<form method="post" id="createquestion" class="form container-fluid row">
+
+    <div class="col-md-12">
+        <h1>Create Form</h1><br>
+        <div class="select">
+            <select name="SubjectID">
+                @foreach (var subject in Model.Courses)
+                {
+                    <option value="@subject.ID">
+                        @subject.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="select">
+            <select name="StudentID">
+                @foreach (var student in Model.Student)
+                {
+                    <option value="@student.ID">
+                        @student.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+
+        <input type="text" name="Name" placeholder="Type Name Here" />
+
+        <br />
+
+
+        <input type="text" name="Description" placeholder="Type Description Here" class="description" />
+
+        <br />
+        <input type="date" name="Date" />
+
+        <br />
+
+
+
+
+
+        <button type="button" id="createbtn">Create Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+
+</form>
+
+<script>
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+    });
+
+
+    $("#createbtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.CreateQuestion()",
+            data: $("#createquestion").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+
+</script>
