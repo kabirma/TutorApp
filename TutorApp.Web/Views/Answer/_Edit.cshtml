@@ -1,0 +1,63 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.NewAnswerViewModels
+
+
+
+<form method="post" id="updateanswer" class="form container-fluid row">
+    <div class="col-md-12">
+        <h1>Edit Form</h1><br>
+        <input name="ID" type="hidden" value="@Model.ID" />
+
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name" />
+
+        <br />
+        <label>Description</label>
+        <input type="text" name="Description" value="@Model.Description" class="description" />
+        <br />
+        <label>Up Vote</label>
+        <input type="text" name="Upvote" value="@Model.Upvote" />
+        <br />
+        <label>Down Vote</label>
+        <input type="text" name="Downvote" value="@Model.Downvote" />
+
+
+        <br />
+        <label>Date</label>
+        <input type="date" name="Date" value="@Model.Date" />
+
+        <input value="@Model.AnsweredByID" name="AnsweredByID" type="hidden" />
+
+        <input value="@Model.QuestionID" name="QuestionID" type="hidden" />
+
+        <br />
+
+        <button type="button" id="updatebtn">Update Record</button>
+
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+
+</form>
+
+<script>
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+    });
+
+    $("#updatebtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.EditAnswer()",
+            data: $("#updateanswer").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+
+</script>

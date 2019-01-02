@@ -78,7 +78,7 @@ namespace TutorApp.Web.Controllers
                 ID = Question.ID,
                 Name = Question.Name,
                 Description = Question.Description,
-
+                Date = Question.Date,
                 SubjectID = Question.Subject.ID,
                 Subject = CourseServices.Instance.GetCourses(),
 

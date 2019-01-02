@@ -9,7 +9,7 @@ namespace TutorApp.Web.ViewModels
     public class ListViewModel
     {
       
-        public List<Teachers> Writer { get; set; }
+        public List<Teachers> Teacher { get; set; }
 
         public List<Courses> Courses { get; set; }
 
@@ -18,5 +18,8 @@ namespace TutorApp.Web.ViewModels
         public List<CoursesField> CourseField { get; set; }
 
         public List<FieldTopics> TopicField { get; set; }
+
+
+        public List<Questions> Question { get; set; }
     }
 }

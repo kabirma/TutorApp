@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountServices.cs" />
+    <Compile Include="AnswersServices.cs" />
     <Compile Include="BlogServices.cs" />
     <Compile Include="CourseServices.cs" />
     <Compile Include="CoursesFieldServices.cs" />

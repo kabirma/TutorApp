@@ -1,0 +1,152 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.AnswerSearchViewModel
+@{
+
+
+    int i = 0;
+}
+@if (Model != null && Model.Answer != null && Model.Answer.Count > 0)
+
+{
+    <table id="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Up Vote</th>
+                <th>Down Vote</th>
+                <th>Answered By</th>
+                <th>Question</th>
+
+
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var answer in Model.Answer)
+            {
+
+                i++;
+            <tr>
+                <td>@i</td>
+                <td>@answer.Name</td>
+                <td>@answer.Description</td>
+                <td>@answer.Date</td>
+                <td>@answer.Upvote</td>
+                <td>@answer.Downvote</td>
+                <td>
+                    @if (answer.AnsweredBy != null)
+                    {<text>@answer.AnsweredBy.Name</text> }
+                else
+                { <text></text>}
+                </td>
+                <td>
+                    @if (answer.Question != null)
+                    {<text>@answer.Question.Name</text> }
+                else
+                { <text></text>}
+                </td>
+
+
+                <td>
+                    <button class="editbtn fas fa-edit" data-id="@answer.ID"></button>
+                    <button class="deletebtn fas fa-trash-alt" data-id="@answer.ID"></button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.AnswerTable("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+
+    $(".editbtn").click(function() {
+
+        $.ajax({
+                url: "@Url.EditAnswer()",
+        data:
+                {
+                    ID: $(this).attr("data-id")
+        }
+            })
+        .done(function(response) {
+            $("#actioncontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+    $(".deletebtn").click(function() {
+        var confirmation = confirm("Are you sure you want to delete");
+        if (confirmation)
+        {
+
+        $.ajax({
+                type: "POST",
+        url: "@Url.DeleteAnswer()",
+        data:
+                {
+                    ID: $(this).attr("data-id")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+        }
+    });
+
+
+
+</script>
+
