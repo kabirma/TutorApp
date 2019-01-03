@@ -81,7 +81,7 @@ else
         for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
         {
             string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
-            <a class="Pagebtn" data-pageNo="@page">@page</a>
+            <a class="Pagebtn @activeclass" data-pageNo="@page">@page</a>
 
         }
 

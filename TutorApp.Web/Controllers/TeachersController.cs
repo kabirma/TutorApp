@@ -17,7 +17,7 @@ namespace TutorApp.Web.Controllers
             return View();
         }
 
-        int items = 20;
+        int items = 1;
         public ActionResult _TeacherTable(string Search, int? pageNo)
         {
             TeacherSearchViewModel model = new TeacherSearchViewModel

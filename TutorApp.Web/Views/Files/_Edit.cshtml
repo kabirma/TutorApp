@@ -4,7 +4,8 @@
 
 
 <form method="post" id="updateFile" class="form container-fluid row">
-    <div class="col-md-12">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
         <h1>Edit Form</h1><br>
         <input name="ID" type="hidden" value="@Model.ID" />
 
@@ -28,7 +29,7 @@
         <br />
         <input id="FileUrl" name="FilePath" type="hidden" value="@Model.FilePath" />
         <input type="file" id="FileUpload" name="FilePath" />
-       
+
         <br />
         <button type="button" id="updatebtn">Update Record</button>
 

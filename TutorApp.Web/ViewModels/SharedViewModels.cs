@@ -15,7 +15,7 @@ namespace TutorApp.Web.ViewModels
     /// </summary>
     public class Pager
     {
-        public Pager(int totalItems, int? page, int pageSize = 20)
+        public Pager(int totalItems, int? page, int pageSize = 1)
         {
             // calculate total, start and end pages
             var totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);

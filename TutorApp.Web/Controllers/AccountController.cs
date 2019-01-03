@@ -38,9 +38,21 @@ namespace TutorApp.Web.Controllers.Admin
             }
         }
 
-       
+        [HttpGet]
+        public ActionResult _Create()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult _Create(Accounts Account)
+        {
 
-     
+            AccountServices.Instance.SaveAccount(Account);
+            return RedirectToAction("_AccountTable");
+        }
+
+
+
         [HttpPost]
         public ActionResult _Delete(Accounts account)
         {

@@ -1,17 +1,18 @@
 ﻿@using TutorApp.Web.Helper;
 
 <h2>Operations</h2>
-<form method="post" id="createFileCateg" class="form container-fluid row">
+<form method="post" id="createaccount" class="form container-fluid row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <h1>Create Form</h1>
         <br />
         <input type="text" name="Name" placeholder="Type Name Here" />
         <br />
-        <input type="text" name="Description" placeholder="Type Descripiton Here" />
+        <input type="text" name="Email" placeholder="Type Email Here" />
+        <br />
+        <input type="text" name="Password" placeholder="Type Password Here" />
         <br />
 
-        <br />
 
         <button type="button" id="createbtn">Create Record</button>
         <button type="button" id="cancelbtn">Cancel</button>
@@ -24,8 +25,8 @@
     $("#createbtn").click(function () {
         $.ajax({
             type: "POST",
-            url: "@Url.CreateFileCategory()",
-            data: $("#createFileCateg").serialize()
+            url: "@Url.CreateAccount()",
+            data: $("#createaccount").serialize()
         })
             .done(function (response) {
                 $("#tablecontainer").html(response);
@@ -42,7 +43,7 @@
     });
 
 
+ 
 
 </script>
-
 

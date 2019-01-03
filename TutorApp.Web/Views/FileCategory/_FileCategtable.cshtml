@@ -5,33 +5,45 @@
     var i = 0;
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>S.No</th>
+@if (Model != null && Model.FileCateg != null && Model.FileCateg.Count > 0)
 
-            <th>Name</th>
-            <th>Description</th>
-            <th>Action</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var categ in Model.FileCateg)
-        {
-            i++;
+{
+    <table id="table">
+        <thead>
             <tr>
-                <td>@i</td>
-                <td>@categ.Name</td>
-                <td>@categ.Description</td>
-                <td>
-                    <button class="editbtn fas fa-edit" data-id="@categ.ID"></button>
-                    <button class="deletebtn fas fa-trash-alt" data-id="@categ.ID"></button>
-                </td>
+                <th>S.No</th>
+
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var categ in Model.FileCateg)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@categ.Name</td>
+                    <td>@categ.Description</td>
+                    <td>
+                        <button class="editbtn fas fa-edit" data-id="@categ.ID"></button>
+                        <button class="deletebtn fas fa-trash-alt" data-id="@categ.ID"></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
 <div class="pager">
     @if (Model.Pager != null)
     {
@@ -45,7 +57,7 @@
         for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
         {
             string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
-            <a class="Pagebtn" data-pageNo="@page">@page</a>
+            <a class="Pagebtn @activeclass" data-pageNo="@page">@page</a>
 
         }
 

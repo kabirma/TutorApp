@@ -4,9 +4,18 @@
 
 
 <form method="post" id="createteacher" class="form container-fluid row">
-
+  <div class="col-md-1"></div>
     <div class="col-md-7">
         <h1>Create Form</h1><br>
+        <br />
+        <div style="text-align:center">
+            <img id="imagefile" class="image" src="https://vignette.wikia.nocookie.net/undertale-rho/images/5/5f/Placeholder.jpg/revision/latest?cb=20180213155916">
+
+            <br />
+            <input id="ImageUrl" name="ImageUrl" type="hidden" />
+            <input type="file" id="ImageUpload" name="Image" />
+            <br />
+        </div>
         <div class="select">
             <select name="TeachingSubjectID">
                 @foreach (var categ in Model.CourseField)
@@ -165,49 +174,42 @@
                 <option value="-1">
                     Select Houlry Rate
                 </option>
-                @for (var i = 5; i < 500; i+=5)
+                @for (var i = 5; i < 500; i += 5)
                 {
                     <option value="@i">
                         @i $
                     </option>
                 }
             </select>
-            </div>
-            <br />
-            <input type="text" name="PhoneNumber" placeholder="Type PhoneNumber Here" />
-
-            <br />
-            <input type="text" name="Address" placeholder="Type Address Here" />
-
-            <br />
-            <input type="text" name="City" placeholder="Type City Here" />
-
-            <br />
-            <input type="text" name="State" placeholder="Type State Here" />
-
-            <br />
-            <input type="text" name="Country" placeholder="Type Country Here" />
-
-            <br />
-            <input type="text" name="ZipCode" placeholder="Type Zip Code Here" />
-
-            <br />
-            <input type="text" name="Bio" placeholder="Type Bio Detail Here" />
-
-            <br />
-            <input id="ImageUrl" name="ImageUrl" type="hidden" />
-            <input type="file" id="ImageUpload" name="Image" />
-
-            <br />
-            <button type="button" id="createbtn">Create Record</button>
-            <button type="button" id="cancelbtn">Cancel</button>
         </div>
-        <div class="col-md-5 row">
-            <br /><br /><br /><br /><br /><br />
-            <img id="imagefile" class="image" src="https://vignette.wikia.nocookie.net/undertale-rho/images/5/5f/Placeholder.jpg/revision/latest?cb=20180213155916">
+        <br />
+        <input type="text" name="PhoneNumber" placeholder="Type PhoneNumber Here" />
+
+        <br />
+        <input type="text" name="Address" placeholder="Type Address Here" />
+
+        <br />
+        <input type="text" name="City" placeholder="Type City Here" />
+
+        <br />
+        <input type="text" name="State" placeholder="Type State Here" />
+
+        <br />
+        <input type="text" name="Country" placeholder="Type Country Here" />
+
+        <br />
+        <input type="text" name="ZipCode" placeholder="Type Zip Code Here" />
+
+        <br />
+        <input type="text" name="Bio" placeholder="Type Bio Detail Here" />
 
 
-        </div>
+
+        <br />
+        <button type="button" id="createbtn">Create Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+
 </form>
 
 <script>

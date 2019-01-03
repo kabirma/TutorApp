@@ -3,37 +3,47 @@
 @{ int i = 0;
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>S.No</th>
-            <th>Name</th>
-            <th>Password</th>
-            <th>Email</th>
-            <th>User Priviledge</th>
+@if (Model != null && Model.Accounts != null && Model.Accounts.Count > 0)
 
-            <th>Action</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var accounts in Model.Accounts)
-        {
-            i++;
+{
+    <table id="table">
+        <thead>
             <tr>
-                <td>@i</td>
-                <td>@accounts.Name</td>
-                <td>@accounts.Password</td>
-                <td>@accounts.Email</td>
-                <td>@accounts.Category</td>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Email</th>
+               
 
-                <td>
-                    <button class="deletebtn fas fa-trash-alt" data-id="@accounts.ID" />
-                </td>
+                <th>Action</th>
+
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var accounts in Model.Accounts)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@accounts.Name</td>
+                    <td>@accounts.Password</td>
+                    <td>@accounts.Email</td>
+                    
+                    <td>
+                        <button class="deletebtn fas fa-trash-alt" data-id="@accounts.ID" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
 <div class="pager">
     @if (Model.Pager != null)
     {
@@ -47,7 +57,7 @@
         for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
         {
             string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
-            <a class="Pagebtn" data-pageNo="@page">@page</a>
+            <a class="Pagebtn @activeclass" data-pageNo="@page">@page</a>
 
         }
 

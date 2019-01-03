@@ -5,64 +5,75 @@
     var i = 0;
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>S.No</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
+@if (Model != null && Model.student != null && Model.student.Count > 0)
 
-            <th>Zip Code</th>
-            <th>Action</th>
+{
+    <table id="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Student in Model.student)
-        {
-            i++;
-        <tr>
-            <td>@i</td>
-            <td>@Student.Name</td>
-            <td>@Student.Email</td>
+                <th>Zip Code</th>
+                <th>Action</th>
 
-            <td>@Student.Password</td>
-            <td>@Student.ZipCode</td>
-            <td>
-                <button class="editbtn fas fa-edit" data-id="@Student.ID"></button>
-                <button class="deletebtn fas fa-trash-alt" data-id="@Student.ID"></button>
-            </td>
-        </tr>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Student in Model.student)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@Student.Name</td>
+                    <td>@Student.Email</td>
+
+                    <td>@Student.Password</td>
+                    <td>@Student.ZipCode</td>
+                    <td>
+                        <button class="editbtn fas fa-edit" data-id="@Student.ID"></button>
+                        <button class="deletebtn fas fa-trash-alt" data-id="@Student.ID"></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
         }
-    </tbody>
-</table>
-<div class="pager">
-    @if (Model.Pager != null)
-    {
-
-        if (Model.Pager.CurrentPage > 1)
+        else
         {
-            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
-            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
-        }
-
-        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+    <br />
+     <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
+    <div class="pager">
+        @if (Model.Pager != null)
         {
-            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
-            <a class="Pagebtn" data-pageNo="@page">@page</a>
 
+            if (Model.Pager.CurrentPage > 1)
+            {
+                <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+                <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+            }
+
+            for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+                <a class="Pagebtn  @activeclass" data-pageNo="@page">@page</a>
+
+            }
+
+            if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+                <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+            }
         }
+    </div>
 
-        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-        {
-            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
-            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
-        }
-    }
-</div>
-
-<script>
+    <script>
 
     $(".Pagebtn").click(function() {
         $.ajax({
@@ -116,7 +127,7 @@
             }
         });
 
-</script>
+    </script>
 
 
 

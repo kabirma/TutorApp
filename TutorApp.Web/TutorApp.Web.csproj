@@ -193,6 +193,7 @@
     <Compile Include="ViewModels\VideoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\backend-style.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -282,6 +283,7 @@
     <Content Include="Views\Video\_VideoTable.cshtml" />
     <Content Include="Views\Video\_Create.cshtml" />
     <Content Include="Views\Video\_Edit.cshtml" />
+    <Content Include="Views\Account\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

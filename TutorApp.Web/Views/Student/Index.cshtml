@@ -5,18 +5,15 @@
 }
 
 <div class="container-fluid">
-    <br />
-    <br />
+
     <br />
 
     <!--******************* Body Content *********************/-->
-    <h1>Students Page</h1>
+    <p class="heading">Students Page</p>
     <form method="post" class="container-fluid">
-
-        <button type="button" id="newbtn">New Record</button>
+        <button type="button" id="newbtn"><i class="fas fa-plus"></i> New Record</button>
         <input id="searchtxt" class="searchtext" name="Search" placeholder="Search Here" />
-        <button id="Resetbtn">Reset</button>
-        <a href="/Login/Index/@Convert.ToInt16(Session["userid"])" class="pull-right back glyphicon glyphicon-arrow-left"></a>
+        <button id="Resetbtn" class="fas fa-sync-alt"></button>
     </form>
     <hr />
     <div id="tablecontainer" class="container-fluid">

@@ -1,38 +1,49 @@
 ﻿@using TutorApp.Web.Helper;
 @model TutorApp.Web.ViewModels.CoursesSearchViewModel
 @{
-   
+
     var i = 0;
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>S.No</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Action</th>
+@if (Model != null && Model.Courses != null && Model.Courses.Count > 0)
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var courses in Model.Courses)
-        {
-            i++;
-        <tr>
-            <td>@i</td>
-            <td><img src="@courses.Imageurl" width="200px" height="auto"/></td>
-            <td>@courses.Name</td>
-            <td>@courses.Description</td>
-            <td>
-                <button class="editbtn fas fa-edit" data-id="@courses.ID"></button>
-                <button class="deletebtn fas fa-trash-alt" data-id="@courses.ID"></button>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+{
+    <table id="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var courses in Model.Courses)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td><img src="@courses.Imageurl" width="200px" height="auto" /></td>
+                    <td>@courses.Name</td>
+                    <td>@courses.Description</td>
+                    <td>
+                        <button class="editbtn fas fa-edit" data-id="@courses.ID"></button>
+                        <button class="deletebtn fas fa-trash-alt" data-id="@courses.ID"></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
 <div class="pager">
     @if (Model.Pager != null)
     {
@@ -46,7 +57,7 @@
         for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
         {
             string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
-            <a class="Pagebtn" data-pageNo="@page">@page</a>
+            <a class="Pagebtn @activeclass" data-pageNo="@page">@page</a>
 
         }
 
