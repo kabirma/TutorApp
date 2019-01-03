@@ -38,6 +38,14 @@ namespace TutorApp.Services
             }
         }
 
+        public int GetAccountsCount()
+        {
+            using (var context = new dbContext())
+            {
+                return context.AccountTable.Count();
+            }
+        }
+
         public Accounts GetAccount(int ID)
         {
             using (var context = new dbContext())

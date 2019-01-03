@@ -4,13 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TutorApp.Services;
+using TutorApp.Web.ViewModels;
 
 namespace TutorApp.Web.Controllers
 {
     public class SharedController : Controller
     {
         // GET: Shared
-        public JsonResult UploadImage()
+         public JsonResult UploadImage()
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -74,5 +76,7 @@ namespace TutorApp.Web.Controllers
             catch (Exception ex) { result.Data = new { Success = false, Message = ex.Message }; }
             return result;
         }
+
+
     }
 }

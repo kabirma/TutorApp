@@ -14,7 +14,11 @@ namespace TutorApp.Web.Controllers
         // GET: VideoCategory
         public ActionResult Index()
         {
-            return View();
+            ListViewModel model = new ListViewModel();
+            model.TeacherCount = TeachersServices.Instance.GetTeachersCount();
+            model.StudentCount = StudentServices.Instance.GetStudentsCount();
+            model.AdminCount = AccountServices.Instance.GetAccountsCount();
+            return View(model);
         }
         public ActionResult _VideoCategtable(string Search, int? pageNo)
         {

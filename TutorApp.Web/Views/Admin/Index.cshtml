@@ -1,0 +1,159 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+<div class="container-fluid relative animatedParent animateOnce my-3">
+    <div class="row row-eq-height my-3 mt-3">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="card no-b mb-3 bg-danger text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="icon-book3 s-18"></i></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="s-48 my-3 font-weight-lighter">@Model.CoursesCount</div>
+                                <a href="@Url.Courses()">Courses</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="card no-b mb-3 bg-danger text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="icon-video-player s-18"></i></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="s-48 my-3 font-weight-lighter">@Model.VideoCount</div>
+                                <a href="@Url.Video()">Videos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="card no-b mb-3 bg-danger text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="icon-files-o s-18"></i></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="s-48 my-3 font-weight-lighter">@Model.FilesCount</div>
+                                <a href="@Url.Files()">Files</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="card no-b mb-3 bg-danger text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="icon-question-circle s-18"></i></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="s-48 my-3 font-weight-lighter">@Model.QuestionCount</div>
+                                <a href="@Url.Question()">Question</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card no-b p-2">
+                <div class="card-body">
+                    <div class="card-body">
+                        <div class="height-300">
+                            <canvas data-chart="chartJs"
+                                    data-chart-type="doughnut"
+                                    data-dataset="[
+                                                        [@Model.AdminCount, @Model.TeacherCount,@Model.StudentCount],
+
+                                                    ]"
+                                    data-labels="[['Admins'],['Teachers'],['Students'],]"
+                                    data-dataset-options="[
+                                                    {
+                                                        label: 'Disk',
+                                                        backgroundColor: [
+                                                            '#03a9f4',
+                                                            '#8f5caf',
+                                                            '#3f51b5'
+                                                        ],
+
+                                                    },
+
+
+                                                    ]"
+                                    data-options="{legend: {display: !0,position: 'bottom',labels: {fontColor: '#7F8FA4',usePointStyle: !0}},
+                                }"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" row my-3">
+        <div class="col-md-6">
+            <div class=" card no-b">
+                <div class="card-body">
+                    <table class="table table-hover earning-box">
+                        <tbody>
+                            @foreach (var course in Model.Courses)
+                            {
+                                <tr>
+                                    <td class="w-10">
+                                        <a href="@Url.Courses()" class="avatar avatar-lg">
+                                            <img src="@course.Imageurl" alt="">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <h6>@course.Name</h6>
+                                       
+                                    </td>
+                                  
+                                    <td>@course.Description</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class=" card no-b">
+                <div class="card-body">
+                    <table class="table table-hover earning-box">
+                        <tbody>
+                            @foreach (var teacher in Model.Teacher)
+                            {
+                                <tr>
+                                    <td class="w-10">
+                                        <a href="@Url.Teacher()" class="avatar avatar-lg">
+                                            <img src="@teacher.ImageUrl" alt="">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <h6>@teacher.Name</h6>
+                                        <small class="text-muted">@teacher.UndergraduateMajor</small>
+                                    </td>
+                                    <td>@teacher.Experience</td>
+                                    <td>$@teacher.HoulryRate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

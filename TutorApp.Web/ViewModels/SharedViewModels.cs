@@ -8,6 +8,7 @@ namespace TutorApp.Web.ViewModels
 {
     public class SharedViewModels
     {
+   
 
     }
     /// <summary>

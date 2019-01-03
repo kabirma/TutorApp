@@ -8,6 +8,37 @@ namespace TutorApp.Web.Helper
 {
     public static class URLHelper
     {
+        /**************** ADMIN *****************/
+        public static string Signin(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Admin",
+                action = "Signin",
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string Signout(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Admin",
+                action = "Signout",
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+
         /**************** Shared *****************/
         public static string Imageuploader(this UrlHelper helper)
         {
@@ -898,6 +929,205 @@ namespace TutorApp.Web.Helper
             {
                 controller = "Video",
                 action = "_Delete",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        /****************************** INDEX *****************************/
+        public static string Account(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Account",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string Answer(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Answer",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string CourseField(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "CourseField",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string FieldTopics(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "FieldTopics",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string Courses(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Courses",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string FileCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "FileCategory",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string Files(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Files",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string Question(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Question",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string Student(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Student",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string Teacher(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Teachers",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string TopicDetails(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "TopicDetails",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string Video(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Video",
+                action = "Index",
+
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+        public static string VideoCategory(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "VideoCategory",
+                action = "Index",
 
             });
 

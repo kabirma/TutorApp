@@ -155,6 +155,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CourseFieldController.cs" />
@@ -284,6 +285,8 @@
     <Content Include="Views\Video\_Create.cshtml" />
     <Content Include="Views\Video\_Edit.cshtml" />
     <Content Include="Views\Account\_Create.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Signin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

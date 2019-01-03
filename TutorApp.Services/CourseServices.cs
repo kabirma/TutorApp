@@ -60,6 +60,13 @@ namespace TutorApp.Services
             }
         }
 
+        public int GetCoursesCount()
+        {
+            using (var context = new dbContext())
+            {
+                return context.CourseTable.Count();
+            }
+        }
         public int GetCoursesCount(string Search)
         {
             using (var context = new dbContext())

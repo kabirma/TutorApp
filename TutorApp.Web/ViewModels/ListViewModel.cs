@@ -23,5 +23,18 @@ namespace TutorApp.Web.ViewModels
 
         public List<Questions> Question { get; set; }
         public List<FilesCategory> FileCategory { get; set; }
+        public int TeacherCount { get; set; }
+        public int StudentCount { get; set; }
+        public List<Accounts> Admin { get; set; }
+        public int AdminCount { get; set; }
+
+
+        public int VideoCount { get; set; }
+
+        public int QuestionCount { get; set; }
+
+        public int FilesCount { get; set; }
+
+        public int CoursesCount { get; set; }
     }
 }

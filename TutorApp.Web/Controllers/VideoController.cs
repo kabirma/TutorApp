@@ -14,7 +14,11 @@ namespace TutorApp.Web.Controllers
         // GET: Video
         public ActionResult Index()
         {
-            return View();
+            ListViewModel model = new ListViewModel();
+            model.TeacherCount = TeachersServices.Instance.GetTeachersCount();
+            model.StudentCount = StudentServices.Instance.GetStudentsCount();
+            model.AdminCount = AccountServices.Instance.GetAccountsCount();
+            return View(model);
         }
 
         int items = 20;
