@@ -99,7 +99,7 @@
                             </div>
                             <ul class="sidebar-menu">
                                 <li class="treeview">
-                                    <a href="index.html">
+                                    <a href="Admin/Index">
                                         <i class="icon icon-sailing-boat-water s-24"></i> <span>Dashboard</span>
                                     </a>
                                 </li>
@@ -279,6 +279,10 @@
         </div>
         <!--/#app -->
         <script src="~/Content/assets/js/app.js"></script>
-
+        <script>
+            $(".skin_handle").on("click", function () {
+                $("body").toggleClass("theme-dark")
+            });
+        </script>
 </body>
 </html>

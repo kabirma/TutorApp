@@ -116,13 +116,13 @@
     text-transform:uppercase;
 }
 
-#createbtn {
+#createbtn, #updatebtn {
     padding: 8px 30px;
     border: none;
     color: white;
     border-radius: 5px;
     background-color: #77cc6d;
-    margin-right:1%;
+    margin-right: 1%;
 }
 
 #cancelbtn {
