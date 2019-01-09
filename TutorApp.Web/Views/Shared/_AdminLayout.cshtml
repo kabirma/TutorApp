@@ -2,6 +2,7 @@
 @model TutorApp.Web.ViewModels.ListViewModel
 @{
     Layout = null;
+    int i = 0;
 }
 
 <!DOCTYPE html>
@@ -94,7 +95,7 @@
                                     <div class="text-xs-center">
                                         <span class="font-weight-lighter s-18">Menu</span>
                                     </div>
-                                    <div class="badge badge-danger r-0">TUTOR APP</div>
+                                    <div class="badge badge-danger r-0">@Model.CompanyDetail[0].Name</div>
                                 </div>
                             </div>
                             <ul class="sidebar-menu">
@@ -128,16 +129,16 @@
                                     </a>
                                     <ul class="treeview-menu">
                                         <li>
-                                            <a href="@Url.Courses()"><i class="icon icon-circle-o"></i>Course</a>
+                                            <a href="@Url.Courses()"><i class="icon icon-play_arrow"></i>Course</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.CourseField()"><i class="icon icon-circle-o"></i>Course Sub Field</a>
+                                            <a href="@Url.CourseField()"><i class="icon icon-play_arrow"></i>Course Sub Field</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.FieldTopics()"><i class="icon icon-circle-o"></i>Field Topics</a>
+                                            <a href="@Url.FieldTopics()"><i class="icon icon-play_arrow"></i>Field Topics</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.TopicDetails()"><i class="icon icon-circle-o"></i>Topic Details</a>
+                                            <a href="@Url.TopicDetails()"><i class="icon icon-play_arrow"></i>Topic Details</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -148,10 +149,10 @@
                                     </a>
                                     <ul class="treeview-menu">
                                         <li>
-                                            <a href="@Url.Video()"><i class="icon icon-circle-o"></i>Video</a>
+                                            <a href="@Url.Video()"><i class="icon icon-play_arrow"></i>Video</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.VideoCategory()"><i class="icon icon-circle-o"></i>Video Category</a>
+                                            <a href="@Url.VideoCategory()"><i class="icon icon-play_arrow"></i>Video Category</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -162,37 +163,62 @@
                                     </a>
                                     <ul class="treeview-menu">
                                         <li>
-                                            <a href="@Url.Files()"><i class="icon icon-circle-o"></i>Files</a>
+                                            <a href="@Url.Files()"><i class="icon icon-play_arrow"></i>Files</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.FileCategory()"><i class="icon icon-circle-o"></i>Files Category</a>
+                                            <a href="@Url.FileCategory()"><i class="icon icon-play_arrow"></i>Files Category</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="treeview">
                                     <a href="#">
-                                        <i class="icon icon-question-circle s-24"></i> <span>Question & Answer</span>
+                                        <i class="icon icon-question-circle-o s-24"></i> 
+                                        <span>Question & Answer</span>
                                         <i class=" icon-angle-left  pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
                                         <li>
-                                            <a href="@Url.Question()"><i class="icon icon-circle-o"></i>Question</a>
+                                            <a href="@Url.Question()"><i class="icon icon-play_arrow"></i>Question</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.Answer()"><i class="icon icon-circle-o"></i>Answer</a>
+                                            <a href="@Url.Answer()"><i class="icon icon-play_arrow"></i>Answer</a>
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="treeview">
+                                    <a href="@Url.Jobs()">
+                                        <i class="icon icon-user-circle s-24"></i>
+                                        <span>Teaching Jobs</span>
+                                        <span class="badge r-3 badge-primary pull-right">@Model.JobsCount</span>
 
+                                    </a>
+                                </li>
+                                <li class="treeview">
+                                    <a href="@Url.Inbox()">
+                                        <i class="icon icon-inbox2 s-24"></i>
+                                        <span>Inbox</span>
+                                        <span class="badge r-3 badge-primary pull-right">@Model.InboxCount</span>
+
+                                    </a>
+                                </li>
                                 <li class="treeview">
                                     <a href="@Url.Account()">
-                                        <i class="icon icon-user-circle s-24"></i>  
+                                        <i class="icon icon-user-circle s-24"></i>
                                         <span>Admin</span>
                                         <span class="badge r-3 badge-primary pull-right">@Model.AdminCount</span>
 
                                     </a>
                                 </li>
+                                <li class="treeview">
+                                    <a href="@Url.CompanyDetails()">
+                                        <i class="icon icon-user-circle s-24"></i>
+                                        <span>Company Information</span>
+                                     
+                                    </a>
+                                </li>
+
                             </ul>
+
                         </div>
                       
                     </div>
@@ -224,7 +250,7 @@
                     <div class="relative">
                         <div class="d-flex">
                             <div class="d-none d-md-block">
-                                <h1 class="nav-title">Tutor App</h1>
+                                <h1 class="nav-title">@Model.CompanyDetail[0].Name</h1>
                             </div>
                         </div>
                     </div>
@@ -235,39 +261,62 @@
                             <li class="dropdown custom-dropdown messages-menu">
                                 <a href="#" class="nav-link" data-toggle="dropdown">
                                     <i class="icon-envelope-o"></i>
-                                    <span class="badge badge-success badge-mini rounded-circle">4</span>
+                                    <span class="badge badge-success badge-mini rounded-circle">@Model.InboxCount</span>
                                 </a>
-                              
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <!-- inner menu: contains the actual data -->
+                                        <ul class="menu pl-2 pr-2">
+                                            <!-- start message -->
+                                            @foreach (var inbox in Model.Inbox)
+                                            {
+                                                
+                                                <li>
+                                                    <a>
+                                                        <div class="avatar float-left">
+                                                            <img src="https://openclipart.org/image/2400px/svg_to_png/285440/1503577975.png" alt="@inbox.Name">
+                                                            <span class="avatar-badge online"></span>
+                                                        </div>
+                                                        <h4>
+                                                            @inbox.Email.ToUpper()
+                                                            <small><i class="icon icon-clock-o"></i>@inbox.Date</small>
+                                                        </h4>
+                                                        <p>@inbox.Message.Substring(0, 50)...</p>
+                                                    </a>
+                                                </li>
+
+                                            }
+                                        </ul>
+                                    </li>
+                                    <li class="footer s-12 p-2 text-center"><a href="@Model.Inbox">See All Messages</a></li>
+                                </ul>
                             </li>
-                            <!-- Notifications -->
-                      
-                         
-                            <!-- Right Sidebar Toggle Button -->
-                           
-                            <!-- User Account-->
-                            <li class="dropdown custom-dropdown user user-menu ">
-                                <a href="#" class="nav-link" data-toggle="dropdown">
-                                    <img src="~/Content/assets/img/dummy/u8.png" class="user-image" alt="User Image">
-                                    <i class="icon-more_vert "></i>
-                                </a>
-                                <div class="dropdown-menu p-4 dropdown-menu-right">
-                                    <div class="row box justify-content-between my-4">
-
-
-                                        <a href="#">
-                                            <i class="icon-supervisor_account indigo lighten-2 avatar  r-5"></i>
-                                            <div class="pt-1">@Session["username"].ToString()</div>
+                                    <!-- Notifications -->
+                                    <!-- Right Sidebar Toggle Button -->
+                                    <!-- User Account-->
+                                    <li class="dropdown custom-dropdown user user-menu ">
+                                        <a href="#" class="nav-link" data-toggle="dropdown">
+                                            <img src="~/Content/assets/img/dummy/u8.png" class="user-image" alt="User Image">
+                                            <i class="icon-more_vert "></i>
                                         </a>
-                                        <a href="@Url.Signout()">
-                                            <i class="icon-sign-out indigo lighten-2 avatar  r-5"></i>
-                                            <div class="pt-1">Logout</div>
-                                        </a>
+                                        <div class="dropdown-menu p-4 dropdown-menu-right">
+                                            <div class="row box justify-content-between my-4">
 
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+
+                                                <a href="#">
+                                                    <i class="icon-supervisor_account indigo lighten-2 avatar  r-5"></i>
+                                                    <div class="pt-1">@Session["username"].ToString()</div>
+                                                </a>
+                                                <a href="@Url.Signout()">
+                                                    <i class="icon-sign-out indigo lighten-2 avatar  r-5"></i>
+                                                    <div class="pt-1">Logout</div>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+</div>
                 </div>
             </div>
             <!--#navbar-->

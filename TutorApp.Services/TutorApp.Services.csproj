@@ -51,11 +51,14 @@
     <Compile Include="AdminServices.cs" />
     <Compile Include="AnswersServices.cs" />
     <Compile Include="BlogServices.cs" />
+    <Compile Include="CompanyDetailServices.cs" />
     <Compile Include="CourseServices.cs" />
     <Compile Include="CoursesFieldServices.cs" />
     <Compile Include="FieldTopicsServices.cs" />
     <Compile Include="FileCategServices.cs" />
     <Compile Include="FilesServices.cs" />
+    <Compile Include="InboxServices.cs" />
+    <Compile Include="JobsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionsServices.cs" />
     <Compile Include="StudentServices.cs" />

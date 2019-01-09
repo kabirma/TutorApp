@@ -30,5 +30,9 @@ namespace TutorApp.Database
         public DbSet<Questions> QuestionTable { get; set; }
         public DbSet<Answers> AnswerTable { get; set; }
 
+        public DbSet<Jobs> JobTable { get; set; }
+        public DbSet<Inbox> InboxTable { get; set; }
+        public DbSet<CompanyDetails> CompanyDetailsTable { get; set; }
+
     }
 }

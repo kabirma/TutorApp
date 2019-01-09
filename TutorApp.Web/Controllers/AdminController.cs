@@ -26,19 +26,26 @@ namespace TutorApp.Web.Controllers
                 model.AdminCount = AccountServices.Instance.GetAccountsCount();
                 model.TeacherCount = TeachersServices.Instance.GetTeachersCount();
                 model.StudentCount = StudentServices.Instance.GetStudentsCount();
+                model.JobsCount = JobsServices.Instance.GetJobsCount();
+                model.InboxCount = InboxServices.Instance.GetInboxsCount();
 
                 model.Teacher = TeachersServices.Instance.GetTeachers();
+
+                model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
+                model.Inbox = InboxServices.Instance.GetInboxs();
                 model.Courses = CourseServices.Instance.GetCourses();
                 return View(model);
             }
-            else { return View("Signin"); }
+            else { return RedirectToAction("Signin"); }
 
         }
 
         [HttpGet]
         public ActionResult Signin()
         {
-            return View();
+            ListViewModel model = new ListViewModel();
+            model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
+            return View(model);
         }
 
         [HttpPost]
@@ -57,13 +64,19 @@ namespace TutorApp.Web.Controllers
                 model.AdminCount = AccountServices.Instance.GetAccountsCount();
                 model.TeacherCount = TeachersServices.Instance.GetTeachersCount();
                 model.StudentCount = StudentServices.Instance.GetStudentsCount();
+                model.JobsCount = JobsServices.Instance.GetJobsCount();
+                model.InboxCount = InboxServices.Instance.GetInboxsCount();
 
                 model.Teacher = TeachersServices.Instance.GetTeachers();
+                model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
+
+                model.Inbox = InboxServices.Instance.GetInboxs();
                 model.Courses = CourseServices.Instance.GetCourses();
-                return View("Index",model);
+                return RedirectToAction("Index",model);
             }
             else
             {
+                
                 return View("Signin");
             }
         }

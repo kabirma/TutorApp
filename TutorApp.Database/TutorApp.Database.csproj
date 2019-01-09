@@ -62,13 +62,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dbContext.cs" />
-    <Compile Include="Migrations\201812271308570_Initial.cs" />
-    <Compile Include="Migrations\201812271308570_Initial.Designer.cs">
-      <DependentUpon>201812271308570_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201901072032004_jobsupdatedagain.cs" />
+    <Compile Include="Migrations\201901072032004_jobsupdatedagain.Designer.cs">
+      <DependentUpon>201901072032004_jobsupdatedagain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901030942412_updatehappend.cs" />
-    <Compile Include="Migrations\201901030942412_updatehappend.Designer.cs">
-      <DependentUpon>201901030942412_updatehappend.cs</DependentUpon>
+    <Compile Include="Migrations\201901081539444_databaseupdated.cs" />
+    <Compile Include="Migrations\201901081539444_databaseupdated.Designer.cs">
+      <DependentUpon>201901081539444_databaseupdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901081816546_databupdated.cs" />
+    <Compile Include="Migrations\201901081816546_databupdated.Designer.cs">
+      <DependentUpon>201901081816546_databupdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,11 +88,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812271308570_Initial.resx">
-      <DependentUpon>201812271308570_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901072032004_jobsupdatedagain.resx">
+      <DependentUpon>201901072032004_jobsupdatedagain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901030942412_updatehappend.resx">
-      <DependentUpon>201901030942412_updatehappend.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901081539444_databaseupdated.resx">
+      <DependentUpon>201901081539444_databaseupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901081816546_databupdated.resx">
+      <DependentUpon>201901081816546_databupdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

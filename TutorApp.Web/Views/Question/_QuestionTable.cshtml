@@ -24,33 +24,33 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var question in Model.Question)
+            @foreach (var Question in Model.Question)
             {
 
                 i++;
             <tr>
                 <td>@i</td>
-                <td>@question.Name</td>
-                <td>@question.Description</td>
-                <td>@question.Date</td>
+                <td>@Question.Name</td>
+                <td>@Question.Description</td>
+                <td>@Question.Date</td>
 
                 <td>
-                    @if (question.Askedby != null)
-                    {<text>@question.Askedby.Name</text> }
+                    @if (Question.Askedby != null)
+                    {<text>@Question.Askedby.Name</text> }
                 else
                 { <text></text>}
                 </td>
                 <td>
-                    @if (question.Subject != null)
-                    {<text>@question.Subject.Name</text> }
+                    @if (Question.Subject != null)
+                    {<text>@Question.Subject.Name</text> }
                 else
                 { <text></text>}
                 </td>
 
 
                 <td>
-                    <button class="editbtn fas fa-edit" data-id="@question.ID"></button>
-                    <button class="deletebtn fas fa-trash-alt" data-id="@question.ID"></button>
+                    <button class="editbtn fas fa-edit" data-id="@Question.ID"></button>
+                    <button class="deletebtn fas fa-trash-alt" data-id="@Question.ID"></button>
                 </td>
             </tr>
             }

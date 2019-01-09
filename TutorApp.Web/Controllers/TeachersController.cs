@@ -18,6 +18,10 @@ namespace TutorApp.Web.Controllers
             model.TeacherCount = TeachersServices.Instance.GetTeachersCount();
             model.StudentCount = StudentServices.Instance.GetStudentsCount();
             model.AdminCount = AccountServices.Instance.GetAccountsCount();
+            model.JobsCount = JobsServices.Instance.GetJobsCount();
+            model.InboxCount = InboxServices.Instance.GetInboxsCount();
+            model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
+            model.Inbox = InboxServices.Instance.GetInboxs();
             return View(model);
         }
 
@@ -91,6 +95,10 @@ namespace TutorApp.Web.Controllers
 
                 ZipCode = model.ZipCode,
                 Bio = model.Bio,
+                Facebook = model.Facebook,
+                Twitter = model.Twitter,
+                Google = model.Google,
+                Linkedin = model.Linkedin,
                 ImageUrl = model.ImageUrl,
 
                 TeachingSubjects = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubjectID)
@@ -134,6 +142,10 @@ namespace TutorApp.Web.Controllers
 
                 ZipCode = Teacher.ZipCode,
                 Bio = Teacher.Bio,
+                Facebook = Teacher.Facebook,
+                Twitter = Teacher.Twitter,
+                Google = Teacher.Google,
+                Linkedin = Teacher.Linkedin,
                 ImageUrl = Teacher.ImageUrl,
 
                 TeachingSubjectID = Teacher.TeachingSubjects.ID,
@@ -175,6 +187,10 @@ namespace TutorApp.Web.Controllers
 
             Teacher.ZipCode = model.ZipCode;
             Teacher.Bio = model.Bio;
+            Teacher.Facebook = model.Facebook;
+            Teacher.Twitter = model.Twitter;
+            Teacher.Google = model.Google;
+            Teacher.Linkedin = model.Linkedin;
             Teacher.ImageUrl = model.ImageUrl;
             
             Teacher.TeachingSubjects = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubjectID);

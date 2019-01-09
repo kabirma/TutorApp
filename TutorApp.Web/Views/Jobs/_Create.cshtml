@@ -1,0 +1,151 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+
+
+<form method="post" id="createJob" class="form container-fluid row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <h1>Create Form</h1><br>
+        <div class="select">
+            <select name="SubjectID">
+                @foreach (var subject in Model.Courses)
+                {
+                    <option value="@subject.ID">
+                        @subject.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="select">
+            <select name="StudentID">
+                @foreach (var student in Model.Student)
+                {
+                    <option value="@student.ID">
+                        @student.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+
+        <input type="text" name="Name" placeholder="Type Name Here" />
+
+        <br />
+
+
+        <input type="text" name="Description" placeholder="Type Description Here" class="description" />
+
+        <br />
+        <input type="date" name="Date" />
+
+        <br />
+        <input type="text" name="Location" placeholder="Type Location Here" />
+
+        <br />
+        <div class="select">
+            <select name="Availability">
+                <option value="-1">
+                    Select Availabile Time
+                </option>
+
+                <option value="Morning">
+                    Morning(9 to 12)
+                </option>
+                <option value="Afternoon">
+                    Afternoon(1 to 3)
+                </option>
+                <option value="Evening">
+                    Evening(3 to 5)
+                </option>
+                <option value="Night">
+                    Night(6 to 9)
+                </option>
+
+
+            </select>
+        </div>
+
+        <br />
+
+        <div class="select">
+            <select name="LessonBegins">
+                <option value="-1">
+                    Select Lesson Begin Time
+                </option>
+                @for (int i = 1; i < 6; i++)
+                {
+                    <option value="@i">
+                        @i Week
+                    </option>
+                }
+
+            </select>
+        </div>
+
+        <br />
+        <div class="select">
+            <select name="GradingLevel">
+                <option value="-1">
+                    Select Student Level
+                </option>
+                <option value="School">
+                    School
+                </option>
+
+                <option value="MidSchool">
+                    Mid School
+                </option>
+
+                <option value="HigherSchool">
+                    Higher School
+                </option>
+
+                <option value="College">
+                    College
+                </option>
+
+                <option value="Undergraduate">
+                    Undergraduate
+                </option>
+
+                <option value="Graduate">
+                    Graduate
+                </option>
+            </select>
+        </div>
+        <br />
+
+
+
+
+        <button type="button" id="createbtn">Create Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+
+</form>
+
+<script>
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+    });
+
+
+    $("#createbtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.CreateJob()",
+            data: $("#createJob").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+
+</script>

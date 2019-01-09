@@ -85,11 +85,11 @@ namespace TutorApp.Services
             {
                 if (!string.IsNullOrEmpty(Search))
                 {
-                    return context.QuestionTable.Where(question => question.Askedby.ID == userid && question.Name != null && question.Name.ToLower().Contains(Search.ToLower())).OrderBy(Product => Product.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
+                    return context.QuestionTable.Where(Question => Question.Askedby.ID == userid && Question.Name != null && Question.Name.ToLower().Contains(Search.ToLower())).OrderBy(Product => Product.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
                 }
                 else
                 {
-                    return context.QuestionTable.Where(question => question.Askedby.ID == userid).OrderBy(question => question.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
+                    return context.QuestionTable.Where(Question => Question.Askedby.ID == userid).OrderBy(Question => Question.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
                 }
             }
         }
@@ -149,11 +149,11 @@ namespace TutorApp.Services
             {
                 if (!string.IsNullOrEmpty(Search))
                 {
-                    return context.QuestionTable.Where(question => question.Askedby.ID == userid && question.Name != null && question.Name.ToLower().Contains(Search.ToLower())).Include(x => x.Askedby).Include(x => x.Subject).Count();
+                    return context.QuestionTable.Where(Question => Question.Askedby.ID == userid && Question.Name != null && Question.Name.ToLower().Contains(Search.ToLower())).Include(x => x.Askedby).Include(x => x.Subject).Count();
                 }
                 else
                 {
-                    return context.QuestionTable.Where(question => question.Askedby.ID == userid).Include(x => x.Askedby).Include(x => x.Subject).Count();
+                    return context.QuestionTable.Where(Question => Question.Askedby.ID == userid).Include(x => x.Askedby).Include(x => x.Subject).Count();
                 }
             }
         }

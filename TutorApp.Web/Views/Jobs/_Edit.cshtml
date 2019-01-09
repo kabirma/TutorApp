@@ -1,0 +1,152 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.NewJobViewModels
+
+
+
+<form method="post" id="updateJob" class="form container-fluid row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <h1>Edit Form</h1><br>
+        <input name="ID" type="hidden" value="@Model.ID" />
+
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name" />
+
+        <br />
+        <label>Description</label>
+        <input type="text" name="Description" value="@Model.Description" class="description" />
+
+        <br />
+        <label>Location</label>
+        <input type="text" name="Location" value="@Model.Location" />
+
+        <br />
+        <label>Availability</label>
+        <div class="select">
+            <select name="Availability">
+                <option value="-1">
+                    Select Availabile Time
+                </option>
+                @{var selecm = Model.GradingLevel == "Morning" ? "selected" : string.Empty;
+                }
+                <option value="Morning" @selecm>
+                    Morning(9 to 12)
+                </option>
+                @{var seleca = Model.GradingLevel == "Afternoon" ? "selected" : string.Empty;
+                }
+                <option value="Afternoon" @seleca>
+                    Afternoon(1 to 3)
+                </option>
+                @{var selece = Model.GradingLevel == "Evening" ? "selected" : string.Empty;
+                }
+                <option value="Evening" @selece>
+                    Evening(3 to 5)
+                </option>
+                @{var selecn = Model.GradingLevel == "Night" ? "selected" : string.Empty;
+                }
+                <option value="Night" @selecn>
+                    Night(6 to 9)
+                </option>
+
+
+            </select>
+        </div>
+
+        <br />
+        <label>Lesson Begins</label>
+         <div class="select">
+             <select name="LessonBegins">
+                @for (var i = 2; i < 9; i++)
+                {
+                    var selecAw = Model.LessonBegins == @i.ToString() ? "selected" : string.Empty;
+
+                    <option value="@i" @selecAw>
+                        @i Week
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+
+        <label>Grading Level</label>
+        <div class="select">
+            <select name="GradingLevel">
+                @{var selecsc = Model.GradingLevel == "School" ? "selected" : string.Empty;
+                }
+                <option value="School" @selecsc>
+                    School
+                </option>
+
+                @{var selecmc = Model.GradingLevel == "MidSchool" ? "selected" : string.Empty;
+                }
+                <option value="MidSchool" @selecmc>
+                    Mid School
+                </option>
+
+                @{var selechc = Model.GradingLevel == "HigherSchool" ? "selected" : string.Empty;
+                }
+                <option value="HigherSchool" @selechc>
+                    Higher School
+                </option>
+
+                @{var selecc = Model.GradingLevel == "College" ? "selected" : string.Empty;
+                }
+                <option value="College" @selecc>
+                    College
+                </option>
+
+                @{var selecug = Model.GradingLevel == "Undergraduate" ? "selected" : string.Empty;
+                }
+                <option value="Undergraduate" @selecug>
+                    Undergraduate
+                </option>
+
+                @{var selecg = Model.GradingLevel == "Graduate" ? "selected" : string.Empty;
+                }
+                <option value="Graduate" @selecg>
+                    Graduate
+                </option>
+            </select>
+        </div>
+        <br />
+
+        <br />
+        <label>Date</label>
+        <input type="date" name="Date" value="@Model.Date" />
+
+        <input value="@Model.StudentID" name="StudentID" type="hidden" />
+
+        <input value="@Model.CourseID" name="CourseID" type="hidden" />
+
+        <br />
+
+        <button type="button" id="updatebtn">Update Record</button>
+
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+
+</form>
+
+<script>
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+    });
+
+    $("#updatebtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.EditJob()",
+            data: $("#updateJob").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+
+
+</script>
+

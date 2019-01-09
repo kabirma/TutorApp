@@ -8,6 +8,7 @@ namespace TutorApp.Web.ViewModels
 {
     public class ListViewModel
     {
+        public List<CompanyDetails> CompanyDetail { get; set; }
         public List<VideosCategory> VideoCategory { get; set; }
 
         public List<Teachers> Teacher { get; set; }
@@ -36,5 +37,10 @@ namespace TutorApp.Web.ViewModels
         public int FilesCount { get; set; }
 
         public int CoursesCount { get; set; }
+
+        
+        public int InboxCount { get; set; }
+        public int JobsCount { get; set; }
+        public List<Inbox> Inbox { get; set; }
     }
 }

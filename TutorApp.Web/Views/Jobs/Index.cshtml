@@ -1,0 +1,86 @@
+﻿@using TutorApp.Web.Helper;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+
+    <br />
+    <p class="heading">Teaching Job Table</p>
+    <form method="post" class="container-fluid">
+        <button type="button" id="newbtn"><i class="fas fa-plus"></i> New Record</button>
+        <input id="searchtxt" class="searchtext" name="Search" placeholder="Search Here" />
+        <button id="Resetbtn" class="fas fa-sync-alt"></button>
+    </form>
+    <hr />
+    <div id="tablecontainer" class="container-fluid">
+
+        @{
+
+            Html.RenderAction("_JobTable");
+
+
+        }
+
+
+    </div>
+
+    <div id="actioncontainer" class="container-fluid">
+
+    </div>
+
+</div> <br />
+<script>
+        $("#Resetbtn").click(function () {
+              $.ajax({
+               url: "@Url.JobsTable("")",
+
+        })
+        .done(function (response) {
+            $("#tablecontainer").html(response);
+            $("#searchtxt").val("");
+        })
+        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+
+            event.preventDefault();
+         });
+
+
+    $("#newbtn").click(function() {
+
+        $.ajax({
+                url: "@Url.CreateJob()",
+
+        })
+        .done(function(response) {
+            $("#actioncontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#actioncontainer").offset().top
+        }, 1000);
+    });
+
+      $("#searchtxt").on('input', function () {
+       $.ajax({
+            url: "@Url.JobsTable("")",
+            data: {
+                Search: $("input[name=Search]").val()
+
+            }
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        event.preventDefault();
+        });
+
+
+
+</script>

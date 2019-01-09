@@ -18,6 +18,10 @@ namespace TutorApp.Web.Controllers
             model.TeacherCount = TeachersServices.Instance.GetTeachersCount();
             model.StudentCount = StudentServices.Instance.GetStudentsCount();
             model.AdminCount = AccountServices.Instance.GetAccountsCount();
+            model.JobsCount = JobsServices.Instance.GetJobsCount();
+            model.InboxCount = InboxServices.Instance.GetInboxsCount();
+            model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
+            model.Inbox = InboxServices.Instance.GetInboxs();
             return View(model);
         }
         public ActionResult _FileCategtable(string Search, int? pageNo)

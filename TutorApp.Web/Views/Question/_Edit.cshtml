@@ -3,7 +3,7 @@
 
 
 
-<form method="post" id="updatequestion" class="form container-fluid row">
+<form method="post" id="updateQuestion" class="form container-fluid row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <h1>Edit Form</h1><br>
@@ -43,7 +43,7 @@
         $.ajax({
             type: "POST",
             url: "@Url.EditQuestion()",
-            data: $("#updatequestion").serialize()
+            data: $("#updateQuestion").serialize()
         })
             .done(function (response) {
                 $("#tablecontainer").html(response);

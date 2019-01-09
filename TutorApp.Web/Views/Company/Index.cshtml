@@ -1,0 +1,24 @@
+﻿@using TutorApp.Web.Helper;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <br />
+    <p class="heading"> Company Details Page </p>
+    
+</div>
+<hr />
+<div id="tablecontainer" class="container-fluid">
+
+    @{
+        Html.RenderAction("_CompanyDetailtable");
+    }
+
+</div>
+
+<div id="actioncontainer" class="container-fluid">
+
+</div>
+

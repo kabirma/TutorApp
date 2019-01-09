@@ -44,7 +44,10 @@
     <Compile Include="Answers.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Blogs.cs" />
+    <Compile Include="CompanyDetails.cs" />
     <Compile Include="CoursesField.cs" />
+    <Compile Include="Inbox.cs" />
+    <Compile Include="Jobs.cs" />
     <Compile Include="TopicDetails.cs" />
     <Compile Include="Courses.cs" />
     <Compile Include="Files.cs" />

@@ -18,6 +18,9 @@ namespace TutorApp.Web.Controllers
             model.TeacherCount = TeachersServices.Instance.GetTeachersCount();
             model.StudentCount = StudentServices.Instance.GetStudentsCount();
             model.AdminCount = AccountServices.Instance.GetAccountsCount();
+            model.JobsCount = JobsServices.Instance.GetJobsCount();
+            model.InboxCount = InboxServices.Instance.GetInboxsCount();
+            model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
             return View(model);
         }
 

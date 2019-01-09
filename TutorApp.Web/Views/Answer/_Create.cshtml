@@ -9,10 +9,10 @@
         <h1>Create Form</h1><br>
         <div class="select">
             <select name="QuestionID">
-                @foreach (var question in Model.Question)
+                @foreach (var Question in Model.Question)
                 {
-                    <option value="@question.ID">
-                        @question.Name
+                    <option value="@Question.ID">
+                        @Question.Name
                     </option>
                 }
             </select>

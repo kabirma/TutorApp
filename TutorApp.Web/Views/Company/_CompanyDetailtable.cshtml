@@ -1,0 +1,82 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.CompanyDetailSearchViewModel
+@{
+
+
+    int i = 0;
+}
+@if (Model != null && Model.CompanyDetail != null && Model.CompanyDetail.Count > 0)
+
+{
+    <table id="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Phone Number</th>
+                <th>Image</th>
+
+
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Co in Model.CompanyDetail)
+            {
+
+                i++;
+            <tr>
+                <td>@i</td>
+                <td>@Co.Name</td>
+                <td>@Co.Email</td>
+                <td>@Co.Address</td>
+                <td>@Co.City</td>
+                <td>@Co.State</td>
+                <td>@Co.PhoneNo</td>
+                <td>@Co.Imageurl</td>
+               
+
+
+                <td>
+                    <button class="editbtn fas fa-edit" data-id="@Co.ID"></button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
+
+<script>
+
+    $(".editbtn").click(function() {
+
+        $.ajax({
+                url: "@Url.EditCompany()",
+        data:
+                {
+                    ID: $(this).attr("data-id")
+        }
+            })
+        .done(function(response) {
+            $("#actioncontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+  
+
+</script>
+

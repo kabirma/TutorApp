@@ -3,7 +3,7 @@
 
 
 
-<form method="post" id="createquestion" class="form container-fluid row">
+<form method="post" id="createQuestion" class="form container-fluid row">
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <h1>Create Form</h1><br>
@@ -63,7 +63,7 @@
         $.ajax({
             type: "POST",
             url: "@Url.CreateQuestion()",
-            data: $("#createquestion").serialize()
+            data: $("#createQuestion").serialize()
         })
             .done(function (response) {
                 $("#tablecontainer").html(response);

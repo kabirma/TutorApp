@@ -1,16 +1,24 @@
 ﻿@using TutorApp.Web.Helper;
 @model TutorApp.Web.ViewModels.NewTeacherViewModels
 
-@{ 
+@{
     var featureturechecked = Model.IsTeacher ? "checked" : string.Empty;
     var featurefalsechecked = !Model.IsTeacher ? "checked" : string.Empty;
 
 }
 
-<form method="post" id="createteacher" class="form container-fluid row">
-
-    <div class="col-md-7">
+<form method="post" id="updateteacher" class="form container-fluid row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 text-center">
         <h1>Create Form</h1><br>
+        <div style="text-align:center">
+            <img id="imagefile" class="image" src="@Model.ImageUrl">
+
+            <br />
+            <input id="ImageUrl" name="ImageUrl" type="hidden" value="@Model.ImageUrl" />
+            <input type="file" id="ImageUpload" name="Image" />
+            <br />
+        </div>
         <input name="ID" type="hidden" value="@Model.ID" />
         <input value="@Model.TeachingSubjectID" name="TeachingSubjectID" type="hidden" />
 
@@ -127,7 +135,7 @@
                 }
             </select>
         </div>
-        <br />
+
         <div class="select">
             <select name="Gender">
                 @{var selecml = Model.StudentType == "Male" ? "selected" : string.Empty;
@@ -182,40 +190,42 @@
                     </option>
                 }
             </select>
-            <br />
-            <input type="text" name="PhoneNumber" placeholder="Type PhoneNumber Here" value="@Model.PhoneNumber" />
-
-            <br />
-            <input type="text" name="Address" placeholder="Type Address Here" value="@Model.Address" />
-
-            <br />
-            <input type="text" name="City" placeholder="Type City Here" value="@Model.City" />
-
-            <br />
-            <input type="text" name="State" placeholder="Type State Here" value="@Model.State" />
-
-            <br />
-            <input type="text" name="Country" placeholder="Type Country Here" value="@Model.Country" />
-
-            <br />
-            <input type="text" name="ZipCode" placeholder="Type Zip Code Here" value="@Model.ZipCode" />
-
-            <br />
-            <input type="text" name="Bio" placeholder="Type Bio Detail Here" value="@Model.Bio" />
-
-            <br />
-            <input id="ImageUrl" name="ImageUrl" type="hidden" value="@Model.ImageUrl" />
-            <input type="file" id="ImageUpload" name="Image" />
-<br />
-            <button type="button" id="updatebtn">Update Record</button>
-            <button type="button" id="cancelbtn">Cancel</button>
         </div>
-        <div class="col-md-5 row">
-            <br /><br /><br /><br /><br /><br />
-            <img id="imagefile" class="image" src="@Model.ImageUrl">
+        <br />
+        <input type="text" name="PhoneNumber" placeholder="Type PhoneNumber Here" value="@Model.PhoneNumber" />
+
+        <br />
+        <input type="text" name="Address" placeholder="Type Address Here" value="@Model.Address" />
+
+        <br />
+        <input type="text" name="City" placeholder="Type City Here" value="@Model.City" />
+
+        <br />
+        <input type="text" name="State" placeholder="Type State Here" value="@Model.State" />
+
+        <br />
+        <input type="text" name="Country" placeholder="Type Country Here" value="@Model.Country" />
+
+        <br />
+        <input type="text" name="ZipCode" placeholder="Type Zip Code Here" value="@Model.ZipCode" />
+
+        <br />
+        <input type="text" name="Facebook" placeholder="Type Facebook Detail Here" value="@Model.Facebook" />
+        <br />
+        <input type="text" name="Twitter" placeholder="Type Twitter Detail Here" value="@Model.Twitter" />
+        <br />
+        <input type="text" name="Google" placeholder="Type Google Detail Here" value="@Model.Google" />
+        <br />
+        <input type="text" name="Linkedin" placeholder="Type Linkedin Detail Here" value="@Model.Linkedin" />
+        <br />
+        <input type="text" name="Bio" placeholder="Type Bio Detail Here" value="@Model.Bio" />
 
 
-        </div>
+        <br />
+        <button type="button" id="updatebtn">Update Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+
 </form>
 
 <script>
@@ -228,7 +238,7 @@
         $.ajax({
             type: "POST",
             url: "@Url.EditTeachers()",
-            data: $("#updatecoursfiled").serialize()
+            data: $("#updateteacher").serialize()
         })
             .done(function (response) {
                 $("#tablecontainer").html(response);
