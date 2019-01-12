@@ -61,5 +61,7 @@ namespace TutorApp.Web.ViewModels
 
         public string Linkedin { get; set; }
 
+        public string Rating { get; set; }
+
     }
 }

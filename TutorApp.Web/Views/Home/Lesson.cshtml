@@ -1,0 +1,135 @@
+﻿@model TutorApp.Web.ViewModels.ListViewModel
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .lesson {
+    margin-top:5%;
+    margin-bottom:2%;
+    }
+    .courses-sidebar{
+        margin:0;
+        padding:0;
+    }
+    .courses-sidebar a{
+        font-size:20px;
+       margin-bottom:0;
+       font-weight:500;
+    
+    }
+        .courses-sidebar hr {
+            margin-top: 3%;
+            margin-bottom: 3%;
+           border-color:dodgerblue;
+            border-width:4px;
+        }
+
+    .courses-main{
+        margin-left:1%;
+    }
+    .courses-main .lesson-head {
+        text-align: center;
+        margin-bottom: 10%;
+        border-bottom: 1px solid #ddd;
+    }
+        .courses-main .lesson-head h2 {
+            text-transform: uppercase;
+            color: #81e827;
+        }
+        .courses-main .lesson-head h5 {
+           
+            color: #808080;
+        }
+    .courses-main .lesson-head p{
+        text-align: left;
+        margin-top: 5%;
+
+    }
+    .course-section h4{
+        text-transform:uppercase;
+        color:dodgerblue;
+    }
+    .topic-section h4 {
+        text-transform: uppercase;
+        color: #81e827
+    }
+    .topics{
+        color:dodgerblue!important;
+        padding:2%;
+    }
+    .topics i {
+        color: #808080 !important;
+    }
+</style>
+<main>
+    <section id="hero_in" class="contacts">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Courses @Model.CompanyDetail[0].Name</h1>
+            </div>
+        </div>
+    </section>
+    <!--/hero_in-->
+    <div class="contact_info">
+        <div class="container">
+            <ul class="clearfix">
+                <li>
+                    <i class="pe-7s-map-marker"></i>
+                    <h4 style="color:white;">Courses</h4>
+                    <span>@Model.CoursesCount<br>Courses in Database</span>
+                </li>
+                <li>
+                    <i class="pe-7s-mail-open-file"></i>
+                    <h4 style="color:white;">Fields</h4>
+                    <span>@Model.CourseFieldCount<br><small>Fields in Database</small></span>
+                </li>
+                <li>
+                    <i class="pe-7s-phone"></i>
+                    <h4 style="color:white;">Topics</h4>
+                    <span>@Model.FieldTopicCount<br><small>Topics in Database</small></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+   
+    <div class="container-fluid row lesson">
+        <div class="col-md-1"></div>
+        <div class="col-md-3 courses-sidebar">
+            <h4>Courses</h4><br />
+            @foreach (var courses in Model.Courses)
+            {
+                <a>@courses.Name</a><br /><hr />
+               
+            }
+        </div>
+
+        <div class="col-md-7 container-fluid row courses-main">
+            <div class="lesson-head col-md-12" >
+                <h2>Lessons</h2>
+                <h5>Improve your self with these basic to Advance level Lessons</h5>
+                <p>These sample lessons give students a way to quickly review the most popular topics in math, science, history, and more! Most lessons end with a quick practice quiz to make sure you understood what you read. Lessons are a great way to review what you're learning in school, or to get ahead!</p>
+            </div>
+           
+            @foreach (var courses in Model.Courses)
+            {
+                <div class="col-md-4">
+                    <img src="@courses.Imageurl" width="100%" height="auto" />
+                </div>
+
+                <div class="col-md-8 course-section">
+                    <h4><a>@courses.Name Lesson</a></h4>
+                    <p>@courses.Description</p>
+                </div>
+                <div class="col-md-12 topic-section">
+                    <hr />
+                    <h4><a>@courses.Name Topics</a></h4><br />
+                    @foreach (var coursesfield in Model.CourseField.Where(x => x.Category.ID == courses.ID)) {
+                        <a class="topics"><i class="icon icon-bookmark"></i>@coursesfield.Name</a><br />
+                    }
+                    <hr />
+                </div>
+            }
+        </div>
+    </div>
+</main>

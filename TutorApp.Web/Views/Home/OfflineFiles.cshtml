@@ -1,0 +1,202 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@{
+    /**/
+
+    ViewBag.Title = "OfflineFiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .search-input{
+        width:200px;
+        padding-left:10px;
+        border-radius:10px;
+        outline:none;
+        border:none;
+    }
+   
+</style>
+<main>
+    <section id="hero_in" class="courses">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Offline courses</h1>
+            </div>
+        </div>
+    </section>
+    <!--/hero_in-->
+    <div class="filters_listing sticky_horizontal">
+        <div class="container">
+            <ul class="clearfix">
+                <li>
+                    <div class="switch-field">
+                        <input type="radio" id="all" name="listing_filter" value="all" checked>
+                        <label class="period-filter" data-time="old" for="old">Old</label>
+                       
+                        <input type="radio" id="latest" name="listing_filter" value="latest">
+                        <label class="period-filter" data-time="new" for="latest">Latest</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="layout_view">
+                       <input type="text" placeholder="Search File " id="searchtxt" class="search-input"  />
+                    </div>
+                </li>
+               
+            </ul>
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /filters -->
+    <div class="container margin_60_35">
+        <div class="row">
+            <aside class="col-lg-3" id="sidebar">
+                <div id="filters_col">
+                    <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt">Filters </a>
+                    <div class="collapse show" id="collapseFilters">
+                        <div class="filter_type">
+                            <h6>Category</h6>
+                            <ul>
+                                <li class="category-filter" data-category="all">
+                                    <a>
+                                        ALL <small>(@Model.FilesCount)</small>
+                                    </a>
+                                </li>
+                                @foreach (var category in Model.FileCategory)
+                                {
+                                    <li class="category-filter" data-category="@category.Name">
+                                        <a>
+                                            @category.Name <small>(@Model.Files.Where(x => x.Category.ID == category.ID).Count())</small>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="filter_type">
+                            <h6>Uploader</h6>
+                            <ul>
+                                <li class="writer-filter" data-writer="all">
+                                    <label>
+                                        ALL <small>(@Model.FilesCount)</small>
+                                    </label>
+                                </li>
+                                @foreach (var writer in Model.Teacher)
+                                {
+                                    <li class="writer-filter" data-writer="@writer.Name">
+                                        <label>
+                                            @writer.Name <small>(@Model.Files.Where(x => x.Writer.ID == writer.ID).Count())</small>
+                                        </label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/collapse -->
+                </div>
+                <!--/filters col-->
+            </aside>
+            <!-- /aside -->
+            <div class="col-lg-9" id="filecontainer">
+                @{
+                    Html.RenderAction("_FileData");
+                }
+
+
+            </div>
+            <!-- /col -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+    <div class="bg_color_1">
+        <div class="container margin_60_35">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#0" class="boxed_list">
+                        <i class="pe-7s-help2"></i>
+                        <h4>Need Help? Contact us</h4>
+                        <p>Cum appareat maiestatis interpretaris et, et sit.</p>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#0" class="boxed_list">
+                        <i class="pe-7s-wallet"></i>
+                        <h4>Payments and Refunds</h4>
+                        <p>Qui ea nemore eruditi, magna prima possit eu mei.</p>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#0" class="boxed_list">
+                        <i class="pe-7s-note2"></i>
+                        <h4>Quality Standards</h4>
+                        <p>Hinc vituperata sed ut, pro laudem nonumes ex.</p>
+                    </a>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bg_color_1 -->
+</main>
+<!--/main-->
+  <script>
+        $("#searchtxt").on('input', function () {
+       $.ajax({
+          url: "@Url.FileData("")",
+            data: {
+                Search: $(this).val()
+
+            }
+        })
+            .done(function (response) {
+                $("#filecontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        event.preventDefault();
+      });
+
+        $(".category-filter").click(function() {
+        $.ajax({
+          url: "@Url.FileData("")",
+          data:
+          {
+                  Category: $(this).attr("data-category")
+          }
+          })
+                .done(function(response) {
+                    $("#filecontainer").html(response);
+          })
+            .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+      $(".writer-filter").click(function() {
+        $.ajax({
+          url: "@Url.FileData("")",
+          data:
+          {
+                  Writer: $(this).attr("data-writer")
+          }
+          })
+                .done(function(response) {
+                    $("#filecontainer").html(response);
+          })
+            .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+      $(".period-filter").click(function() {
+        $.ajax({
+          url: "@Url.FileData("")",
+          data:
+          {
+                  timeperiod: $(this).attr("data-time")
+          }
+          })
+                .done(function(response) {
+                    $("#filecontainer").html(response);
+          })
+            .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+  </script>

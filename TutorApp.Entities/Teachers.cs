@@ -50,6 +50,7 @@ namespace TutorApp.Entities
         public string Google { get; set; }
 
         public string Linkedin { get; set; }
+        public string Rating { get; set; }
 
     }
 }

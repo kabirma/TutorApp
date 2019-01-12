@@ -2,7 +2,7 @@
 @model TutorApp.Web.ViewModels.ListViewModel
 @{
     Layout = null;
-    int i = 0;
+   
 }
 
 <!DOCTYPE html>
@@ -270,7 +270,7 @@
                                             <!-- start message -->
                                             @foreach (var inbox in Model.Inbox)
                                             {
-                                                
+
                                                 <li>
                                                     <a>
                                                         <div class="avatar float-left">
@@ -281,7 +281,12 @@
                                                             @inbox.Email.ToUpper()
                                                             <small><i class="icon icon-clock-o"></i>@inbox.Date</small>
                                                         </h4>
-                                                        <p>@inbox.Message.Substring(0, 50)...</p>
+                                                        <p>
+                                                            @if(inbox.Message.Length > 50)
+                                                            {<text>@inbox.Message.Substring(0, 50)</text>}
+                                                        else
+                                                        {<text>@inbox.Message.Substring(0, inbox.Message.Length)</text>}...
+                                                                                                            </p>
                                                     </a>
                                                 </li>
 
@@ -305,7 +310,8 @@
 
                                                 <a href="#">
                                                     <i class="icon-supervisor_account indigo lighten-2 avatar  r-5"></i>
-                                                    <div class="pt-1">@Session["username"].ToString()</div>
+                                                    <div class="pt-1">@if (Session["username"] != null) { @Session["username"].ToString();}
+                                                    else { <text>User</text>}</div>
                                                 </a>
                                                 <a href="@Url.Signout()">
                                                     <i class="icon-sign-out indigo lighten-2 avatar  r-5"></i>

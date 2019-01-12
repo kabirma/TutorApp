@@ -14,5 +14,7 @@ namespace TutorApp.Entities
         public string City { get; set; }
         public string State { get; set; }
         public string Imageurl { get; set; }
+        public string Description { get; set; }
+        public string AboutImage { get; set; }
     }
 }

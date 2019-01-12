@@ -1,31 +1,160 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+﻿@model TutorApp.Web.ViewModels.ListViewModel
+    @{ 
+        var coursefcount = 0;
+    }
+<main>
+    <section class="hero_single version_2">
+        <div class="wrapper">
+            <div class="container">
+                <h3>What would you learn?</h3>
+                <p>Increase your expertise in business, technology and personal development</p>
+                <form>
+                    <div id="custom-search-input">
+                        <div class="input-group">
+                            <input type="text" class=" search-query" placeholder="Ex. Architecture, Specialization...">
+                            <input type="submit" class="btn_search" value="Search">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- /hero_single -->
+    <div class="features clearfix">
+        <div class="container">
+            <ul>
+                <li>
+                    <i class="pe-7s-study"></i>
+                    <h4 style="color:white!important;">@Model.CoursesCount</h4><span>Explore a variety of fresh topics</span>
+                </li>
+                <li>
+                    <i class="pe-7s-cup"></i>
+                    <h4 style="color:white!important;">@Model.TeacherCount</h4><span>Find the right instructor for you</span>
+                </li>
+                <li>
+                    <i class="pe-7s-video"></i>
+                    <h4 style="color:white!important;">@Model.VideoCount</h4><span>Learn from our storage of Videos</span>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <!-- /features -->
+    <div class="container-fluid margin_120_0">
+        <div class="main_title_2">
+            <span><em></em></span>
+            <h2>@Model.CompanyDetail[0].Name Popular Teachers</h2>
+            <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+        </div>
+        <div id="reccomended" class="owl-carousel owl-theme">
+           @foreach (var teachers in Model.Teacher)
+           {
+            <div class="item">
+                <div class="box_grid">
+                    <figure>
+                        <a href="#0" class="wish_bt"></a>
+                        <a href="course-detail.html"><img src="@teachers.ImageUrl" class="img-fluid" alt=""></a>
+                        <div class="price">$@teachers.HoulryRate/hr</div>
+                        <div class="preview"><span>Preview course</span></div>
+                    </figure>
+                    <div class="wrapper">
+                        <small>@teachers.UndergraduateMajor From @teachers.UndergraduateCollage</small>
+                        <h3>@teachers.Name @teachers.LName</h3>
+                        <p>@teachers.Bio</p>
+                        <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
+                    </div>
+                    <ul>
+                        <li><i class="icon_clock_alt"></i> @teachers.AvailableHours</li>
+                        <li><i class="icon_like"></i> @teachers.Email</li>
+                        <li><a href="course-detail.html">have a Look at my Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /item -->
+           }
+        </div>
+        <!-- /carousel -->
+        <div class="container">
+            <p class="btn_home_align"><a href="courses-grid.html" class="btn_1 rounded">View all Teachers</a></p>
+        </div>
+        <!-- /container -->
+        <hr>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <!-- /container -->
+    <div class="container margin_30_95">
+        <div class="main_title_2">
+            <span><em></em></span>
+            <h2>@Model.CompanyDetail[0].Name Categories Courses</h2>
+            <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+        </div>
+        <div class="row">
+        @foreach (var courses in Model.Courses)
+        {
+            <div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
+                <a href="#0" class="grid_item">
+                    <figure class="block-reveal">
+                        <div class="block-horizzontal"></div>
+                        <img src="@courses.Imageurl" class="img-fluid" alt="">
+                        <div class="info">
+                            @foreach(var fieldcount in Model.CourseField.Where(coursefield => coursefield.Category.ID == courses.ID)) { coursefcount++;  }
+                            <small><i class="ti-layers"></i>@coursefcount Programmes</small>
+                            <h3>@courses.Name</h3>
+                        </div>
+                    </figure>
+                </a>
+            </div>
+            <!-- /grid_item -->
+        }
+        </div>
+        <!-- /row -->
     </div>
-</div>
+    <!-- /container -->
+    <div class="bg_color_1">
+        <div class="container margin_120_95">
+            <div class="main_title_2">
+                <span><em></em></span>
+                <h2>@Model.CompanyDetail[0].Name Teaching Jobs</h2>
+                <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+            </div>
+            <div class="row">
+                @foreach (var jobs in Model.Job)
+                {
+                    <div class="col-lg-6">
+                        <a class="box_news" href="#0">
+                            <figure>
+                                <img src="https://www.thoughtco.com/thmb/45XWafEdDpIzg4Ze9943GM7fMi4=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-187244393-5a980ce743a1030037ba389f.jpg" alt="">
+                                <figcaption><strong>@jobs.Date.Substring(0,2)</strong></figcaption>
+                            </figure>
+                            <ul>
+                                <li>Student: @jobs.Student.Name</li>
+                                <li>@jobs.Date</li>
+                            </ul>
+                            <h4>@jobs.Name</h4>
+                            <p>@jobs.Description.Substring(0,150)</p>
+                        </a>
+                    </div>
+                    <!-- /box_news -->
+                }
+            </div>
+            <!-- /row -->
+            <p class="btn_home_align"><a href="blog.html" class="btn_1 rounded">View all Job Posts</a></p>
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bg_color_1 -->
+    <div class="call_section">
+        <div class="container clearfix">
+            <div class="col-lg-5 col-md-6 float-right wow" data-wow-offset="250">
+                <div class="block-reveal">
+                    <div class="block-vertical"></div>
+                    <div class="box_1">
+                        <h3>Enjoy a great students community</h3>
+                        <p>We're delighted that we're doing things right according to those who matter to us most: our students. We've achieved over 90 per cent for student satisfaction.</p>
+                        <a href="#0" class="btn_1 rounded">Sign Up to See</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/call_section-->
+</main>
+<!-- /main -->

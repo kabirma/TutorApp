@@ -1,6 +1,6 @@
 ﻿@using TutorApp.Web.Helper;
 @model TutorApp.Entities.CompanyDetails
-<h2>Operations</h2>
+
 <form method="post" id="updatecompany" class="form container-fluid row">
 
 
@@ -30,7 +30,14 @@
         <label>Phone Number</label>
         <input type="text" name="PhoneNo" value="@Model.PhoneNo" /><br />
         <br />
+        <label>About Us Description</label>
+        <input type="text" name="Description" value="@Model.Description" /><br />
+        <br />
+        <label>About Us Image</label><br />
+        <img id="Aboutimagefile" class="image" src="@Model.AboutImage" />
 
+        <input id="AboutImageUrl" name="AboutImage" type="hidden" value="@Model.AboutImage" />
+        <input type="file" id="AboutImageUpload" name="Image" />
 
         <button type="button" id="updatebtn">Update Record</button>
         <button type="button" id="cancelbtn">Cancel</button>
@@ -88,6 +95,38 @@
                     $("#imagefile").attr("src", response.ImageUrl);
 
                     $("#ImageUrl").val(response.ImageUrl);
+                }
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+     $("#AboutImageUpload").change(function () {
+
+        var element = this;
+        var formData = new FormData();
+        var totalfiles = element.files.length;
+
+        for (var i = 0; i < totalfiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Imageuploader()',
+            dataType: 'json',
+            data: formData,
+            contentType: false,
+            processData: false
+
+        })
+            .done(function (response) {
+
+                if (response.Success) {
+                    $("#Aboutimagefile").attr("src", response.ImageUrl);
+
+                    $("#AboutImageUrl").val(response.ImageUrl);
                 }
             })
             .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });

@@ -1,56 +1,68 @@
 ﻿@using TutorApp.Web.Helper;
 @model TutorApp.Web.ViewModels.CompanyDetailSearchViewModel
-@{
-
-
-    int i = 0;
-}
+<style>
+    span{
+        font-size:120%;
+    }
+    .text-co{
+        margin-bottom:2%;
+        font-size:18px;
+    }
+    .btn-edit {
+        padding: 14px 60px;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        background-color: #77cc6d;
+    }
+    .btn-edit:hover{
+        opacity:.7;
+    }
+</style>
 @if (Model != null && Model.CompanyDetail != null && Model.CompanyDetail.Count > 0)
 
 {
-    <table id="table">
-        <thead>
-            <tr>
-                <th>S.No</th>
-                <th>Name</th>
-                <th>Email Address</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Phone Number</th>
-                <th>Image</th>
+<div class="Container row">
+    <div class="col-md-12" style="margin-top:3%;text-align:center;">
+        <h3>Company Details</h3>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5 text-center">
+        <img src="@Model.CompanyDetail[0].Imageurl" />
+    </div>
+    <div class="col-md-5" style="margin-top:2%;">
+        <br />
+        <div class="text-co"><b>Name:</b> @Model.CompanyDetail[0].Name</div>
 
-
-                <th>Action</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Co in Model.CompanyDetail)
-            {
-
-                i++;
-            <tr>
-                <td>@i</td>
-                <td>@Co.Name</td>
-                <td>@Co.Email</td>
-                <td>@Co.Address</td>
-                <td>@Co.City</td>
-                <td>@Co.State</td>
-                <td>@Co.PhoneNo</td>
-                <td>@Co.Imageurl</td>
-               
-
-
-                <td>
-                    <button class="editbtn fas fa-edit" data-id="@Co.ID"></button>
-                </td>
-            </tr>
+        <div class="text-co"><b>Email:</b> @Model.CompanyDetail[0].Email</div>
+        <div class="text-co"><b>Address:</b> @Model.CompanyDetail[0].Address</div>
+        <div class="text-co"><b>City:</b> @Model.CompanyDetail[0].City</div>
+        <div class="text-co"><b>State:</b> @Model.CompanyDetail[0].State</div>
+        <div class="text-co"><b>Phone Number:</b> @Model.CompanyDetail[0].PhoneNo</div>
+    </div>
+    <br />
+    <br /><br />
+    <div class="col-md-12" style="margin-top:5%;margin-bottom:5%;text-align:center;">
+        <h3>About Us Page Details</h3>
+    </div>
+    <br /><br />
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <img src="@Model.CompanyDetail[0].AboutImage" />
+    </div>
+    <div class="col-md-5">
+        <span>@Model.CompanyDetail[0].Description</span>
+    </div>
+    <div class="col-md-1"></div>
+    <br />
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="margin-top:5%;margin-bottom:5%;text-align:center;">
+        <button class="fas fa-edit btn-edit" data-id="@Model.CompanyDetail[0].ID"></button>
+    </div>
+</div>
             }
-        </tbody>
-    </table>
+      
 
-}
 else
 {
     <br />
@@ -61,7 +73,7 @@ else
 
 <script>
 
-    $(".editbtn").click(function() {
+    $(".btn-edit").click(function() {
 
         $.ajax({
                 url: "@Url.EditCompany()",

@@ -37,10 +37,16 @@ namespace TutorApp.Web.ViewModels
         public int FilesCount { get; set; }
 
         public int CoursesCount { get; set; }
+        public int CourseFieldCount { get; set; }
+        public int FieldTopicCount { get; set; }
 
-        
         public int InboxCount { get; set; }
         public int JobsCount { get; set; }
         public List<Inbox> Inbox { get; set; }
+
+        public List<Jobs> Job { get; set; }
+        public List<Files> Files { get; set; }
+        public string Search { get; internal set; }
+        public Pager Pager { get; internal set; }
     }
 }

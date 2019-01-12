@@ -400,6 +400,9 @@
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Company\_CompanyDetailtable.cshtml" />
     <Content Include="Views\Company\_Edit.cshtml" />
+    <Content Include="Views\Home\Lesson.cshtml" />
+    <Content Include="Views\Home\OfflineFiles.cshtml" />
+    <Content Include="Views\Home\_FileData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

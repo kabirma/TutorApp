@@ -11,6 +11,7 @@ namespace TutorApp.Web.ViewModels
         public List<Files> File { get; set; }
         public string Search { get; set; }
         public Pager Pager { get; internal set; }
+        public int FilesCount { get; set; }
     }
     public class NewFileViewModels
     {

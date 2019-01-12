@@ -1,5 +1,12 @@
 ﻿@using TutorApp.Web.Helper;
 @model TutorApp.Entities.Courses
+
+
+@{
+    var featureturechecked = Model.IsFeatured ? "checked" : string.Empty;
+    var featurefalsechecked = !Model.IsFeatured ? "checked" : string.Empty;
+
+}
 <h2>Operations</h2>
 <form method="post" id="updateCourse" class="form container-fluid row">
 
@@ -13,6 +20,10 @@
         <input type="text" name="Name" value="@Model.Name" /><br />
         <label>Description</label>
         <input type="text" name="Description" value="@Model.Description" /><br />
+        <br />
+        <label>Is Featured?</label><br />
+        <input type="radio" name="IsFeatured" value="True" id="true" @featureturechecked /><label for="true">True</label>
+        <input type="radio" name="IsFeatured" value="False" id="false" @featurefalsechecked /><label for="false">False</label>
         <br />
         <input id="ImageUrl" name="Imageurl" type="hidden" value="@Model.Imageurl" />
         <input type="file" id="ImageUpload" name="Image" />

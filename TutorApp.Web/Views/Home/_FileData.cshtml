@@ -1,0 +1,80 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+<div class="row">
+    @foreach (var files in Model.Files)
+    {
+        <div class="col-md-6">
+            <div class="box_grid wow">
+                <figure class="block-reveal">
+                   
+                    <img src="~/Content/img/docs.jpg" class="img-fluid" alt="">
+
+
+                </figure>
+                <div class="wrapper">
+                    <small>Category : @files.Category.Name</small>
+                    <h3>@files.Name</h3>
+                    <p>@if (files.Description.Length > 100)
+                    {<text>@files.Description.Substring(0, 100)...</text> }
+                    else {
+                    <text>@files.Description.Substring(0, files.Description.Length)...</text>}
+                    </p>
+                    <small>Uploaded By : @files.Writer.Name</small>
+                </div>
+                <ul>
+                    <li><i class="icon_clock_alt"></i> @files.Date</li>
+
+                    <li><a href="@files.FilePath" download>Download</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /box_grid -->
+    }
+</div>
+<!-- /row -->
+<!-- Pagination -->
+
+
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn  @activeclass" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.FileData("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+</script>

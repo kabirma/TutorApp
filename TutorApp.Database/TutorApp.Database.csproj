@@ -74,6 +74,18 @@
     <Compile Include="Migrations\201901081816546_databupdated.Designer.cs">
       <DependentUpon>201901081816546_databupdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901092256521_coursesupdated.cs" />
+    <Compile Include="Migrations\201901092256521_coursesupdated.Designer.cs">
+      <DependentUpon>201901092256521_coursesupdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901101903476_coursesup.cs" />
+    <Compile Include="Migrations\201901101903476_coursesup.Designer.cs">
+      <DependentUpon>201901101903476_coursesup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901101930223_coupdate.cs" />
+    <Compile Include="Migrations\201901101930223_coupdate.Designer.cs">
+      <DependentUpon>201901101930223_coupdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -96,6 +108,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901081816546_databupdated.resx">
       <DependentUpon>201901081816546_databupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901092256521_coursesupdated.resx">
+      <DependentUpon>201901092256521_coursesupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901101903476_coursesup.resx">
+      <DependentUpon>201901101903476_coursesup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901101930223_coupdate.resx">
+      <DependentUpon>201901101930223_coupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

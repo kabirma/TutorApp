@@ -8,6 +8,39 @@ namespace TutorApp.Web.Helper
 {
     public static class URLHelper
     {
+        /**************** HOME ********************/
+        public static string ContactUS(this UrlHelper helper)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Home",
+                action = "Contact",
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+        public static string FileData(this UrlHelper helper,string Search)
+        {
+            string routeURL = string.Empty;
+
+            routeURL = helper.RouteUrl("Default", new
+            {
+                controller = "Home",
+                action = "_FileData",
+                Search=Search
+            });
+
+            routeURL = HttpUtility.UrlDecode(routeURL, System.Text.Encoding.UTF8);
+
+            return routeURL.ToLower();
+        }
+
+
         /**************** ADMIN *****************/
         public static string Signin(this UrlHelper helper)
         {

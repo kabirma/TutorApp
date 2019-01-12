@@ -10,5 +10,6 @@ namespace TutorApp.Entities
     {
         public string Imageurl { get; set; }
         public string Description { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }

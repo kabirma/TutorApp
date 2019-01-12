@@ -56,7 +56,7 @@ namespace TutorApp.Services
             }
         }
 
-        public List<Files> GetFiles(string Search, int pageNo, string Writer, string Category)
+        public List<Files> GetFiles(string Search, int pageNo, string Category, string Writer,string timeperiod)
         {
             using (var context = new dbContext())
             {
@@ -66,11 +66,34 @@ namespace TutorApp.Services
                 }
                 if (!string.IsNullOrEmpty(Writer))
                 {
-                    return context.FileTable.Where(File => File.Name != null && File.Writer.Name == Writer).OrderBy(File => File.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    if (Writer == "all") {
+                        return context.FileTable.OrderBy(Files => Files.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                    else
+                    {
+                        return context.FileTable.Where(File => File.Name != null && File.Writer.Name == Writer).OrderBy(File => File.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
                 }
                 if (!string.IsNullOrEmpty(Category))
                 {
-                    return context.FileTable.Where(File => File.Name != null && File.Category.Name == Category).OrderBy(File => File.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    if (Category == "all") {
+                        return context.FileTable.OrderBy(Files => Files.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                    else
+                    {
+                        return context.FileTable.Where(File => File.Name != null && File.Category.Name == Category).OrderBy(File => File.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                }
+                if (!string.IsNullOrEmpty(timeperiod)) {
+                    if (timeperiod == "old")
+                    {
+                        return context.FileTable.OrderByDescending(Files => Files.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                    else
+                    {
+                        return context.FileTable.OrderBy(Files => Files.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+
+                    }
                 }
                 else
                 {
@@ -110,7 +133,7 @@ namespace TutorApp.Services
             }
         }
 
-        public int GetFilesCount(string Search, string Writer, string Category)
+        public int GetFilesCount(string Search, string Category, string Writer)
         {
             using (var context = new dbContext())
             {
@@ -120,12 +143,19 @@ namespace TutorApp.Services
                 }
                 if (!string.IsNullOrEmpty(Writer))
                 {
-                    return context.FileTable.Where(File => File.Name != null && File.Writer.Name == Writer).Include(x => x.Writer).Include(x => x.Category).Count();
+                    if (Writer == "all") { return context.FileTable.Include(x => x.Writer).Include(x => x.Category).Count(); }
+                    else {
+                        return context.FileTable.Where(File => File.Name != null && File.Writer.Name == Writer).Include(x => x.Writer).Include(x => x.Category).Count();
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(Category))
                 {
-                    return context.FileTable.Where(File => File.Name != null && File.Category.Name == Writer).Include(x => x.Writer).Include(x => x.Category).Count();
+                    if (Category == "all") { return context.FileTable.Include(x => x.Writer).Include(x => x.Category).Count(); }
+                    else
+                    {
+                        return context.FileTable.Where(File => File.Name != null && File.Category.Name == Category).Include(x => x.Writer).Include(x => x.Category).Count();
+                    }
                 }
                 else
                 {

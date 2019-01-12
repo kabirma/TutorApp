@@ -15,6 +15,7 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Is Featured?</th>
                 <th>Action</th>
 
             </tr>
@@ -28,6 +29,7 @@
                     <td><img src="@courses.Imageurl" width="150px" height="auto" /></td>
                     <td>@courses.Name</td>
                     <td>@courses.Description</td>
+                    <td>@courses.IsFeatured</td>
                     <td>
                         <button class="editbtn fas fa-edit" data-id="@courses.ID"></button>
                         <button class="deletebtn fas fa-trash-alt" data-id="@courses.ID"></button>
