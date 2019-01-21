@@ -10,6 +10,10 @@ namespace TutorApp.Web.ViewModels
     {
         public List<CompanyDetails> CompanyDetail { get; set; }
         public List<VideosCategory> VideoCategory { get; set; }
+        public List<Videos> Videos { get; set; }
+        public Videos Video { get; set; }
+        public List<VideoComments> Comments { get; set; }
+        public int CommentCount { get; set; }
 
         public List<Teachers> Teacher { get; set; }
 

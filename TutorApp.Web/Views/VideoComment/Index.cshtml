@@ -1,0 +1,64 @@
+﻿@using TutorApp.Web.Helper;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <br />
+    <p class="heading"> Video Comment Page </p>
+    <form method="post" class="container-fluid">
+
+        <input id="searchtxt" class="searchtext" name="Search" placeholder="Search Here" />
+        <button id="Resetbtn" class="fas fa-sync-alt"></button>
+    </form>
+</div>
+<hr />
+<div id="tablecontainer" class="container-fluid">
+
+    @{
+        Html.RenderAction("_VideoCommentTable");
+    }
+
+</div>
+
+<div id="actioncontainer" class="container-fluid">
+
+</div>
+
+<script>
+         $("#Resetbtn").click(function () {
+              $.ajax({
+               url: "@Url.VideoCommentTable("")",
+
+        })
+        .done(function (response) {
+            $("#tablecontainer").html(response);
+            $("#searchtxt").val("");
+        })
+        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+
+            event.preventDefault();
+         });
+
+
+         $("#searchtxt").on('input', function () {
+            $.ajax({
+            url: "@Url.InboxTable("")",
+            data: {
+                Search: $("input[name=Search]").val()
+
+            }
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        event.preventDefault();
+    });
+
+
+
+
+</script>

@@ -1,0 +1,89 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@if (Model != null && Model.Videos != null && Model.Videos.Count > 0)
+{
+
+    foreach (var video in Model.Videos)
+    {
+        <div class="box_list wow">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <figure class="block-reveal">
+                        <div class="block-horizzontal"></div>
+                        <a href="/Home/VideoDetails/@video.ID"><img src="@video.ImageUrl" class="img-fluid" alt=""></a>
+
+                    </figure>
+                </div>
+                <div class="col-lg-7">
+                    <div class="wrapper">
+
+                        <div class="price"><i class="icon_like"></i> @video.Likes</div>
+                        <small>Category : @video.Category.Name</small>
+                        <h3>@video.Name</h3>
+                        <p>@video.Description</p>
+                        <small>Uploader : @video.Writer.Name</small>
+                    </div>
+                    <ul>
+                        <li><i class="icon_clock_alt"></i> @video.Date</li>
+                        <li><a href="/Home/VideoDetails/@video.ID">Watch</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /box_list -->
+    }
+
+}
+
+else
+{
+    <br />
+    /**/
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+    /**/
+}
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn  @activeclass" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.VideoData("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+</script>

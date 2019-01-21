@@ -6,11 +6,13 @@ using System.Web.Mvc;
 using TutorApp.Entities;
 using TutorApp.Services;
 using TutorApp.Web.ViewModels;
+using System.Data.Entity;
 
 namespace TutorApp.Web.Controllers
 {
     public class HomeController : Controller
     {
+        int items = 8;
         public ActionResult Index()
         {
             ListViewModel model = new ListViewModel();
@@ -71,7 +73,7 @@ namespace TutorApp.Web.Controllers
 
             return View(model);
         }
-        int items = 8;
+      
         public ActionResult _FileData(string Search, int? pageNo,string Category,string Writer,string timeperiod)
         {
             ListViewModel model = new ListViewModel
@@ -95,6 +97,48 @@ namespace TutorApp.Web.Controllers
         }
 
 
+
+        public ActionResult OnlineVideos()
+        {
+            ListViewModel model = new ListViewModel();
+            model.Videos = VideosServices.Instance.GetVideos();
+            model.VideoCategory = VideoCategServices.Instance.GetVideosCategory();
+            model.Teacher = TeachersServices.Instance.GetTeachers();
+            model.VideoCount = VideosServices.Instance.GetVideosCount();
+
+            return View(model);
+        }
+
+        public ActionResult _VideoData(string Search, int? pageNo, string Writer, string Category, string timeperiod)
+        {
+            ListViewModel model = new ListViewModel
+            {
+                Search = Search
+            };
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+
+            model.Videos = VideosServices.Instance.GetVideos(Search, pageNo.Value,  Writer, Category, timeperiod);
+            model.VideoCount = VideosServices.Instance.GetVideosCount(Search,  Writer, Category);
+            if (model.Videos != null)
+            {
+                model.Pager = new Pager(model.VideoCount, pageNo, items);
+
+                return PartialView(model);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+        public ActionResult VideoDetails(int ID)
+        {
+            ListViewModel model = new ListViewModel();
+            model.Video = VideosServices.Instance.GetVideo(ID);
+            model.Videos = VideosServices.Instance.GetVideos();
+            model.Comments = VideoCommentServices.Instance.GetSelectedVideoComments(ID);
+            model.CommentCount = VideoCommentServices.Instance.GetSelectedVideoComments(ID).Count();
+            return View(model);
+        }
 
     }
 }

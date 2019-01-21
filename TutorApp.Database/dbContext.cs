@@ -33,6 +33,6 @@ namespace TutorApp.Database
         public DbSet<Jobs> JobTable { get; set; }
         public DbSet<Inbox> InboxTable { get; set; }
         public DbSet<CompanyDetails> CompanyDetailsTable { get; set; }
-
+        public DbSet<VideoComments> VideoCommentTable { get; set; }
     }
 }

@@ -86,6 +86,22 @@
     <Compile Include="Migrations\201901101930223_coupdate.Designer.cs">
       <DependentUpon>201901101930223_coupdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901121445565_comment.cs" />
+    <Compile Include="Migrations\201901121445565_comment.Designer.cs">
+      <DependentUpon>201901121445565_comment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901121448447_commentupdate.cs" />
+    <Compile Include="Migrations\201901121448447_commentupdate.Designer.cs">
+      <DependentUpon>201901121448447_commentupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901202027317_videoupdate.cs" />
+    <Compile Include="Migrations\201901202027317_videoupdate.Designer.cs">
+      <DependentUpon>201901202027317_videoupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901202038218_videoupdateas.cs" />
+    <Compile Include="Migrations\201901202038218_videoupdateas.Designer.cs">
+      <DependentUpon>201901202038218_videoupdateas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,6 +133,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901101930223_coupdate.resx">
       <DependentUpon>201901101930223_coupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121445565_comment.resx">
+      <DependentUpon>201901121445565_comment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121448447_commentupdate.resx">
+      <DependentUpon>201901121448447_commentupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901202027317_videoupdate.resx">
+      <DependentUpon>201901202027317_videoupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901202038218_videoupdateas.resx">
+      <DependentUpon>201901202038218_videoupdateas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -65,6 +65,7 @@
     <Compile Include="TeachersServices.cs" />
     <Compile Include="TopicDetailsServices.cs" />
     <Compile Include="VideoCategServices.cs" />
+    <Compile Include="VideoCommentServices.cs" />
     <Compile Include="VideosServices.cs" />
   </ItemGroup>
   <ItemGroup>

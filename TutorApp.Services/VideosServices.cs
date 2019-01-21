@@ -56,7 +56,7 @@ namespace TutorApp.Services
             }
         }
 
-        public List<Videos> GetVideos(string Search, int pageNo, string Writer, string Category)
+        public List<Videos> GetVideos(string Search, int pageNo, string Writer, string Category,string timeperiod)
         {
             using (var context = new dbContext())
             {
@@ -66,11 +66,39 @@ namespace TutorApp.Services
                 }
                 if (!string.IsNullOrEmpty(Writer))
                 {
-                    return context.VideoTable.Where(Video => Video.Name != null && Video.Writer.Name == Writer).OrderBy(Video => Video.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    if (Writer == "all")
+                    {
+                        return context.VideoTable.OrderBy(Videos => Videos.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                    else
+                    {
+                        return context.VideoTable.Where(video => video.Name != null && video.Writer.Name == Writer).OrderBy(video => video.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
                 }
+
                 if (!string.IsNullOrEmpty(Category))
                 {
-                    return context.VideoTable.Where(Video => Video.Name != null && Video.Category.Name == Category).OrderBy(Video => Video.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    if (Category == "all")
+                    {
+                        return context.VideoTable.OrderBy(Videos => Videos.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                    else
+                    {
+                        return context.VideoTable.Where(video => video.Name != null && video.Category.Name == Category).OrderBy(video => video.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(timeperiod))
+                {
+                    if (timeperiod == "old")
+                    {
+                        return context.VideoTable.OrderByDescending(video => video.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+                    }
+                    else
+                    {
+                        return context.VideoTable.OrderBy(video => video.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
+
+                    }
                 }
                 else
                 {

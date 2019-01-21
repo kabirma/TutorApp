@@ -7,21 +7,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    .search-input{
-        width:200px;
-        padding-left:10px;
-        border-radius:10px;
-        outline:none;
-        border:none;
-    }
-   
-</style>
+
 <main>
     <section id="hero_in" class="courses">
         <div class="wrapper">
             <div class="container">
-                <h1 class="fadeInUp"><span></span>Offline courses</h1>
+                <h1 class="fadeInUp"><span></span>Offline Files</h1>
             </div>
         </div>
     </section>
@@ -31,11 +22,11 @@
             <ul class="clearfix">
                 <li>
                     <div class="switch-field">
-                        <input type="radio" id="all" name="listing_filter" value="all" checked>
-                        <label class="period-filter" data-time="old" for="old">Old</label>
+                        <input type="radio" id="all" name="listing_filter" value="all" >
+                        <label class="period-filter old" data-time="old" for="old">Old</label>
                        
-                        <input type="radio" id="latest" name="listing_filter" value="latest">
-                        <label class="period-filter" data-time="new" for="latest">Latest</label>
+                        <input type="radio" id="latest" name="listing_filter" value="latest" checked>
+                        <label class="period-filter new" data-time="new" for="latest">Latest</label>
                     </div>
                 </li>
                 <li>
@@ -99,7 +90,7 @@
             <!-- /aside -->
             <div class="col-lg-9" id="filecontainer">
                 @{
-                    Html.RenderAction("_FileData");
+                       Html.RenderAction("_FileData");
                 }
 
 
@@ -109,36 +100,7 @@
         <!-- /row -->
     </div>
     <!-- /container -->
-    <div class="bg_color_1">
-        <div class="container margin_60_35">
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="#0" class="boxed_list">
-                        <i class="pe-7s-help2"></i>
-                        <h4>Need Help? Contact us</h4>
-                        <p>Cum appareat maiestatis interpretaris et, et sit.</p>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#0" class="boxed_list">
-                        <i class="pe-7s-wallet"></i>
-                        <h4>Payments and Refunds</h4>
-                        <p>Qui ea nemore eruditi, magna prima possit eu mei.</p>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#0" class="boxed_list">
-                        <i class="pe-7s-note2"></i>
-                        <h4>Quality Standards</h4>
-                        <p>Hinc vituperata sed ut, pro laudem nonumes ex.</p>
-                    </a>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /bg_color_1 -->
+  
 </main>
 <!--/main-->
   <script>
@@ -197,6 +159,6 @@
                     $("#filecontainer").html(response);
           })
             .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
-    });
-
+      });
+    
   </script>

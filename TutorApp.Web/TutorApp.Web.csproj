@@ -173,6 +173,7 @@
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Controllers\TopicDetailsController.cs" />
     <Compile Include="Controllers\VideoCategoryController.cs" />
+    <Compile Include="Controllers\VideoCommentController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,6 +198,7 @@
     <Compile Include="ViewModels\TeachersViewModel.cs" />
     <Compile Include="ViewModels\TopicDetailViewModel.cs" />
     <Compile Include="ViewModels\VideoCategViewModel.cs" />
+    <Compile Include="ViewModels\VideoCommentViewModel.cs" />
     <Compile Include="ViewModels\VideoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -403,6 +405,11 @@
     <Content Include="Views\Home\Lesson.cshtml" />
     <Content Include="Views\Home\OfflineFiles.cshtml" />
     <Content Include="Views\Home\_FileData.cshtml" />
+    <Content Include="Views\VideoComment\Index.cshtml" />
+    <Content Include="Views\VideoComment\_VideoCommentTable.cshtml" />
+    <Content Include="Views\Home\OnlineVideos.cshtml" />
+    <Content Include="Views\Home\_VideoData.cshtml" />
+    <Content Include="Views\Home\VideoDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

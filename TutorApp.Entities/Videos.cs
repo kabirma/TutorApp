@@ -13,5 +13,7 @@ namespace TutorApp.Entities
         public string Date { get; set; }
         public string FilePath { get; set; }
         public VideosCategory Category { get; set; }
+        public string Likes { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

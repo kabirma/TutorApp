@@ -74,6 +74,7 @@ namespace TutorApp.Services
                         return context.FileTable.Where(File => File.Name != null && File.Writer.Name == Writer).OrderBy(File => File.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Writer).Include(x => x.Category).ToList();
                     }
                 }
+
                 if (!string.IsNullOrEmpty(Category))
                 {
                     if (Category == "all") {

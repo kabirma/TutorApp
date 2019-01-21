@@ -4,9 +4,18 @@
 
 
 <form method="post" id="createVideo" class="form container-fluid row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
         <h1>Create Form</h1><br>
+        <div style="text-align:center">
+            <img id="imagefile" class="image" src="https://vignette.wikia.nocookie.net/undertale-rho/images/5/5f/Placeholder.jpg/revision/latest?cb=20180213155916">
+
+            <br />
+            <input id="ImageUrl" name="ImageUrl" type="hidden" />
+            <input type="file" id="ImageUpload" name="Image" />
+            <label>Video Cover</label>
+            <br />
+        </div>
         <div class="select">
             <select name="CategoryID">
                 @foreach (var categ in Model.VideoCategory)
@@ -41,13 +50,16 @@
         <input type="date" name="Date" />
 
         <br />
-
+        <input type="text" name="Likes" placeholder="Type Number of Likes Here" />
+        <br />
 
 
         <input id="VideoUrl" name="FilePath" type="hidden" />
         <input type="file" id="VideoUpload" name="FilePath" /><br />
         <label class="size">500MB Size Limit</label>
         <br />
+
+       
         <button type="button" id="createbtn">Create Record</button>
         <button type="button" id="cancelbtn">Cancel</button>
     </div>
@@ -105,6 +117,38 @@
             }
             })
        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+     $("#ImageUpload").change(function () {
+        var element = this;
+        var formData = new FormData();
+        var totalfiles = element.files.length;
+
+        for (var i = 0; i < totalfiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Imageuploader()',
+            dataType: 'json',
+            data: formData,
+            contentType: false,
+            processData: false
+
+        })
+            .done(function (response) {
+                console.log(response);
+
+                if (response.Success) {
+                    $("#imagefile").attr("src", response.ImageUrl);
+
+                    $("#ImageUrl").val(response.ImageUrl);
+                }
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
 
     });
 

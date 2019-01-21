@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Udema a modern educational site template">
     <meta name="author" content="Ansonika">
-    <title>EDUtIME</title>
+    <title>EduTime</title>
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="~/Content/img/apple-touch-icon-57x57-precomposed.png">
@@ -49,7 +49,16 @@
                 color: white;
                 border-radius: 270px;
             }
-            
+
+     
+        .search-input {
+            width: 200px;
+            padding-left: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+        }
+   
     </style>
 </head>
 <body>
@@ -215,6 +224,16 @@
     </div>
     <!-- page -->
    
+    <script>
+        $(".old").click(function () {
+            $(this).attr('checked', true);
+            $('.new').attr('checked', true);
+        });
+        $(".new").click(function () {
+            $(this).attr('checked', true);
+            $('.old').attr('checked', true);
+        });
 
+    </script>
 </body>
 </html>

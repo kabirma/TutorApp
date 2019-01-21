@@ -1,0 +1,118 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@{
+    ViewBag.Title = "VideoDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <section id="hero_in" class="general">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>@Model.Video.Name</h1>
+            </div>
+        </div>
+    </section>
+    <!--/hero_in-->
+    <div class="container margin_60_35">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="bloglist singlepost">
+                    <p><video width="100%" height="auto" controls poster="@Model.Video.ImageUrl">
+                        <source src="@Model.Video.FilePath" type="video/mp4">
+                        Your browser doesn't support video.
+                    </video>
+                    </p>
+                    <h1>@Model.Video.Name</h1>
+                    <div class="postmeta">
+                        <ul>
+                            <li><a href="#"><i class="icon_folder-alt"></i> Collections</a></li>
+                            <li><a href="#"><i class="icon_clock_alt"></i> @Model.Video.Date</a></li>
+                            <li><a href="#"><i class="icon_pencil-edit"></i> @Model.Video.Writer.Name</a></li>
+                            <li><a href="#"><i class="icon_comment_alt"></i> @Model.CommentCount</a></li>
+                        </ul>
+                    </div>
+                    <!-- /post meta -->
+                    <div class="post-content">
+                        <div class="dropcaps">
+                            <p>@Model.Video.Description</p>
+                        </div>
+                            </div>
+                    <!-- /post -->
+                </div>
+                <!-- /single-post -->
+                <div id="comments">
+                    <h5>Comments</h5>
+                    <ul>
+                       @foreach (var comments in Model.Comments)
+                       {
+                        <li>
+                            <div class="avatar">
+                                <a href="#">
+                                    <img src="@comments.Video.ImageUrl" alt="">
+                                </a>
+                            </div>
+                            <div class="comment_right clearfix">
+                                <div class="comment_info">
+                                    By <a href="">@comments.Name</a><span>|</span>@comments.Date<span>|</span>
+                                </div>
+                                <p>
+                                   @comments.Comment
+                                </p>
+                            </div>
+                        </li>
+                       }
+                    </ul>
+                </div>
+                <hr>
+                <h5>Leave a Comment</h5>
+                <form>
+                    <div class="form-group">
+                        <input type="text" name="name" id="name2" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" id="email2" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" id="website3" class="form-control" placeholder="Website">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="comments" id="comments2" rows="6" placeholder="Message Below"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="submit2" class="btn_1 rounded add_bottom_30"> Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /col -->
+            <aside class="col-lg-3">
+      
+                <!-- /widget -->
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4>Recent Posts</h4>
+                    </div>
+                    <ul class="comments-list">
+                       @foreach (var videos in Model.Videos)
+                       {
+                        <li>
+                            <div class="alignleft">
+                                <a href="#0"><img src="@videos.ImageUrl" alt=""></a>
+                            </div>
+                            <small>@videos.Date</small>
+                            <h3><a href="#" title="">@videos.Name</a></h3>
+                        </li>
+                       }                   
+                    </ul>
+                </div>
+                <!-- /widget -->
+             
+                <!-- /widget -->
+            </aside>
+            <!-- /aside -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</main>
+<!--/main-->

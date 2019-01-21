@@ -71,6 +71,8 @@ namespace TutorApp.Web.Controllers
                 Description = model.Description,
                 Date = model.Date,
                 FilePath = model.FilePath,
+                ImageUrl=model.ImageUrl,
+                Likes=model.Likes,
                 Category = VideoCategServices.Instance.GetVideoCateg(model.CategoryID),
                 Writer = TeachersServices.Instance.GetTeacher(model.WriterID)
             };
@@ -89,7 +91,8 @@ namespace TutorApp.Web.Controllers
                 Description = Video.Description,
                 Date = Video.Date,
                 FilePath = Video.FilePath,
-
+                ImageUrl = Video.ImageUrl,
+                Likes = Video.Likes,
                 CategoryID = Video.Category.ID,
                 Category = VideoCategServices.Instance.GetVideosCategory(),
 
@@ -110,7 +113,8 @@ namespace TutorApp.Web.Controllers
 
             Video.Date = model.Date;
             Video.FilePath = model.FilePath;
-
+            Video.ImageUrl = model.ImageUrl;
+            Video.Likes = model.Likes;
             Video.Writer = TeachersServices.Instance.GetTeacher(model.WriterID);
             Video.Category = VideoCategServices.Instance.GetVideoCateg(model.CategoryID);
 

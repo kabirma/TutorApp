@@ -20,7 +20,8 @@ namespace TutorApp.Web.ViewModels
         public string Description { get; set; }
         public string Date { get; set; }
         public string FilePath { get; set; }
-
+        public string Likes { get; set; }
+        public string ImageUrl { get; set; }
 
 
         public int CategoryID { get; set; }

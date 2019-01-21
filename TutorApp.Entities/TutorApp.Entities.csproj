@@ -57,6 +57,7 @@
     <Compile Include="Students.cs" />
     <Compile Include="Teachers.cs" />
     <Compile Include="FieldTopics.cs" />
+    <Compile Include="VideoComments.cs" />
     <Compile Include="Videos.cs" />
     <Compile Include="VideosCategory.cs" />
   </ItemGroup>
