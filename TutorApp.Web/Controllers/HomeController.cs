@@ -14,7 +14,7 @@ namespace TutorApp.Web.Controllers
     {
 
 
-        int items = 8;
+        int items = 20;
         public ActionResult Index()
         {
             ListViewModel model = new ListViewModel();
@@ -163,6 +163,7 @@ namespace TutorApp.Web.Controllers
                 return HttpNotFound();
             }
         }
+        [HttpGet]
         public ActionResult VideoDetails(int ID)
         {
             ListViewModel model = new ListViewModel();
@@ -171,6 +172,21 @@ namespace TutorApp.Web.Controllers
             model.Comments = VideoCommentServices.Instance.GetSelectedVideoComments(ID);
             model.CommentCount = VideoCommentServices.Instance.GetSelectedVideoComments(ID).Count();
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult VideoDetails(NewVideoCommentViewModel model)
+        {
+            var newVideoComment = new VideoComments
+            {
+                Name = model.Name,
+                Comment = model.Comment,
+                Date = model.Date,
+
+                Video = VideosServices.Instance.GetVideo(model.VideosID),
+            };
+
+            VideoCommentServices.Instance.SaveVideoComments(newVideoComment);
+            return RedirectToAction("VideoDetails",new { ID=model.VideosID});
         }
 
         public ActionResult AvailableTeacher()
