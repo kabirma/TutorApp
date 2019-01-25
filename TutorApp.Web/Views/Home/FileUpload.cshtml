@@ -53,33 +53,33 @@
                 <div id="middle-wizard">
                     <div class="step">
                         <div id="intro">
-                            <figure><img src="~/content/img/videob2b.png" width="100%" height="auto" alt=""></figure>
-                            <h1>Upload Video</h1>
-                            <p>Video Lessons can greatly enhence student learning, and can also gives you the edge you needed in Teaching.</p>
-                            <p><strong>Publish you own Videos or Collegues so that students can learn from you even when you are not available.</strong></p>
+                            <figure><img src="~/content/img/MetroUI_ZIP_Archive.png" width="100%" height="auto" alt=""></figure>
+                            <h1>Upload Files</h1>
+                            <p>Providing your own notes can greatly enhence student learning, and can also gives you the edge you needed in Teaching.</p>
+                            <p><strong>Upload your own material or Collegues so that students can learn from you even when you are not available.</strong></p>
                         </div>
                     </div>
                     <div class="step">
-                        <h3 class="main_question"><strong>1/3</strong>Please fill Video Details</h3>
+                        <h3 class="main_question"><strong>1/3</strong>Please fill File Details</h3>
                         <div class="form-group">
-                            <input type="text" name="Name" class="form-control required" placeholder="Video Title">
+                            <input type="text" name="Name" class="form-control required" placeholder="File Title">
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="Description" class="form-control required" placeholder="Your Video Description">
-                            <input type="hidden" name="Likes" value="0">
+                            <input type="text" name="Description" class="form-control required" placeholder="Your File Description">
+                           
                             <input type="hidden" name="Date" class="date">
                             <input type="hidden" name="WriterID" class="" value="@Model.Teacher.ID">
                         </div>
-                    
+
                     </div>
                     <div class="step">
                         <h3 class="main_question"><strong>2/3</strong>Please Select Video Category</h3>
-                      
+
                         <div class="form-group select">
                             <div class="styled-select">
                                 <select name="CategoryID" id="education_apply">
-                                    @foreach (var categ in Model.VideoCategory)
+                                    @foreach (var categ in Model.FileCategory)
                                     {
                                         <option value="@categ.ID">
                                             @categ.Name
@@ -89,26 +89,18 @@
 
                             </div>
                         </div>
-                       
+
                     </div>
                     <!-- /step-->
                     <div class="submit step">
 
-                        <h3 class="main_question"><strong>3/3</strong>Upload your Video & it's Poster</h3>
+                        <h3 class="main_question"><strong>3/3</strong>Upload your File</h3>
 
-                        <div style="text-align:center">
-                            <img id="imagefile" class="image" width="100%" height="auto" src="https://vignette.wikia.nocookie.net/undertale-rho/images/5/5f/Placeholder.jpg/revision/latest?cb=20180213155916">
 
-                            <br />
-                            <input id="ImageUrl" name="ImageUrl" type="hidden" />
-                            <input type="file" id="ImageUpload" name="Image" />
-                            <label>Video Cover</label>
-                            <br />
-                        </div>
-                        <label>Video</label>
-                        <input id="VideoUrl" name="FilePath" type="hidden" />
-                        <input type="file" id="VideoUpload" name="FilePath" /><br />
-                        <label class="size">500MB Size Limit</label>
+                        <label>File</label>
+                        <input id="FileUrl" name="FilePath" type="hidden" />
+                        <input type="file" id="FileUpload" name="FilePath" /><br />
+                        <label class="size">100MB Size Limit</label>
                         <br />
 
                     </div>
@@ -119,7 +111,7 @@
                 <div id="bottom-wizard">
                     <button type="button" name="backward" class="backward">Backward </button>
                     <button type="button" name="forward" class="forward">Forward</button>
-                    <button type="submit" name="process" class="submit">Upload Video</button>
+                    <button type="submit" name="process" class="submit">Upload File</button>
                 </div>
                 <!-- /bottom-wizard -->
             </form>
@@ -167,19 +159,21 @@
             $(".date").val(strDate)
         });
 
-         $("#VideoUpload").change(function () {
+
+            
+    $("#FileUpload").change(function () {
         var element = this;
         var formData = new FormData();
         var totalfiles = element.files.length;
 
         for (var i = 0; i < totalfiles; i++) {
             var file = element.files[i];
-            formData.append("Video", file);
+            formData.append("File", file);
         }
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Videouploader()',
+            url: '@Url.Fileuploader()',
             dataType: 'json',
             data: formData,
             contentType: false,
@@ -190,43 +184,12 @@
             console.log(response);
 
             if (response.Success) {
-
-                $("#VideoUrl").val(response.VideoUrl);
+              
+                $("#FileUrl").val(response.FileUrl);
+              
             }
             })
        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
-
-    });
-
-     $("#ImageUpload").change(function () {
-        var element = this;
-        var formData = new FormData();
-        var totalfiles = element.files.length;
-
-        for (var i = 0; i < totalfiles; i++) {
-            var file = element.files[i];
-            formData.append("Photo", file);
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Imageuploader()',
-            dataType: 'json',
-            data: formData,
-            contentType: false,
-            processData: false
-
-        })
-            .done(function (response) {
-                console.log(response);
-
-                if (response.Success) {
-                    $("#imagefile").attr("src", response.ImageUrl);
-
-                    $("#ImageUrl").val(response.ImageUrl);
-                }
-            })
-            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
 
     });
 

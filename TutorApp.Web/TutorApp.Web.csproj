@@ -1239,6 +1239,8 @@
     <Content Include="Content\Files\7be8f6da-cdf1-41a2-b616-be0b7525cef0.docx" />
     <Content Include="Content\Files\8dbb261d-06c8-41fe-bd6d-3f47471f8b35.docx" />
     <Content Include="Content\Files\f32cf94b-3d87-467c-bcac-66efe10663b8.docx" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1356,6 +1358,9 @@
     <Content Include="Views\Home\QuestionDetail.cshtml" />
     <Content Include="Views\Home\_AnswerQuestion.cshtml" />
     <Content Include="Views\Home\_AnswerSection.cshtml" />
+    <Content Include="Views\Home\FileUpload.cshtml" />
+    <Content Include="Views\Home\LessonFields.cshtml" />
+    <Content Include="Views\Home\LessonTopics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

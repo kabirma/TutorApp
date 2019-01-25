@@ -23,9 +23,11 @@ namespace TutorApp.Web.ViewModels
         public Students SingleStudent { get; set; }
 
         public List<CoursesField> CourseField { get; set; }
+        public CoursesField SingleCourseField { get; set; }
 
         public List<FieldTopics> TopicField { get; set; }
-
+        public FieldTopics SingleTopicField { get; set; }
+        public List<TopicDetails> TopicDetail { get; set; }
 
         public List<Questions> Question { get; set; }
         public Questions SingleQuestion { get; set; }

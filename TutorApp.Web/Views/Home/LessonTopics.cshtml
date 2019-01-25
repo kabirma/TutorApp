@@ -1,8 +1,12 @@
-﻿@model TutorApp.Web.ViewModels.ListViewModel
+﻿
+@model TutorApp.Web.ViewModels.ListViewModel
+
 @{
-   
+    ViewBag.Title = "LessonTopics";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <style>
     .lesson {
         margin-top: 5%;
@@ -69,17 +73,15 @@
         .topics i {
             color: #808080 !important;
         }
-
     .side-div {
         background-color: #f2f2f2;
         padding: 10%;
         border-radius: 2px;
         margin-left: 25px;
     }
-
-        .side-div h4 {
-            color: dodgerblue;
-        }
+    .side-div h4{
+        color:dodgerblue;
+    }
 </style>
 <main>
     <section id="hero_in" class="contacts">
@@ -111,8 +113,9 @@
             </ul>
         </div>
     </div>
-   
+
     <div class="container-fluid row lesson">
+     
         <div class="col-md-3 courses-sidebar">
             <div class="side-div">
                 <h4>Courses</h4>
@@ -123,11 +126,11 @@
                 }
             </div>
             <br />
-            <div class="side-div">
+            <div  class="side-div">
                 <h4>Courses Fields</h4>
                 @foreach (var coursesfield in Model.CourseField)
                 {
-                    <i class="icon-bookmark"></i><a href="/Home/LessonFields/@coursesfield.ID">@coursesfield.Name</a><br /><hr />
+                <i class="icon-bookmark"></i><a href="/Home/LessonFields/@coursesfield.ID">@coursesfield.Name</a><br /><hr />
 
                 }
             </div>
@@ -135,31 +138,38 @@
 
         <div class="col-md-8 container-fluid row courses-main">
             <div class="lesson-head col-md-12">
-                <h2>Lessons</h2>
+                <h2>@Model.SingleTopicField.Name Lesson</h2>
                 <h5>Improve your self with these basic to Advance level Lessons</h5>
-                <p>These sample lessons give students a way to quickly review the most popular topics in math, science, history, and more! Most lessons end with a quick practice quiz to make sure you understood what you read. Lessons are a great way to review what you're learning in school, or to get ahead!</p>
+                <p>@Model.SingleTopicField.Description</p>
             </div>
 
-            @foreach (var courses in Model.Courses)
-            {
-                <div class="col-md-4">
-                    <img src="@courses.Imageurl" width="100%" height="auto" />
-                </div>
+           
 
-                <div class="col-md-8 course-section">
-                    <h4><a>@courses.Name Lesson</a></h4>
-                    <p>@courses.Description</p>
-                </div>
+               
                 <div class="col-md-12 topic-section">
 
-                    <h4><a>@courses.Name Topics</a></h4><br />
-                    @foreach (var coursesfield in Model.CourseField.Where(x => x.Category.ID == courses.ID))
+
+                    @foreach (var topicdetails in Model.TopicDetail)
                     {
-                        <a href="/Home/LessonFields/@coursesfield.ID" class="topics"><i class="icon icon-bookmark"></i>@coursesfield.Name</a><br />
+                        <div class="container row">
+                            <div class="col-md-12">
+                                <h3>@topicdetails.Name</h3>
+                                <br />
+                                <p>@topicdetails.Description</p>
+                            </div>
+                            <br />
+                            <div class="col-md-12">
+                                <img width="100%" height="auto" src="@topicdetails.Imageurl" />
+                            </div>
+
+                        </div>
+                        <hr style="border-width:3px;" />
                     }
-                    <hr style="border-width:3px;" />
+
                 </div>
-            }
+           
         </div>
     </div>
 </main>
+
+

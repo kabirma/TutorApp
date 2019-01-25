@@ -1,8 +1,10 @@
 ﻿@model TutorApp.Web.ViewModels.ListViewModel
+
 @{
-   
+    ViewBag.Title = "LessonFields";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
     .lesson {
         margin-top: 5%;
@@ -111,7 +113,7 @@
             </ul>
         </div>
     </div>
-   
+
     <div class="container-fluid row lesson">
         <div class="col-md-3 courses-sidebar">
             <div class="side-div">
@@ -135,31 +137,31 @@
 
         <div class="col-md-8 container-fluid row courses-main">
             <div class="lesson-head col-md-12">
-                <h2>Lessons</h2>
+                <h2>@Model.SingleCourseField.Name Lesson</h2>
                 <h5>Improve your self with these basic to Advance level Lessons</h5>
-                <p>These sample lessons give students a way to quickly review the most popular topics in math, science, history, and more! Most lessons end with a quick practice quiz to make sure you understood what you read. Lessons are a great way to review what you're learning in school, or to get ahead!</p>
+                <p>@Model.SingleCourseField.Description</p>
             </div>
-
-            @foreach (var courses in Model.Courses)
-            {
-                <div class="col-md-4">
-                    <img src="@courses.Imageurl" width="100%" height="auto" />
-                </div>
-
-                <div class="col-md-8 course-section">
-                    <h4><a>@courses.Name Lesson</a></h4>
-                    <p>@courses.Description</p>
-                </div>
-                <div class="col-md-12 topic-section">
-
-                    <h4><a>@courses.Name Topics</a></h4><br />
-                    @foreach (var coursesfield in Model.CourseField.Where(x => x.Category.ID == courses.ID))
-                    {
-                        <a href="/Home/LessonFields/@coursesfield.ID" class="topics"><i class="icon icon-bookmark"></i>@coursesfield.Name</a><br />
-                    }
+            <div class="col-md-12 topic-section">
+                @foreach (var fieldtopics in Model.TopicField.Where(x => x.Category.ID == Model.SingleCourseField.ID))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="/Home/LessonTopics/@fieldtopics.ID"><h3>@fieldtopics.Name</h3></a>
+                            <br />
+                            <p>@fieldtopics.Description</p>
+                        </div>
+                        <div class="col-md-12">
+                            <h4>@fieldtopics.Name Topics</h4>
+                            @foreach (var topicdetail in Model.TopicDetail.Where(x => x.Category.ID == fieldtopics.ID))
+                            {
+                                <a class="topics"><i class="icon icon-bookmark"></i>@topicdetail.Name</a><br />
+                            }
+                        </div>
+                    </div>
                     <hr style="border-width:3px;" />
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
 </main>
+

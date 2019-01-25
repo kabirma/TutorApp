@@ -64,6 +64,37 @@ namespace TutorApp.Web.Controllers
             model.FieldTopicCount = FieldTopicsServices.Instance.GetFieldTopicsCount();
             return View(model);
         }
+        public ActionResult LessonFields(int ID)
+        {
+            ListViewModel model = new ListViewModel();
+            model.Courses = CourseServices.Instance.GetCourses();
+            model.SingleCourseField = CoursesFieldServices.Instance.GetCourseField(ID);
+            model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
+            model.CourseFieldCount = CoursesFieldServices.Instance.GetCoursesFieldCount();
+            model.CoursesCount = CourseServices.Instance.GetCoursesCount();
+            model.TopicField = FieldTopicsServices.Instance.GetFieldTopics();
+            model.FieldTopicCount = FieldTopicsServices.Instance.GetFieldTopicsCount();
+            model.TopicDetail = TopicDetailsServices.Instance.GetTopicDetails();
+            model.CourseField = CoursesFieldServices.Instance.GetCoursesField();
+            return View(model);
+        }
+
+        public ActionResult LessonTopics(int ID)
+        {
+            ListViewModel model = new ListViewModel();
+            model.Courses = CourseServices.Instance.GetCourses();
+            model.CourseField = CoursesFieldServices.Instance.GetCoursesField();
+            model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
+            model.CourseFieldCount = CoursesFieldServices.Instance.GetCoursesFieldCount();
+            model.CoursesCount = CourseServices.Instance.GetCoursesCount();
+            model.SingleTopicField = FieldTopicsServices.Instance.GetFieldTopic(ID);
+            model.FieldTopicCount = FieldTopicsServices.Instance.GetFieldTopicsCount();
+            model.TopicDetail = TopicDetailsServices.Instance.GetTopicDetails().Where(x=>x.Category.ID==ID).ToList();
+            
+            return View(model);
+        }
+
+
 
         public ActionResult OfflineFiles()
         {
@@ -196,13 +227,15 @@ namespace TutorApp.Web.Controllers
             {
                 Session["teacher"] = username;
                 Session["teacherpass"] = password;
+                Session["teacherID"] = teach.ID;
                 return RedirectToAction("TeacherProfile");
             }
             if(teach == null && student != null)
             {
                 Session["student"] = username;
                 Session["studentpass"] = password;
-                return RedirectToAction("StudentProfile");
+                Session["studentID"] = student.ID;
+                return RedirectToAction("StudentProfile", new { ID = student.ID });
             }
             else { 
                 return View();
@@ -288,10 +321,21 @@ namespace TutorApp.Web.Controllers
             return View();
         }
 
-
+        [HttpGet]
         public ActionResult TeacherProfile()
         {
-            return View();
+            if (Session["teacherID"] != null)
+            {
+                ListViewModel model = new ListViewModel();
+                model.Teacher = TeachersServices.Instance.GetTeacher(Convert.ToInt32(Session["teacherID"]));
+                model.Videos = VideosServices.Instance.GetVideos().Where(x => x.Writer.ID == (Convert.ToInt32(Session["teacherID"]))).OrderBy(x=>x.Date).ToList();
+                model.Files=FilesServices.Instance.GetFiles().Where(x => x.Writer.ID == (Convert.ToInt32(Session["teacherID"]))).OrderBy(x => x.Date).ToList();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         public ActionResult StudentProfile()
@@ -430,6 +474,31 @@ namespace TutorApp.Web.Controllers
                 Writer = TeachersServices.Instance.GetTeacher(model.WriterID)
             };
             VideosServices.Instance.SaveVideos(newVideo);
+            return RedirectToAction("TeacherProfile");
+        }
+
+        [HttpGet]
+        public ActionResult FileUpload(int ID)
+        {
+            ListViewModel model = new ListViewModel();
+            model.FileCategory = FileCategServices.Instance.GetFilesCategory();
+            model.Teacher = TeachersServices.Instance.GetTeacher(ID);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult FileUpload(NewFileViewModels model)
+        {
+
+            var newFile = new Files
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Date = model.Date,
+                FilePath = model.FilePath,
+                Category = FileCategServices.Instance.GetFileCateg(model.CategoryID),
+                Writer = TeachersServices.Instance.GetTeacher(model.WriterID)
+            };
+            FilesServices.Instance.SaveFiles(newFile);
             return RedirectToAction("TeacherProfile");
         }
 
