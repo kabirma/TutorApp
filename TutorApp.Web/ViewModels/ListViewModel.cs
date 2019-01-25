@@ -14,12 +14,13 @@ namespace TutorApp.Web.ViewModels
         public Videos Video { get; set; }
         public List<VideoComments> Comments { get; set; }
         public int CommentCount { get; set; }
-
-        public List<Teachers> Teacher { get; set; }
+        public List<Teachers> Teachers { get; set; }
+        public Teachers Teacher { get; set; }
 
         public List<Courses> Courses { get; set; }
 
         public List<Students> Student { get; set; }
+        public Students SingleStudent { get; set; }
 
         public List<CoursesField> CourseField { get; set; }
 
@@ -27,6 +28,8 @@ namespace TutorApp.Web.ViewModels
 
 
         public List<Questions> Question { get; set; }
+        public Questions SingleQuestion { get; set; }
+        public List<Answers> Answer { get; set; }
         public List<FilesCategory> FileCategory { get; set; }
         public int TeacherCount { get; set; }
         public int StudentCount { get; set; }
@@ -52,5 +55,6 @@ namespace TutorApp.Web.ViewModels
         public List<Files> Files { get; set; }
         public string Search { get; internal set; }
         public Pager Pager { get; internal set; }
+        public string Message { get; internal set; }
     }
 }

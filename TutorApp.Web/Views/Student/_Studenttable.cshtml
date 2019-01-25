@@ -15,7 +15,9 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
-
+                <th>Phone Number</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
                 <th>Zip Code</th>
                 <th>Action</th>
 
@@ -25,18 +27,21 @@
             @foreach (var Student in Model.student)
             {
                 i++;
-                <tr>
-                    <td>@i</td>
-                    <td>@Student.Name</td>
-                    <td>@Student.Email</td>
+            <tr>
+                <td>@i</td>
+                <td>@Student.Name @Student.Lname</td>
+                <td>@Student.Email</td>
 
-                    <td>@Student.Password</td>
-                    <td>@Student.ZipCode</td>
-                    <td>
-                        <button class="editbtn fas fa-edit" data-id="@Student.ID"></button>
-                        <button class="deletebtn fas fa-trash-alt" data-id="@Student.ID"></button>
-                    </td>
-                </tr>
+                <td>@Student.Password</td>
+                <td>@Student.PhoneNumber</td>
+                <td>@Student.Gender</td>
+                <td>@Student.DOB</td>
+                <td>@Student.ZipCode</td>
+                <td>
+                    <button class="editbtn fas fa-edit" data-id="@Student.ID"></button>
+                    <button class="deletebtn fas fa-trash-alt" data-id="@Student.ID"></button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

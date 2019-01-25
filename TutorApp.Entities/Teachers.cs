@@ -19,6 +19,11 @@ namespace TutorApp.Entities
         public string LessonLocation { get; set; }
         public string AvailableHours { get; set; }
         public CoursesField TeachingSubjects { get; set; }
+        public CoursesField TeachingSubjects2 { get; set; }
+        public CoursesField TeachingSubjects3 { get; set; }
+        public CoursesField TeachingSubjects4 { get; set; }
+        public CoursesField TeachingSubjects5 { get; set; }
+
         public string Gender { get; set; }
         public string DOB { get; set; }
         public string UndergraduateCollage { get; set; }

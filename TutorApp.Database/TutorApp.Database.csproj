@@ -102,6 +102,26 @@
     <Compile Include="Migrations\201901202038218_videoupdateas.Designer.cs">
       <DependentUpon>201901202038218_videoupdateas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901221026003_teacherupdated.cs" />
+    <Compile Include="Migrations\201901221026003_teacherupdated.Designer.cs">
+      <DependentUpon>201901221026003_teacherupdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901231317285_studentupdated.cs" />
+    <Compile Include="Migrations\201901231317285_studentupdated.Designer.cs">
+      <DependentUpon>201901231317285_studentupdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901231322019_studentupdatedas.cs" />
+    <Compile Include="Migrations\201901231322019_studentupdatedas.Designer.cs">
+      <DependentUpon>201901231322019_studentupdatedas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901232101374_studentupdatedaas.cs" />
+    <Compile Include="Migrations\201901232101374_studentupdatedaas.Designer.cs">
+      <DependentUpon>201901232101374_studentupdatedaas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901232326597_studentupdatedaasas.cs" />
+    <Compile Include="Migrations\201901232326597_studentupdatedaasas.Designer.cs">
+      <DependentUpon>201901232326597_studentupdatedaasas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,6 +165,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901202038218_videoupdateas.resx">
       <DependentUpon>201901202038218_videoupdateas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901221026003_teacherupdated.resx">
+      <DependentUpon>201901221026003_teacherupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901231317285_studentupdated.resx">
+      <DependentUpon>201901231317285_studentupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901231322019_studentupdatedas.resx">
+      <DependentUpon>201901231322019_studentupdatedas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901232101374_studentupdatedaas.resx">
+      <DependentUpon>201901232101374_studentupdatedaas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901232326597_studentupdatedaasas.resx">
+      <DependentUpon>201901232326597_studentupdatedaasas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -56,7 +56,7 @@ namespace TutorApp.Web.Controllers
             var model = new ListViewModel
             {
                 FileCategory = FileCategServices.Instance.GetFilesCategory(),
-                Teacher = TeachersServices.Instance.GetTeachers()
+                Teachers = TeachersServices.Instance.GetTeachers()
 
             };
             return PartialView(model);

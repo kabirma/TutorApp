@@ -1,7 +1,5 @@
 ﻿@model TutorApp.Web.ViewModels.ListViewModel
-    @{ 
-        var coursefcount = 0;
-    }
+   
 <main>
     <section class="hero_single version_2">
         <div class="wrapper">
@@ -11,8 +9,7 @@
                 <form>
                     <div id="custom-search-input">
                         <div class="input-group">
-                            <input type="text" class=" search-query" placeholder="Ex. Architecture, Specialization...">
-                            <input type="submit" class="btn_search" value="Search">
+                            <a class="btn btn-primary w-100">Check our Courses</a>
                         </div>
                     </div>
                 </form>
@@ -46,7 +43,7 @@
             <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
         </div>
         <div id="reccomended" class="owl-carousel owl-theme">
-           @foreach (var teachers in Model.Teacher)
+           @foreach (var teachers in Model.Teachers)
            {
             <div class="item">
                 <div class="box_grid">
@@ -74,7 +71,7 @@
         </div>
         <!-- /carousel -->
         <div class="container">
-            <p class="btn_home_align"><a href="courses-grid.html" class="btn_1 rounded">View all Teachers</a></p>
+            <p class="btn_home_align"><a href="/Home/AvailableTeacher" class="btn_1 rounded">View all Teachers</a></p>
         </div>
         <!-- /container -->
         <hr>
@@ -95,8 +92,6 @@
                         <div class="block-horizzontal"></div>
                         <img src="@courses.Imageurl" class="img-fluid" alt="">
                         <div class="info">
-                            @foreach(var fieldcount in Model.CourseField.Where(coursefield => coursefield.Category.ID == courses.ID)) { coursefcount++;  }
-                            <small><i class="ti-layers"></i>@coursefcount Programmes</small>
                             <h3>@courses.Name</h3>
                         </div>
                     </figure>
@@ -122,21 +117,27 @@
                         <a class="box_news" href="#0">
                             <figure>
                                 <img src="https://www.thoughtco.com/thmb/45XWafEdDpIzg4Ze9943GM7fMi4=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-187244393-5a980ce743a1030037ba389f.jpg" alt="">
-                                <figcaption><strong>@jobs.Date.Substring(0,2)</strong></figcaption>
+                                <figcaption><strong>@jobs.Date.Substring(5,5).Replace("-", " ")</strong></figcaption>
                             </figure>
                             <ul>
                                 <li>Student: @jobs.Student.Name</li>
                                 <li>@jobs.Date</li>
                             </ul>
                             <h4>@jobs.Name</h4>
-                            <p>@jobs.Description.Substring(0,150)</p>
-                        </a>
-                    </div>
-                    <!-- /box_news -->
+                            <p>@if (jobs.Description.Length > 150) {<text>@jobs.Description.Substring(0,150)</text> } else {<text>@jobs.Description.Substring(0,jobs.Description.Length)</text> }</p>
+ 
+
+                          </a>
+ 
+
+                      </div>
+ 
+
+                      <!-- /box_news -->
                 }
             </div>
             <!-- /row -->
-            <p class="btn_home_align"><a href="blog.html" class="btn_1 rounded">View all Job Posts</a></p>
+            <p class="btn_home_align"><a href="/Home/TutoringJobsView" class="btn_1 rounded">View all Job Posts</a></p>
         </div>
         <!-- /container -->
     </div>
@@ -149,7 +150,7 @@
                     <div class="box_1">
                         <h3>Enjoy a great students community</h3>
                         <p>We're delighted that we're doing things right according to those who matter to us most: our students. We've achieved over 90 per cent for student satisfaction.</p>
-                        <a href="#0" class="btn_1 rounded">Sign Up to See</a>
+                        <a href="/Home/Accounttype" class="btn_1 rounded">Sign Up to See</a>
                     </div>
                 </div>
             </div>

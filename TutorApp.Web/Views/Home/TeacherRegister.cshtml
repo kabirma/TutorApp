@@ -1,0 +1,515 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Teacher Registeration</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Edutime">
+    <meta name="author" content="Edutime">
+    <meta name="keywords" content="Edutime">
+    <!-- Font-->
+    <link rel="stylesheet" type="text/css" href="~/content/css/opensans-font.css">
+    <link rel="stylesheet" type="text/css" href="~/content/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="~/content/css/stylereg.css" />
+    <script src="~/content/js/jquery-3.3.1.min.js"></script>
+
+    <script src="~/content/js/jquery.steps.js"></script>
+    <script src="~/content/js/mainreg.js"></script>
+    <style>
+
+
+        body, html {
+            margin: 0;
+          
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            font-family: "Open Sans", "Helvetica", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: #EEE;
+        }
+
+
+        body:not(:-moz-handler-blocked) fieldset {
+            display: table-cell;
+        }
+
+        /* TOGGLE STYLING */
+        .toggle {
+            margin: 0 0 1.5rem;
+            box-sizing: border-box;
+            font-size: 0;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+
+            .toggle input {
+                width: 0;
+                height: 0;
+                position: absolute;
+                left: -9999px;
+            }
+
+                .toggle input + label {
+                    margin: 0;
+                    padding: .75rem 2rem;
+                    box-sizing: border-box;
+                    position: relative;
+                    display: inline-block;
+                    border: solid 1px #DDD;
+                    background-color: #FFF;
+                    font-size: 1rem;
+                    line-height: 140%;
+                    font-weight: 600;
+                    text-align: center;
+                    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+                    transition: border-color .15s ease-out, color .25s ease-out, background-color .15s ease-out, box-shadow .15s ease-out;
+                    /* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+                    /*flex: 0 0 50%; display: flex; justify-content: center; align-items: center;*/
+                    /* ----- */
+                }
+
+                    .toggle input + label:first-of-type {
+                        border-radius: 6px 0 0 6px;
+                        border-right: none;
+                    }
+
+                    .toggle input + label:last-of-type {
+                        border-radius: 0 6px 6px 0;
+                        border-left: none;
+                    }
+
+                .toggle input:hover + label {
+                    border-color: #213140;
+                }
+
+                .toggle input:checked + label {
+                    background-color: #4B9DEA;
+                    color: #FFF;
+                    box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+                    border-color: #4B9DEA;
+                    z-index: 1;
+                }
+
+                .toggle input:focus + label {
+                    outline: dotted 1px #CCC;
+                    outline-offset: .45rem;
+                }
+
+
+        /* STYLING FOR THE STATUS HELPER TEXT FOR THE DEMO */
+        .status {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+            .status span {
+                font-weight: 600;
+                color: #B6985A;
+            }
+
+                .status span:first-of-type {
+                    display: inline;
+                }
+
+                .status span:last-of-type {
+                    display: none;
+                }
+    </style>
+</head>
+<body>
+    <div class="page-content">
+        <div class="form-v1-content">
+            <div class="wizard-form">
+                <form class="form-register" method="post">
+                    <div id="form-total">
+                        <!-- SECTION 1 -->
+                        <h2>
+                            <p class="step-icon"><span>01</span></p>
+                            <span class="step-text">Peronal Infomation</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="wizard-header">
+                                    <h3 class="heading">Peronal Infomation</h3>
+                                    <p>Please enter your infomation and proceed to the next step so we can build your account.  </p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder">
+
+
+                                        <input type="text" class="form-control input-border" id="first-name" name="Name" placeholder="First Name" required>
+
+                                    </div>
+                                    <div class="form-holder">
+
+                                        <input type="text" class="form-control input-border" id="last-name" name="LName" placeholder="Last Name" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+
+                                        <input type="text" name="Email" id="your_email" class="form-control input-border" placeholder="example@email.com" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+
+
+                                        <input type="text" class="form-control input-border" id="phone" name="PhoneNumber" placeholder="+1 888-999-7777" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="date" class="form-control input-border" id="ssn" name="DOB" placeholder="DOB" required>
+                                    </div>
+                                </div>
+
+                                <div class="toggle">
+                                    <input type="radio" name="Gender" value="weight" id="sizeWeight" checked="checked" />
+                                    <label for="sizeWeight">Male</label>
+                                    <input type="radio" name="Gender" value="dimensions" id="sizeDimensions" />
+                                    <label for="sizeDimensions">Female</label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" class="form-control input-border" id="ssn" name="Password" placeholder="Password" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                        <!-- SECTION 2 -->
+                        <h2>
+                            <p class="step-icon"><span>02</span></p>
+                            <span class="step-text">Your Educational History</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="wizard-header">
+                                    <h3 class="heading">Educational History</h3>
+                                    <p>Please enter your infomation and proceed to the next step so we can build your accounts.</p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="UndergraduateCollage" id="find_bank" placeholder="Undergraduate Collage" class="form-control" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="UndergraduateMajor" id="find_bank" placeholder="Undergraduate Major" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="GraduateCollage" id="find_bank" placeholder="Graduate Collage" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="GraduateDegree" id="find_bank" placeholder="Graduate Degree" class="form-control">
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="GraduateCollage2" id="find_bank" placeholder="Graduate Collage 2" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="GraduateDegree2" id="find_bank" placeholder="Graduate Degree 2" class="form-control">
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </section>
+                        <!-- SECTION 3 -->
+                        <h2>
+                            <p class="step-icon"><span>03</span></p>
+                            <span class="step-text">Location Details</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="wizard-header">
+                                    <h3 class="heading">Tell us your Location</h3>
+                                    <p>Please enter your infomation and proceed to the next step so we can build your accounts.</p>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="Address" id="find_bank" placeholder="Your Home Address" class="form-control" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="City" id="find_bank" placeholder="Your City" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="State" id="find_bank" placeholder="Your State" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="Country" id="find_bank" placeholder="Your Country" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="ZipCode" id="find_bank" placeholder="Your Area Zip Code" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <h2>
+                            <p class="step-icon"><span>04</span></p>
+                            <span class="step-text">Teaching Details</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="wizard-header">
+                                    <h3 class="heading">Your Teaching Details</h3>
+                                    <p>Please enter your infomation and proceed to the next step so we can build your accounts.</p>
+                                </div>
+                                <div class="form-row form-row-date">
+                                    <div class="form-holder form-holder-2">
+                                        <label class="special-label">Teaching Courses</label>
+                                        <select name="TeachingSubjectID" id="year">
+                                            <option value="MM" disabled selected>Subject 1</option>
+                                            @foreach (var coursesfields in Model.CourseField)
+                                            {
+                                                <option value="@coursesfields.ID">@coursesfields.Name</option>
+                                            }
+                                        </select>
+                                        <select name="TeachingSubject2ID" id="year">
+                                            <option value="MM" disabled selected>Subject 2</option>
+                                            @foreach (var coursesfields in Model.CourseField)
+                                            {
+                                                <option value="@coursesfields.ID">@coursesfields.Name</option>
+                                            }
+                                        </select>
+                                        <select name="TeachingSubject3ID" id="year">
+                                            <option value="MM" disabled selected>Subject 3</option>
+                                            @foreach (var coursesfields in Model.CourseField)
+                                            {
+                                                <option value="@coursesfields.ID">@coursesfields.Name</option>
+                                            }
+                                        </select>
+                                        <select name="TeachingSubject4ID" id="year">
+                                            <option value="MM" disabled selected>Subject 4</option>
+                                            @foreach (var coursesfields in Model.CourseField)
+                                            {
+                                                <option value="@coursesfields.ID">@coursesfields.Name</option>
+                                            }
+                                        </select>
+                                        <select name="TeachingSubject5ID" id="year">
+                                            <option value="MM" disabled selected>Subject 5</option>
+                                            @foreach (var coursesfields in Model.CourseField)
+                                            {
+                                                <option value="@coursesfields.ID">@coursesfields.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-1">
+                                        <input type="text" name="AvailableHours" id="find_bank" placeholder="Teaching Hour" class="form-control" required>
+                                    </div>
+                                    <div class="form-holder form-holder-1">
+                                        <input type="text" name="HoulryRate" id="find_bank" placeholder="Hourly Teaching Rate" class="form-control" required>
+
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+
+                                        <select name="StudentType" id="year">
+                                            <option value="MM" disabled selected>Student Level</option>
+
+                                            <option value="School">
+                                                School
+                                            </option>
+
+                                            <option value="MidSchool">
+                                                Mid School
+                                            </option>
+
+                                            <option value="HigherSchool">
+                                                Higher School
+                                            </option>
+
+                                            <option value="College">
+                                                College
+                                            </option>
+
+                                            <option value="Undergraduate">
+                                                Undergraduate
+                                            </option>
+
+                                            <option value="Graduate">
+                                                Graduate
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+
+                                        <select name="Experience" id="year">
+                                            <option value="MM" disabled selected>Experience</option>
+                                            @for (var i = 0; i < 16; i++)
+                                            {
+                                                <option value="@i">
+                                                    @i year
+                                                </option>
+                                            }
+                                            <option value="15+">
+                                                15+ years
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+
+                                        <select name="LessonLocation" id="year">
+                                            <option value="MM" disabled selected>Meeting Location</option>
+                                            <option value="Home">
+                                                Home
+                                            </option>
+
+                                            <option value="Outside">
+                                                Outside
+                                            </option>
+
+                                            <option value="Online">
+                                                Online
+                                            </option>
+                                        </select>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <h2>
+                            <p class="step-icon"><span>05</span></p>
+                            <span class="step-text">Profile Details</span>
+                        </h2>
+                        <section>
+                            <div class="inner">
+                                <div class="wizard-header">
+                                    <h3 class="heading">Your Profile Details</h3>
+                                    <p>Please enter your infomation and proceed to the next step so we can build your accounts.</p>
+                                </div>
+                                <div class="form-row text-center">
+                                    <img id="imagefile" class="image" src="https://vignette.wikia.nocookie.net/undertale-rho/images/5/5f/Placeholder.jpg/revision/latest?cb=20180213155916">
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <input id="ImageUrl" name="ImageUrl" type="hidden" />
+                                    <input type="file" id="ImageUpload" name="Image" />
+
+
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-2">
+                                        <input type="text" name="Bio" id="find_bank" placeholder="Tell Us Something About your Self." class="form-control" required>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-1">
+                                        <input type="text" name="Facebook" id="find_bank" placeholder="Your Facebook Profile" class="form-control" required>
+                                    </div>
+                                    <div class="form-holder form-holder-1">
+                                        <input type="text" name="Twitter" id="find_bank" placeholder="Your Twitter Profile" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-holder form-holder-1">
+                                        <input type="text" name="Linkedin" id="find_bank" placeholder="Your Linkedin Profile" class="form-control">
+                                    </div>
+                                    <div class="form-holder form-holder-1">
+                                        <input type="text" name="Google" id="find_bank" placeholder="Your Google Profile" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-holder form-holder-1">
+                                    <button type="Submit">Sign Up</button>
+                                    <a href="/Home/Login" class="pull-right" style="margin-top:3%;">Already have a Account?</a></div></div>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+    <script>
+       $("#ImageUpload").change(function () {
+        var element = this;
+        var formData = new FormData();
+        var totalfiles = element.files.length;
+
+        for (var i = 0; i < totalfiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Imageuploader()',
+            dataType: 'json',
+            data: formData,
+            contentType: false,
+            processData: false
+
+        })
+            .done(function (response) {
+                console.log(response);
+
+                if (response.Success) {
+                    $("#imagefile").attr("src", response.ImageUrl);
+
+                    $("#ImageUrl").val(response.ImageUrl);
+                }
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+
+    $('.zmdi-check').hide();
+
+    </script>
+</body>
+
+</html>

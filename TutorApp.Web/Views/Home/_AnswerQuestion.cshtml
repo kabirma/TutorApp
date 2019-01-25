@@ -1,0 +1,43 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+<h4>Give Your Answer</h4>
+<form method="post" id="createanswer">
+    <div class="form-group">
+        <textarea class="form-control" name="Description" placeholder="Type Answer Here" style="resize:none;height:200px;"></textarea>
+    </div>
+    <input type="hidden" name="Date" />
+    <input type="hidden" value="0" name="Upvote" />
+    <input type="hidden" value="0" name="Downvote" />
+    <input type="hidden" value="@Model.SingleQuestion.Name" name="Name" />
+    <input type="hidden" value="@Model.SingleQuestion.ID" name="QuestionID" />
+    <div class="form-group row">
+        <div class="col-md-9">
+            <button type="button" class="btn btn-success w-100" id="createbtn">Submit</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-danger w-100" id="cancelbtn">Cancel</button>
+        </div>
+    </div>
+</form>
+
+<script>
+        $("#cancelbtn").click(function () {
+            $("#actioncontainer").html("");
+        });
+
+      $("#createbtn").click(function () {
+          var d = new Date();
+          var strDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+          $(".date").val(strDate)
+        $.ajax({
+            type: "POST",
+            url: "@Url.CreateAnswer()",
+            data: $("#createanswer").serialize()
+        })
+            .done(function (response) {
+                $("#answercontainer").html(response);
+              
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+</script>

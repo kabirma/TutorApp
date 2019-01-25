@@ -1,0 +1,103 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@{
+    ViewBag.Title = "AboutTutoringJobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <section id="hero_in" class="courses">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>About Tutoring Jobs</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container-fluid row" style="margin:8% 0">
+        <div class="col-md-1"></div>
+        <div class="col-md-8 container row">
+            <div class="text-center">
+                <h2 class=" text-uppercase">
+                    About tutoring jobs with EduTime
+                </h2>
+                <h6>
+                    Register today to find tutor jobs in your area. Search for jobs or browse available tutoring jobs by subject or location.
+                </h6>
+            </div>
+            <div class="col-md-6 text-center">
+                <div class="dropdown">
+                    <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        List of Jobs by Subject
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach (var jobs in Model.Job.Distinct())
+                        {<a class="dropdown-item" href="#">@jobs.Course.Name</a>
+                    }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <div class="dropdown">
+                    <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        List of Jobs by City
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach (var jobs in Model.Job.Distinct())
+                        {<a class="dropdown-item" href="#">@jobs.City</a>
+                    }
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+                  <div class="row" style="margin:3% 0;">
+                      <div class="col-md-4 text-center">
+                          <h4><i class="icon-hockey-stick"></i>Find tutoring jobs in your subjects</h4>
+                          <p>Active tutors receive over two tutoring job opportunities each week.</p>
+                      </div>
+                      <div class="col-md-4 text-center">
+                          <h4><i class="icon-hockey-stick"></i>Find tutoring jobs in your subjects</h4>
+                          <p>Active tutors receive over two tutoring job opportunities each week.</p>
+                      </div>
+                      <div class="col-md-4 text-center">
+                          <h4><i class="icon-hockey-stick"></i>Find tutoring jobs in your subjects</h4>
+                          <p>Active tutors receive over two tutoring job opportunities each week.</p>
+                      </div>
+                  </div>
+            <div class="col-md-12 text-center">
+                <a href="/Home/TeacherRegister" class="btn btn-success btn-lg">Apply For Free</a>
+            </div>
+               
+           
+        </div>
+
+        <div class="col-md-3">
+            <h4 style="text-transform:uppercase;">Recent Jobs Requests</h4>
+            <br />
+            @if (Model != null && Model.Job != null)
+            {
+                foreach (var jobs in Model.Job.Take(4))
+                {
+                    <div class="jumbotron">
+                        <h4>@jobs.Name in @jobs.City</h4>
+                        <p>
+                            @if (jobs.Description.Length > 40)
+                            {<text>@jobs.Description.Substring(0, 40)</text>}
+                        else
+                        { <text>@jobs.Description.Substring(0, jobs.Description.Length)</text>}
+                        </p>
+                        <p style="opacity:.8;">Posted by @jobs.Student.Name on @jobs.Date</p>
+
+                    </div>
+
+                }
+            }
+            else
+            {
+                <div class="danger">
+                    <p>No Job request Found...</p>
+                </div>
+            }
+        </div>
+   
+    </div>    
+</main>

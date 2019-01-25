@@ -55,7 +55,7 @@ namespace TutorApp.Services
             }
         }
 
-        public List<Jobs> GetJobs(string Search, int pageNo, string Student, string Course)
+        public List<Jobs> GetJobs(string Search, int pageNo, string Course, string timeperiod)
         {
             using (var context = new dbContext())
             {
@@ -63,13 +63,24 @@ namespace TutorApp.Services
                 {
                     return context.JobTable.Where(Job => Job.Name != null && Job.Name.ToLower().Contains(Search.ToLower())).OrderBy(Job => Job.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Student).Include(x => x.Course).ToList();
                 }
-                if (!string.IsNullOrEmpty(Student))
+                if (!string.IsNullOrEmpty(timeperiod))
                 {
-                    return context.JobTable.Where(Job => Job.Name != null && Job.Student.Name == Student).OrderBy(Job => Job.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Student).Include(x => x.Course).ToList();
+                    if (timeperiod == "old") {
+                        return context.JobTable.OrderByDescending(Job => Job.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Student).Include(x => x.Course).ToList();
+                    }
+                    else { 
+                    return context.JobTable.OrderBy(Job => Job.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Student).Include(x => x.Course).ToList();
+                    }
                 }
                 if (!string.IsNullOrEmpty(Course))
                 {
-                    return context.JobTable.Where(Job => Job.Name != null && Job.Course.Name == Course).OrderBy(Job => Job.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Student).Include(x => x.Course).ToList();
+                    if (Course != "all")
+                    {
+                        return context.JobTable.Where(Job => Job.Name != null && Job.Course.Name == Course).OrderBy(Job => Job.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Student).Include(x => x.Course).ToList();
+                    }
+                    else {
+                        return context.JobTable.OrderBy(Jobs => Jobs.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Student).Include(x => x.Course).ToList();
+                    }
                 }
                 else
                 {
@@ -109,7 +120,7 @@ namespace TutorApp.Services
             }
         }
 
-        public int GetJobsCount(string Search, string Student, string Course)
+        public int GetJobsCount(string Search, string Course)
         {
             using (var context = new dbContext())
             {
@@ -117,14 +128,18 @@ namespace TutorApp.Services
                 {
                     return context.JobTable.Where(Job => Job.Name != null && Job.Name.ToLower().Contains(Search.ToLower())).Include(x => x.Student).Include(x => x.Course).Count();
                 }
-                if (!string.IsNullOrEmpty(Student))
-                {
-                    return context.JobTable.Where(Job => Job.Name != null && Job.Student.Name == Student).Include(x => x.Student).Include(x => x.Course).Count();
-                }
+
 
                 if (!string.IsNullOrEmpty(Course))
                 {
-                    return context.JobTable.Where(Job => Job.Name != null && Job.Course.Name == Student).Include(x => x.Student).Include(x => x.Course).Count();
+                    if (Course != "all")
+                    {
+                        return context.JobTable.Where(Job => Job.Name != null && Job.Course.Name == Course).Include(x => x.Student).Include(x => x.Course).Count();
+                    }
+                    else
+                    {
+                        return context.JobTable.Include(x => x.Student).Include(x => x.Course).Count();
+                    }
                 }
                 else
                 {

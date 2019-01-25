@@ -1,0 +1,71 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+@if (Model != null && Model.Answer != null)
+{
+    foreach (var answers in Model.Answer)
+    {
+        <div class="answer-section jumbotron" id="answercontainer">
+            <h4 >
+                @answers.AnsweredBy.Name (@answers.AnsweredBy.UndergraduateMajor from @answers.AnsweredBy.UndergraduateCollage)
+            </h4>
+            <div>
+                @answers.Description
+            </div>
+            <div class="tag row" style="margin:10px 0;font-size:18px;">
+                <div class="col-md-3">
+                    @answers.Upvote <i class="fas fa-thumbs-up"></i>
+                </div>
+                <div class="col-md-6 text-center">
+                    Answered on @answers.Date
+                </div>
+                <div class="col-md-3 text-right">
+                    @answers.Downvote <i class="fas fa-thumbs-down"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-primary btn-lg" id="like"><i class="fas fa-thumbs-up"></i> Like</button>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-danger  btn-lg" id="dislike"><i class="fas fa-thumbs-down"></i> Dislike</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="danger">
+        No Answer Found, be the First One to Answer.
+    </div>
+}
+<script>
+    $("#like").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.VoteChanging(Model.SingleQuestion.ID,"up")",
+            
+        })
+            .done(function (response) {
+                $("#answercontainer").html(response);
+
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+    $("#dislike").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.VoteChanging(Model.SingleQuestion.ID, "down")",
+            
+        })
+            .done(function (response) {
+                $("#answercontainer").html(response);
+
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+</script>

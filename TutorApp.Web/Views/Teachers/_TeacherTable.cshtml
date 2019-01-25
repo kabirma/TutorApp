@@ -40,6 +40,10 @@
                 <th>Zip Code</th>
                 <th>Bio</th>
                 <th>Teaching Subject</th>
+                <th>Teaching Subject2</th>
+                <th>Teaching Subject3</th>
+                <th>Teaching Subject4</th>
+                <th>Teaching Subject5</th>
                 <th>Rating</th>
                 <th>Facebook</th>
                 <th>Twitter</th>
@@ -90,6 +94,30 @@
                 <td>
                     @if (Teacher.TeachingSubjects != null)
                     {<text>@Teacher.TeachingSubjects.Name</text> }
+                else
+                { <text></text>}
+                </td>
+                <td>
+                    @if (Teacher.TeachingSubjects2 != null)
+                    {<text>@Teacher.TeachingSubjects2.Name</text> }
+                else
+                { <text></text>}
+                </td>
+                <td>
+                    @if (Teacher.TeachingSubjects3 != null)
+                    {<text>@Teacher.TeachingSubjects3.Name</text> }
+                else
+                { <text></text>}
+                </td>
+                <td>
+                    @if (Teacher.TeachingSubjects4 != null)
+                    {<text>@Teacher.TeachingSubjects4.Name</text> }
+                else
+                { <text></text>}
+                </td>
+                <td>
+                    @if (Teacher.TeachingSubjects5 != null)
+                    {<text>@Teacher.TeachingSubjects5.Name</text> }
                 else
                 { <text></text>}
                 </td>

@@ -26,13 +26,22 @@ namespace TutorApp.Services
 
         }
         #endregion
+
+        public Teachers LoginTeacher(Teachers teacher)
+        {
+            using(var context=new dbContext())
+            {
+                Teachers check= context.TeacherTable.Where(x => x.Email.Equals(teacher.Email) || x.Name.Equals(teacher.Name) || x.PhoneNumber.Equals(teacher.PhoneNumber) && x.Password.Equals(teacher.Password)).FirstOrDefault();
+                return check;
+            }
+        }
         public void SaveTeachers(Teachers Teacher)
         {
 
             using (var context = new dbContext())
             {
                 context.Entry(Teacher.TeachingSubjects).State = System.Data.Entity.EntityState.Unchanged;
-
+             
                 context.TeacherTable.Add(Teacher);
                 context.SaveChanges();
             }
@@ -45,30 +54,48 @@ namespace TutorApp.Services
             {
                 if (!string.IsNullOrEmpty(Search))
                 {
-                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).OrderBy(Teacher => Teacher.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).ToList();
+                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).OrderBy(Teacher => Teacher.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).ToList();
                 }
                 else
                 {
-                    return context.TeacherTable.OrderBy(Teachers => Teachers.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).ToList();
+                    return context.TeacherTable.OrderBy(Teachers => Teachers.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).ToList();
                 }
             }
         }
 
-        public List<Teachers> GetTeachers(string Search, int pageNo, string categ)
+        public List<Teachers> GetTeachers(string Search, int pageNo, string subject,string timeperiod)
         {
             using (var context = new dbContext())
             {
                 if (!string.IsNullOrEmpty(Search))
                 {
-                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).OrderBy(Teacher => Teacher.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).ToList();
+                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).OrderBy(Teacher => Teacher.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.TeachingSubjects.Category).Include(x => x.TeachingSubjects2.Category).Include(x => x.TeachingSubjects3.Category).Include(x => x.TeachingSubjects4.Category).Include(x => x.TeachingSubjects5.Category).ToList();
                 }
-                if (!string.IsNullOrEmpty(categ))
+                if (!string.IsNullOrEmpty(subject))
                 {
-                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.TeachingSubjects.Name == categ).OrderBy(Teacher => Teacher.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).ToList();
+                    if (subject == "all")
+                    {
+                        return context.TeacherTable.OrderBy(Teachers => Teachers.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.TeachingSubjects.Category).Include(x => x.TeachingSubjects2.Category).Include(x => x.TeachingSubjects3.Category).Include(x => x.TeachingSubjects4.Category).Include(x => x.TeachingSubjects5.Category).ToList();
+                    }
+                    else
+                    { 
+                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.TeachingSubjects.Name == subject || Teacher.TeachingSubjects2.Name == subject || Teacher.TeachingSubjects3.Name == subject || Teacher.TeachingSubjects4.Name == subject || Teacher.TeachingSubjects5.Name == subject).OrderBy(Teacher => Teacher.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.TeachingSubjects.Category).Include(x => x.TeachingSubjects2.Category).Include(x => x.TeachingSubjects3.Category).Include(x => x.TeachingSubjects4.Category).Include(x => x.TeachingSubjects5.Category).ToList();
+                    }
+                }
+                if (!string.IsNullOrEmpty(timeperiod))
+                {
+                    if (timeperiod == "old")
+                    {
+                        return context.TeacherTable.OrderByDescending(Teachers => Teachers.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.TeachingSubjects.Category).Include(x => x.TeachingSubjects2.Category).Include(x => x.TeachingSubjects3.Category).Include(x => x.TeachingSubjects4.Category).Include(x => x.TeachingSubjects5.Category).ToList();
+                    }
+                    else
+                    {
+                        return context.TeacherTable.OrderBy(Teachers => Teachers.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.TeachingSubjects.Category).Include(x => x.TeachingSubjects2.Category).Include(x => x.TeachingSubjects3.Category).Include(x => x.TeachingSubjects4.Category).Include(x => x.TeachingSubjects5.Category).ToList();
+                    }
                 }
                 else
                 {
-                    return context.TeacherTable.OrderBy(Teachers => Teachers.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).ToList();
+                    return context.TeacherTable.OrderBy(Teachers => Teachers.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.TeachingSubjects.Category).Include(x => x.TeachingSubjects2.Category).Include(x => x.TeachingSubjects3.Category).Include(x => x.TeachingSubjects4.Category).Include(x => x.TeachingSubjects5.Category).ToList();
                 }
             }
         }
@@ -79,11 +106,11 @@ namespace TutorApp.Services
         //    {
         //        if (!string.IsNullOrEmpty(Search))
         //        {
-        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid && Blog.Name != null && Blog.Name.ToLower().Contains(Search.ToLower())).OrderBy(Product => Product.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.Login).ToList();
+        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid && Blog.Name != null && Blog.Name.ToLower().Contains(Search.ToLower())).OrderBy(Product => Product.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.Login).ToList();
         //        }
         //        else
         //        {
-        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid).OrderBy(Blog => Blog.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.Login).ToList();
+        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid).OrderBy(Blog => Blog.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.Login).ToList();
         //        }
         //    }
         //}
@@ -95,30 +122,37 @@ namespace TutorApp.Services
             {
                 if (!string.IsNullOrEmpty(Search))
                 {
-                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).Include(x => x.TeachingSubjects).Count();
+                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Count();
                 }
                 else
                 {
-                    return context.TeacherTable.Include(x => x.TeachingSubjects).Count();
+                    return context.TeacherTable.Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Count();
                 }
             }
         }
 
-        public int GetTeachersCount(string Search, string categ)
+        public int GetTeachersCount(string Search, string subject)
         {
             using (var context = new dbContext())
             {
                 if (!string.IsNullOrEmpty(Search))
                 {
-                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).Include(x => x.TeachingSubjects).Count();
+                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.Name.ToLower().Contains(Search.ToLower())).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Count();
                 }
-                if (!string.IsNullOrEmpty(categ))
+                if (!string.IsNullOrEmpty(subject))
                 {
-                    return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.TeachingSubjects.Name == categ).Include(x => x.TeachingSubjects).Count();
+                    if (subject == "all")
+                    {
+                        return context.TeacherTable.Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Count();
+                    }
+                    else
+                    {
+                        return context.TeacherTable.Where(Teacher => Teacher.Name != null && Teacher.TeachingSubjects.Name == subject || Teacher.TeachingSubjects2.Name == subject || Teacher.TeachingSubjects3.Name == subject || Teacher.TeachingSubjects4.Name == subject || Teacher.TeachingSubjects5.Name == subject).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Count();
+                    }
                 }
                 else
                 {
-                    return context.TeacherTable.Include(x => x.TeachingSubjects).Count();
+                    return context.TeacherTable.Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Count();
                 }
             }
         }
@@ -126,7 +160,7 @@ namespace TutorApp.Services
         {
             using (var context = new dbContext())
             {
-                return context.TeacherTable.Include(x => x.TeachingSubjects).Count();
+                return context.TeacherTable.Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Count();
             }
         }
 
@@ -138,11 +172,11 @@ namespace TutorApp.Services
         //    {
         //        if (!string.IsNullOrEmpty(Search))
         //        {
-        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid && Blog.Name != null && Blog.Name.ToLower().Contains(Search.ToLower())).Include(x => x.TeachingSubjects).Include(x => x.Login).Count();
+        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid && Blog.Name != null && Blog.Name.ToLower().Contains(Search.ToLower())).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.Login).Count();
         //        }
         //        else
         //        {
-        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid).Include(x => x.TeachingSubjects).Include(x => x.Login).Count();
+        //            return context.TeacherTable.Where(Blog => Blog.Login.ID == userid).Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.Login).Count();
         //        }
         //    }
         //}
@@ -151,7 +185,7 @@ namespace TutorApp.Services
         {
             using (var context = new dbContext())
             {
-                return context.TeacherTable.Include(x => x.TeachingSubjects).ToList();
+                return context.TeacherTable.Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).ToList();
 
             }
         }
@@ -161,7 +195,7 @@ namespace TutorApp.Services
         {
             var context = new dbContext();
 
-            return context.TeacherTable.Include(x=>x.TeachingSubjects).SingleOrDefault(x => x.ID == ID);
+            return context.TeacherTable.Include(x => x.TeachingSubjects).Include(x => x.TeachingSubjects2).Include(x => x.TeachingSubjects3).Include(x => x.TeachingSubjects4).Include(x => x.TeachingSubjects5).Include(x => x.TeachingSubjects.Category).Include(x => x.TeachingSubjects2.Category).Include(x => x.TeachingSubjects3.Category).Include(x => x.TeachingSubjects4.Category).Include(x => x.TeachingSubjects5.Category).SingleOrDefault(x => x.ID == ID);
 
         }
 

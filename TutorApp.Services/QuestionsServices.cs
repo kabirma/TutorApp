@@ -56,7 +56,7 @@ namespace TutorApp.Services
             }
         }
 
-        public List<Questions> GetQuestions(string Search, int pageNo, string askedby,string subject)
+        public List<Questions> GetQuestions(string Search, int pageNo, string subject, string timeperiod)
         {
             using (var context = new dbContext())
             {
@@ -64,17 +64,28 @@ namespace TutorApp.Services
                 {
                     return context.QuestionTable.Where(Question => Question.Name != null && Question.Name.ToLower().Contains(Search.ToLower())).OrderBy(Question => Question.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x=>x.Subject).ToList();
                 }
-                if (!string.IsNullOrEmpty(askedby))
+                if (!string.IsNullOrEmpty(timeperiod))
                 {
-                    return context.QuestionTable.Where(Question => Question.Name != null && Question.Askedby.Name == askedby).OrderBy(Question => Question.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x=>x.Subject).ToList();
+                    if (timeperiod == "old") {
+                        return context.QuestionTable.OrderByDescending(Questions => Questions.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
+                    }
+                    else {
+                        return context.QuestionTable.OrderBy(Questions => Questions.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
+                    }
                 }
                 if (!string.IsNullOrEmpty(subject))
                 {
-                    return context.QuestionTable.Where(Question => Question.Name != null && Question.Subject.Name == subject).OrderBy(Question => Question.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
+                    if (subject == "all") {
+                        return context.QuestionTable.OrderBy(Questions => Questions.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
+                    }
+                    else
+                    {
+                        return context.QuestionTable.Where(Question => Question.Name != null && Question.Subject.Name == subject).OrderBy(Question => Question.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
+                    }
                 }
                 else
                 {
-                    return context.QuestionTable.OrderBy(Questions => Questions.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x=>x.Subject).ToList();
+                    return context.QuestionTable.OrderBy(Questions => Questions.ID).Skip((pageNo - 1) * items).Take(items).Include(x => x.Askedby).Include(x => x.Subject).ToList();
                 }
             }
         }
@@ -110,7 +121,7 @@ namespace TutorApp.Services
             }
         }
 
-        public int GetQuestionsCount(string Search, string askedby,string subject)
+        public int GetQuestionsCount(string Search, string subject)
         {
             using (var context = new dbContext())
             {
@@ -118,18 +129,22 @@ namespace TutorApp.Services
                 {
                     return context.QuestionTable.Where(Question => Question.Name != null && Question.Name.ToLower().Contains(Search.ToLower())).Include(x => x.Askedby).Include(x=>x.Subject).Count();
                 }
-                if (!string.IsNullOrEmpty(askedby))
-                {
-                    return context.QuestionTable.Where(Question => Question.Name != null && Question.Askedby.Name == askedby).Include(x => x.Askedby).Include(x=>x.Subject).Count();
-                }
+
 
                 if (!string.IsNullOrEmpty(subject))
                 {
-                    return context.QuestionTable.Where(Question => Question.Name != null && Question.Subject.Name == askedby).Include(x => x.Askedby).Include(x => x.Subject).Count();
+                    if (subject == "all")
+                    {
+                        return context.QuestionTable.Include(x => x.Askedby).Include(x => x.Subject).Count();
+                    }
+                    else
+                    {
+                        return context.QuestionTable.Where(Question => Question.Name != null && Question.Subject.Name == subject).Include(x => x.Askedby).Include(x => x.Subject).Count();
+                    }
                 }
                 else
                 {
-                    return context.QuestionTable.Include(x => x.Askedby).Include(x=>x.Subject).Count();
+                    return context.QuestionTable.Include(x => x.Askedby).Include(x => x.Subject).Count();
                 }
             }
         }

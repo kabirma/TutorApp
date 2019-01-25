@@ -55,7 +55,7 @@ namespace TutorApp.Web.Controllers
 
             var model = new ListViewModel
             {
-                Teacher = TeachersServices.Instance.GetTeachers(),
+                Teachers = TeachersServices.Instance.GetTeachers(),
                 Question = QuestionsServices.Instance.GetQuestions()
 
             };

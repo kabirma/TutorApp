@@ -1,0 +1,23 @@
+﻿@model TutorApp.Web.ViewModels.ListViewModel
+@{
+    ViewBag.Title = "Messagepage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <section id="hero_in" class="general">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Successfull</h1>
+            </div>
+        </div>
+    </section>
+
+    <div class="jumbotron">
+        <h1>Message</h1>
+        <p>
+           @Model.Message
+        </p>
+    </div>
+
+</main>

@@ -101,7 +101,12 @@ namespace TutorApp.Web.Controllers
                 Linkedin = model.Linkedin,
                 ImageUrl = model.ImageUrl,
 
-                TeachingSubjects = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubjectID)
+                TeachingSubjects = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubjectID),
+                TeachingSubjects2 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject2ID),
+                TeachingSubjects3 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject3ID),
+                TeachingSubjects4 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject4ID),
+                TeachingSubjects5 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject5ID)
+
             };
             TeachersServices.Instance.SaveTeachers(newTeacher);
             return RedirectToAction("_TeacherTable");
@@ -149,7 +154,19 @@ namespace TutorApp.Web.Controllers
                 ImageUrl = Teacher.ImageUrl,
 
                 TeachingSubjectID = Teacher.TeachingSubjects.ID,
-                TeachingSubjects = CoursesFieldServices.Instance.GetCoursesField()
+                TeachingSubjects = CoursesFieldServices.Instance.GetCoursesField(),
+
+                TeachingSubject2ID = Teacher.TeachingSubjects2.ID,
+                TeachingSubjects2 = CoursesFieldServices.Instance.GetCoursesField(),
+
+                TeachingSubject3ID = Teacher.TeachingSubjects3.ID,
+                TeachingSubjects3 = CoursesFieldServices.Instance.GetCoursesField(),
+
+                TeachingSubject4ID = Teacher.TeachingSubjects4.ID,
+                TeachingSubjects4 = CoursesFieldServices.Instance.GetCoursesField(),
+
+                TeachingSubject5ID = Teacher.TeachingSubjects5.ID,
+                TeachingSubjects5 = CoursesFieldServices.Instance.GetCoursesField(),
             };
             return PartialView(model);
         }
@@ -194,7 +211,12 @@ namespace TutorApp.Web.Controllers
             Teacher.ImageUrl = model.ImageUrl;
             
             Teacher.TeachingSubjects = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubjectID);
-            
+            Teacher.TeachingSubjects2 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject2ID);
+            Teacher.TeachingSubjects3 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject3ID);
+            Teacher.TeachingSubjects4 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject4ID);
+            Teacher.TeachingSubjects5 = CoursesFieldServices.Instance.GetCourseField(model.TeachingSubject5ID);
+
+
             TeachersServices.Instance.UpdateTeacher(Teacher);
             return RedirectToAction("_TeacherTable");
         }

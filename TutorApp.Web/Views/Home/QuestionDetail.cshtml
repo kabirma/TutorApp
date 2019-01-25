@@ -1,0 +1,128 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@{
+    ViewBag.Title = "QuestionDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .tag {
+        background-color: dodgerblue;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 5px;
+    }
+</style>
+<main>
+    <section id="hero_in" class="courses">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Question Section</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container-fluid row" style="margin:5% 0;">
+        <div class="col-md-1"></div>
+        <div class="col-md-7 container text-left">
+            <div class="row" style="border-bottom:1px solid #ddd;padding-bottom:10px;">
+                <div class="col-md-8">
+                    <h3 class="page-header">@Model.SingleQuestion.Name</h3>
+                </div>
+                <div class="col-md-4 text-right" style="margin-top:5px;">
+                    <span class="tag">@Model.SingleQuestion.Subject.Name</span>
+                </div>
+
+            </div>
+            <div style="margin-top:10px;">
+                <div>
+                    @Model.SingleQuestion.Description<br />
+
+                </div>
+                <div class="row tag" style="margin-top:10px;">
+                    <div class="col-md-6 ">Asked By: @Model.SingleQuestion.Askedby.Name @Model.SingleQuestion.Askedby.Lname</div>
+                    <div class="col-md-6 text-right">Asked On: @Model.SingleQuestion.Date</div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="row text-center">
+                @if (Session["teacher"] != null)
+                {
+                    <div class="col-md-12 text-right"><button class="btn btn-success btn-lg w-100" id="newbtn">Answer the Question</button></div>
+                }
+                else
+                {
+                    <div class="alert alert-danger col-md-12" role="alert">You Need to logged in as a Teacher in order to Answer the Question.</div>
+                    <br />
+                    <div class="col-md-12">
+                        <a class="btn btn-danger" href="/Home/Login">Go to Login</a>
+                    </div>
+                }
+            </div>
+            <br /><br />
+            <h3>Answers</h3>
+            <div id="answercontainer">
+
+                @{
+
+                    Html.RenderAction("_AnswerSection");
+
+
+                }
+
+            </div>
+
+            <br />
+            <hr />
+            <div class="anwser-written" id="actioncontainer">
+
+            </div>
+        </div>
+
+
+
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <h4 style="text-transform:uppercase;">Recent Questions</h4>
+            <br />
+            @if (Model != null && Model.Question != null)
+            {
+                foreach (var question in Model.Question.Take(4))
+                {
+                    <div class="jumbotron">
+                        <h4>@question.Name</h4>
+                        <p>
+                            @if (question.Description.Length > 40)
+                            {<text>@question.Description.Substring(0, 40)</text>}
+                        else
+                        { <text>@question.Description.Substring(0, question.Description.Length)</text>}
+                        </p>
+                        <p style="opacity:.8;">Asked by @question.Askedby.Name on @question.Date</p>
+
+                    </div>
+
+                }
+            }
+            else
+            {
+                <div class="danger">
+                    <p>No Questions Found...</p>
+                </div>
+            }
+        </div>
+    </div>
+</main>
+<script>
+      $("#newbtn").click(function() {
+
+        $.ajax({
+                url: "@Url.QuestionAnswer(Model.SingleQuestion.ID)",
+
+        })
+        .done(function(response) {
+            $("#actioncontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#actioncontainer").offset().top
+        }, 1000);
+    });
+</script>

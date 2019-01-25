@@ -1,0 +1,125 @@
+﻿
+@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@if (Model != null && Model.Teachers != null && Model.Teachers.Count > 0)
+{
+
+    foreach (var teacher in Model.Teachers)
+    {
+        <div class="box_list wow">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <figure class="block-reveal">
+                        <div class="block-horizzontal"></div>
+                        <a href="/Home/TeacherDetails/@teacher.ID"><img src="@teacher.ImageUrl" class="img-fluid" alt=""></a>
+
+                    </figure>
+                </div>
+                <div class="col-lg-7">
+                    <div class="wrapper">
+
+                        <div class="price"><i class="icon-money"></i> @teacher.HoulryRate$</div>
+                        <small>
+                            Subjects :
+                            @if (teacher.TeachingSubjects.Name != null)
+                            {<text>, @teacher.TeachingSubjects.Name</text>}
+                        else
+                        { <text></text>}
+
+                            @if (teacher.TeachingSubjects2.Name != null)
+                            {<text>, @teacher.TeachingSubjects2.Name</text>}
+                        else
+                        { <text></text>}
+
+                            @if (teacher.TeachingSubjects3.Name != null)
+                            {<text>, @teacher.TeachingSubjects3.Name</text>}
+                        else
+                        { <text></text>}
+
+                            @if (teacher.TeachingSubjects4.Name != null)
+                            {<text>, @teacher.TeachingSubjects4.Name</text>}
+                        else
+                        { <text></text>}
+
+                            @if (teacher.TeachingSubjects5.Name != null)
+                            {<text>, @teacher.TeachingSubjects5.Name</text>}
+                        else
+                        { <text></text>}
+
+                        </small>
+                        <h3>@teacher.Name @teacher.LName</h3>
+                        <p>@teacher.Bio</p>
+                        @if (teacher.UndergraduateMajor != null)
+                        {<text> <small>Undergraduate in <b>@teacher.UndergraduateMajor</b> from <b>@teacher.UndergraduateCollage</b></small></text>}<br />
+
+                        @if (teacher.GraduateDegree != null)
+                        {<text> <small>Graduate in <b>@teacher.GraduateDegree</b> from <b>@teacher.GraduateCollage</b></small></text>}<br />
+
+                        @if (teacher.GraduateDegree2 != null)
+                        {<text> <small>Graduate in <b>@teacher.GraduateDegree2</b> from <b>@teacher.GraduateCollage2</b></small></text>}
+
+                    </div>
+                    <ul>
+                        <li><i class="icon_clock_alt"></i> @teacher.AvailableHours Hours</li>
+                        <li><a href="/Home/TeacherDetails/@teacher.ID">View Details</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /box_list -->
+    }
+
+}
+
+else
+{
+    <br />
+    /**/
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+    /**/
+}
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn  @activeclass" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.TeacherData("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+</script>

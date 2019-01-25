@@ -1,0 +1,99 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@{
+    ViewBag.Title = "AskQuestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    h3, h4 {
+        margin-bottom: 4%;
+        text-transform: uppercase;
+        font-family: 'Calisto MT';
+    }
+
+</style>
+<main>
+    <section id="hero_in" class="courses">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Ask a Question</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container-fluid row" style="margin:5% 0;">
+        <div class="col-md-1"></div>
+        <div class="col-md-7 container text-left">
+            <div class="text-center">
+                <h3 class="page-header">Type Details About Your Question</h3>
+            </div>
+            <form method="post">
+                <div class="form-group">
+                    <input class="form-control" name="Name" placeholder="Type Question Title Here" />
+                </div>
+
+                <div class="form-group">
+                    <textarea style="resize: none;height:200px;" class="form-control" name="Description" placeholder="Type Question Description Here"></textarea>
+                </div>
+
+                <input type="hidden" name="Date" class="date" />
+                <input type="hidden" name="StudentID" value="@Model.SingleStudent.ID" />
+
+                <div class="form-group select">
+                    <div class="styled-select">
+                        <select name="SubjectID" id="education_apply">
+                            @foreach (var subject in Model.Courses)
+                            {
+                                <option value="@subject.ID">
+                                    @subject.Name
+                                </option>
+                            }
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary submit">Submit Question</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <h4 style="text-transform:uppercase;">Recent Questions</h4>
+            <br />
+            @if (Model != null && Model.Question != null)
+            {
+                foreach (var question in Model.Question.Take(4))
+                {
+                    <div class="jumbotron">
+                        <h4>@question.Name</h4>
+                        <p>
+                            @if (question.Description.Length > 40)
+                            {<text>@question.Description.Substring(0, 40)</text>}
+                        else
+                        { <text>@question.Description.Substring(0, question.Description.Length)</text>}
+                        </p>
+                        <p style="opacity:.8;">Asked by @question.Askedby.Name on @question.Date</p>
+
+                    </div>
+
+                }
+            }
+            else
+            {
+                <div class="danger">
+                    <p>No Questions Found...</p>
+                </div>
+            }
+        </div>
+    </div>
+</main>
+
+<script>
+     $(".submit").click(function(){
+            var d = new Date();
+            var strDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+            $(".date").val(strDate)
+        });
+
+</script>
+

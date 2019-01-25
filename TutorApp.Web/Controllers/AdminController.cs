@@ -29,7 +29,7 @@ namespace TutorApp.Web.Controllers
                 model.JobsCount = JobsServices.Instance.GetJobsCount();
                 model.InboxCount = InboxServices.Instance.GetInboxsCount();
 
-                model.Teacher = TeachersServices.Instance.GetTeachers();
+                model.Teachers = TeachersServices.Instance.GetTeachers();
 
                 model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
                 model.Inbox = InboxServices.Instance.GetInboxs();
@@ -67,7 +67,7 @@ namespace TutorApp.Web.Controllers
                 model.JobsCount = JobsServices.Instance.GetJobsCount();
                 model.InboxCount = InboxServices.Instance.GetInboxsCount();
 
-                model.Teacher = TeachersServices.Instance.GetTeachers();
+                model.Teachers = TeachersServices.Instance.GetTeachers();
                 model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
 
                 model.Inbox = InboxServices.Instance.GetInboxs();

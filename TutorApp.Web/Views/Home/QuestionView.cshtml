@@ -1,0 +1,110 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+
+@{
+    ViewBag.Title = "QuestionView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<main>
+    <section id="hero_in" class="courses">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Questions Section</h1>
+            </div>
+        </div>
+    </section>
+    <!--/hero_in-->
+    <div class="filters_listing sticky_horizontal">
+        <div class="container">
+            <ul class="clearfix">
+                <li>
+                    <div class="switch-field">
+                        <input type="radio" id="all" name="listing_filter" value="all">
+                        <label class="period-filter" data-time="old" for="old">Old</label>
+
+                        <input type="radio" id="latest" name="listing_filter" value="latest" checked>
+                        <label class="period-filter" data-time="new" for="latest">Latest</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="layout_view">
+                        <input type="text" placeholder="Search File " id="searchtxt" class="search-input" />
+                    </div>
+                </li>
+
+               
+                <li>
+                    <select name="orderby" class="selectbox category-filter">
+
+                        <option value="all" data-category="all">All Courses</option>
+                        @foreach (var courses in Model.Courses)
+                        {
+                            <option value="@courses.Name" data-category="@courses.Name">@courses.Name</option>
+                        }
+                    </select>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /filters -->
+
+    <div class="container margin_60_35" id="Questioncontainer">
+        @{
+            Html.RenderAction("_QuestionData");
+        }
+    </div>
+    <!-- /container -->
+
+
+</main>
+<!--/main-->
+<script>
+        $("#searchtxt").on('input', function () {
+       $.ajax({
+          url: "@Url.QuestionData("")",
+            data: {
+                Search: $(this).val()
+
+            }
+        })
+            .done(function (response) {
+                $("#Questioncontainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+        event.preventDefault();
+      });
+
+    $(".category-filter").on('change',function(e) {
+        $.ajax({
+          url: "@Url.VideoData("")",
+          data:
+              {
+                  Category: $(".category-filter").val()
+          }
+          })
+                .done(function(response) {
+                    $("#Questioncontainer").html(response);
+          })
+            .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+      $(".period-filter").click(function() {
+        $.ajax({
+          url: "@Url.QuestionData("")",
+          data:
+          {
+                  timeperiod: $(this).attr("data-time")
+          }
+          })
+                .done(function(response) {
+                    $("#Questioncontainer").html(response);
+          })
+            .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+
+</script>
+

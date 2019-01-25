@@ -1,0 +1,98 @@
+﻿@using TutorApp.Web.Helper;
+@{
+                /**/
+
+                ViewBag.Title = "Accounttype";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <section id="hero_in" class="general">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Register Yourself</h1>
+            </div>
+        </div>
+    </section>
+    <!--/hero_in-->
+    <div class="container margin_60_35">
+        <div class="pricing-container cd-has-margins">
+            <div class="pricing-switcher">
+                <p class="fieldset">
+                    <input type="radio" name="duration-2" value="monthly" id="monthly-2" checked>
+                    <label for="monthly-2">Teacher</label>
+                    <input type="radio" name="duration-2" value="yearly" id="yearly-2">
+                    <label for="yearly-2">Student</label>
+                    <span class="switch"></span>
+                </p>
+            </div>
+            <!--/pricing-switcher -->
+            <ul class="pricing-list bounce-invert">
+
+                <li class="popular">
+                    <ul class="pricing-wrapper">
+                        <li data-type="monthly" class="is-visible">
+                            <header class="pricing-header">
+                                <h2>Teacher Account</h2>
+                                <div class="price">
+
+                                    <span class="price-value">
+                                        <a>Teacher Account</a>
+                                    </span>
+
+                                </div>
+                            </header>
+                            <!-- /pricing-header -->
+                            <div class="pricing-body">
+                                <ul class="pricing-features">
+                                    <li>Get Online & Offline Tutions</li>
+                                    <li>Earn upto your Standards</li>
+                                    <li>Pormote your Skills</li>
+                                    <li>Provide Video Lessons</li>
+                                    <li>Give you own Notes</li>
+                                    <li><em>24/7</em> Support</li>
+                                </ul>
+                            </div>
+                            <!-- /pricing-body -->
+                            <footer class="pricing-footer">
+                                <a class="select-plan" href="@Url.TeacherRegister()">Create</a>
+                            </footer>
+                        </li>
+                        <li data-type="yearly" class="is-hidden">
+                            <header class="pricing-header">
+                                <h2>Student</h2>
+                                <div class="price">
+
+                                    <span class="price-value">Student Account</span>
+
+                                </div>
+                            </header>
+                            <!-- /pricing-header -->
+                            <div class="pricing-body">
+                                <ul class="pricing-features">
+                                    <li>Get Online & Offline Tutors</li>
+                                    <li>Learn from Video COurses</li>
+                                    <li>Easily available collection of Courses</li>
+                                    <li>Prepare for you Exam</li>
+                                    <li>Learn Skills from a variety of Courses</li>
+                                    <li><em>24/7</em> Support</li>
+                                </ul>
+                            </div>
+                            <!-- /pricing-body -->
+                            <footer class="pricing-footer">
+                                <a class="select-plan" href="@Url.StudentRegister()">Create</a>
+                            </footer>
+                        </li>
+                    </ul>
+                    <!-- /cd-pricing-wrapper -->
+                </li>
+
+            </ul>
+            <!-- /pricing-list -->
+        </div>
+        <!-- /pricing-container -->
+    </div>
+    <!-- /container -->
+    <!--/bg_color_1-->
+</main>
+<!--/main-->

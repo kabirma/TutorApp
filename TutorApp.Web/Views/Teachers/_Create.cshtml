@@ -27,6 +27,51 @@
             </select>
         </div>
         <br />
+        <div class="select">
+            <select name="TeachingSubject2ID">
+                @foreach (var categ in Model.CourseField)
+                {
+                    <option value="@categ.ID">
+                        @categ.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="select">
+            <select name="TeachingSubject3ID">
+                @foreach (var categ in Model.CourseField)
+                {
+                    <option value="@categ.ID">
+                        @categ.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="select">
+            <select name="TeachingSubject4ID">
+                @foreach (var categ in Model.CourseField)
+                {
+                    <option value="@categ.ID">
+                        @categ.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="select">
+            <select name="TeachingSubject5ID">
+                @foreach (var categ in Model.CourseField)
+                {
+                    <option value="@categ.ID">
+                        @categ.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <br />
 
         <input type="text" name="Name" placeholder="Type First Name Here" />
 

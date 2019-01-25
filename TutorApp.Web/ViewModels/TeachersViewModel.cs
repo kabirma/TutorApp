@@ -19,7 +19,16 @@ namespace TutorApp.Web.ViewModels
         public string Name { get; set; }
        
         public int TeachingSubjectID { get; set; }
+        public int TeachingSubject2ID { get; set; }
+        public int TeachingSubject3ID { get; set; }
+        public int TeachingSubject4ID { get; set; }
+        public int TeachingSubject5ID { get; set; }
+
         public List<CoursesField> TeachingSubjects { get; set; }
+        public List<CoursesField> TeachingSubjects2 { get; set; }
+        public List<CoursesField> TeachingSubjects3 { get; set; }
+        public List<CoursesField> TeachingSubjects4 { get; set; }
+        public List<CoursesField> TeachingSubjects5 { get; set; }
 
         public string LName { get; set; }
         public string Email { get; set; }

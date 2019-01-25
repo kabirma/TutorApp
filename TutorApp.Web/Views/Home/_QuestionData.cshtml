@@ -1,0 +1,92 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@if (Model != null && Model.Question != null && Model.Question.Count > 0)
+{
+
+    foreach (var question in Model.Question)
+    {
+        <div class="box_list wow">
+            <div class="row no-gutters">
+                <div class="col-lg-5">
+                    <figure class="block-reveal">
+                        <div class="block-horizzontal"></div>
+                        <a href="/Home/QuestionDetail/@question.ID"><img src="@question.Subject.Imageurl" class="img-fluid" alt=""></a>
+
+                    </figure>
+                </div>
+                <div class="col-lg-7">
+                    <div class="wrapper">
+
+                        <small>Course : @question.Subject.Name</small>
+                        <h3>@question.Name</h3>
+                        <p>@if (question.Description.Length > 100) { <text>@question.Description.Substring(0,100)</text>}
+                        else { <text>@question.Description.Substring(0,question.Description.Length)</text>}
+                        ...</p>
+                        <small>Asked By : @question.Askedby.Name @question.Askedby.Lname</small><br />
+                        <small>Student Email : @question.Askedby.Email</small>
+                    </div>
+                    <ul>
+                        <li><i class="icon_clock_alt"></i> @question.Date</li>
+                        <li><a href="/Home/QuestionDetail/@question.ID">View Details</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /box_list -->
+    }
+
+}
+
+else
+{
+    <br />
+    /**/
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+    /**/
+}
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn  @activeclass" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.QuestionData("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+    });
+</script>
+

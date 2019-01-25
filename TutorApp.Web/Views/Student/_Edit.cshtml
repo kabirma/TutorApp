@@ -1,30 +1,41 @@
 ﻿@using TutorApp.Web.Helper;
 @model TutorApp.Entities.Students
+
 <h2>Operations</h2>
 <form method="post" id="updateStudent" class="form container-fluid row">
 
 
-   
+
     <div class="col-md-12">
         <h1>Edit Form</h1><br>
 
         <input name="ID" type="hidden" value="@Model.ID" />
-        <label>Name</label>
+        <label>First Name</label>
         <input type="text" name="Name" value="@Model.Name" /><br />
-        <label>Description</label>
+        <label>Last Name</label>
+        <input type="text" name="LName" value="@Model.Lname" /><br />
+
+        <label>Email</label>
         <input type="text" name="Email" value="@Model.Email" /><br />
-     
 
-        <label>Description</label>
+
+        <label>Password</label>
         <input type="text" name="Password" value="@Model.Password" /><br />
+        <label>Password</label>
+        <input type="text" name="PhoneNumber" placeholder="Type Phone Number Here" value="@Model.PhoneNumber" />
+        <br />
 
-        <label>Description</label>
+        <input type="hidden" name="Gender" value="@Model.Gender" />
+        <label>Date of Birth</label>
+        <input type="date" name="DOB" value="@Model.DOB" />
+        <br />
+        <label>Zip Code</label>
         <input type="text" name="ZipCode" value="@Model.ZipCode" />
         <br />
         <button type="button" id="updatebtn">Update Record</button>
         <button type="button" id="cancelbtn">Cancel</button>
     </div>
- 
+
 </form>
 
 <script>
