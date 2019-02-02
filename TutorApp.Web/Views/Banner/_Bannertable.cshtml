@@ -1,0 +1,125 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.BannerSearchViewModel
+
+@{
+
+    var i = 0;
+}
+
+
+@if (Model != null && Model.Banner != null && Model.Banner.Count > 0)
+
+{
+    <table id="table">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Image</th>
+                <th>Name</th>
+                
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var banner in Model.Banner)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td><img src="@banner.ImageUrl" width="auto" height="200px" /></td>
+                    <td>@banner.Name</td>
+                   
+                    <td>
+                        <button class="editbtn fas fa-edit" data-id="@banner.ID"></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <br />
+    <div class="alert alert-danger" role="alert">
+        There are no records.
+    </div>
+}
+<div class="pager">
+    @if (Model.Pager != null)
+    {
+
+        if (Model.Pager.CurrentPage > 1)
+        {
+            <a class="Pagebtn fas fa-angle-double-left" data-pageNo="1"></a>
+            <a class="Pagebtn fas fa-angle-left" data-pageNo="@(Model.Pager.CurrentPage -1)"></a>
+        }
+
+        for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            string activeclass = Model.Pager.CurrentPage == page ? "active " : string.Empty;
+            <a class="Pagebtn @activeclass" data-pageNo="@page">@page</a>
+
+        }
+
+        if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <a class="Pagebtn fas fa-angle-right" data-pageNo="@(Model.Pager.CurrentPage+1)"></a>
+            <a class="Pagebtn fas fa-angle-double-right" data-pageNo="@Model.Pager.EndPage"></a>
+        }
+    }
+</div>
+
+<script>
+
+    $(".Pagebtn").click(function() {
+        $.ajax({
+                url: "@Url.BannerTable("")",
+        data:
+                {
+                pageNo: $(this).attr("data-pageNo")
+        }
+            })
+        .done(function(response) {
+            $("#tablecontainer").html(response);
+            })
+        .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
+});
+
+
+
+        $(".editbtn").click(function () {
+
+            $.ajax({
+                url: "@Url.EditBanner()",
+                data: {
+                    ID: $(this).attr("data-id")
+                }
+            })
+                .done(function (response) {
+                    $("#actioncontainer").html("");
+                    $("#actioncontainer").html(response);
+                })
+                .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#actioncontainer").offset().top
+            }, 1000);
+        });
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

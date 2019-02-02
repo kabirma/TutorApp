@@ -170,19 +170,15 @@ h6 {
 }
 
 .bg-gra-01 {
-  background: -webkit-gradient(linear, left bottom, left top, from(#5192e8), to(#1a67cc));
-  background: -webkit-linear-gradient(bottom, #5192e8 0%, #1a67cc 100%);
-  background: -moz-linear-gradient(bottom, #5192e8 0%, #1a67cc 100%);
-  background: -o-linear-gradient(bottom, #5192e8 0%, #1a67cc 100%);
-  background: linear-gradient(to top, #5192e8 0%, #1a67cc 100%);
+    background-image: -moz-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
+    background-image: -webkit-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
+    background-image: -ms-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
 }
 
 .bg-gra-02 {
-  background: -webkit-gradient(linear, left bottom, right top, from(#5192e8), to(#1a67cc));
-  background: -webkit-linear-gradient(bottom left, #5192e8 0%, #1a67cc 100%);
-  background: -moz-linear-gradient(bottom left, #5192e8 0%, #1a67cc 100%);
-  background: -o-linear-gradient(bottom left, #5192e8 0%, #1a67cc 100%);
-  background: linear-gradient(to top right, #5192e8 0%, #1a67cc 100%);
+    background-image: -moz-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
+    background-image: -webkit-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
+    background-image: -ms-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
 }
 
 /* ==========================================================================

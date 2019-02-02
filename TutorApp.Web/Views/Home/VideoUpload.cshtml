@@ -14,11 +14,10 @@
     <meta name="author" content="EduTime">
     <title>EduTime</title>
     <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="~/content/image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon" href="~/content/img/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="~/content/img/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="~/content/img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="~/content/img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="shortcut icon" href="~/content/Database_Images/57.png" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="~/content/Database_Images/57.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="~/content/Database_Images/72.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="~/content/Database_Images/114.png">
     <!-- BASE CSS -->
     <link href="~/content/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/content/css/style.css" rel="stylesheet">
@@ -30,6 +29,89 @@
     <link href="~/content/css/wizard.css" rel="stylesheet">
     <!-- YOUR CUSTOM CSS -->
     <link href="~/content/css/custom.css" rel="stylesheet">
+    <style>
+
+.circle-loader {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-left-color: #5cb85c;
+    animation: loader-spin 1.2s infinite linear;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+}
+
+.load-complete {
+    -webkit-animation: none;
+    animation: none;
+    border-color: #5cb85c;
+    transition: border 500ms ease-out;
+}
+
+.checkmark {
+    display: none;
+}
+
+    .checkmark.draw:after {
+        animation-duration: 800ms;
+        animation-timing-function: ease;
+        animation-name: checkmark;
+        transform: scaleX(-1) rotate(135deg);
+    }
+
+    .checkmark:after {
+        opacity: 1;
+        height: 1.5em;
+        width: 0.75em;
+        transform-origin: left top;
+        border-right: 3px solid #5cb85c;
+        border-top: 3px solid #5cb85c;
+        content: '';
+        left: 0.70em;
+        top: 1.5em;
+        position: absolute;
+    }
+
+
+@@keyframes loader-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@@keyframes checkmark {
+    0% {
+        height: 0;
+        width: 0;
+        opacity: 1;
+    }
+
+    20% {
+        height: 0;
+        width: 1.75em;
+        opacity: 1;
+    }
+
+    40% {
+        height: 3.5em;
+        width: 1.75em;
+        opacity: 1;
+    }
+
+    100% {
+        height: 3.5em;
+        width: 1.75em;
+        opacity: 1;
+    }
+}
+
+    </style>
 </head>
 <body id="admission_bg">
 
@@ -40,7 +122,7 @@
 
     <div id="form_container" class="clearfix">
         <figure>
-            <a href="index.html"><img src="~/content/img/logo.png" width="149" height="42" data-retina="true" alt=""></a>
+            <a href="index.html"><img src="~/content/Database_Images/57.png" width="149" height="42" data-retina="true" alt=""></a>
         </figure>
         <div id="wizard_container">
             <div id="top-wizard">
@@ -108,6 +190,10 @@
                         <label>Video</label>
                         <input id="VideoUrl" name="FilePath" type="hidden" />
                         <input type="file" id="VideoUpload" name="FilePath" /><br />
+                        <div class="circle-loader">
+                            <div class="checkmark draw"></div>
+                        </div>
+                        <br />
                         <label class="size">500MB Size Limit</label>
                         <br />
 
@@ -161,13 +247,18 @@
     <script src="~/content/js/jquery.validate.js"></script>
     <script src="~/content/js/admission_func.js"></script>
     <script>
+        $(".submit").attr("disabled", "disabled");
+        $('.circle-loader').hide();
+
         $(".submit").click(function(){
             var d = new Date();
             var strDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
             $(".date").val(strDate)
         });
 
-         $("#VideoUpload").change(function () {
+        $("#VideoUpload").change(function () {
+       
+        $('.circle-loader').show();
         var element = this;
         var formData = new FormData();
         var totalfiles = element.files.length;
@@ -179,7 +270,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Videouploader()',
+            url: '/Shared/UploadVideo',
             dataType: 'json',
             data: formData,
             contentType: false,
@@ -192,6 +283,9 @@
             if (response.Success) {
 
                 $("#VideoUrl").val(response.VideoUrl);
+                $('.checkmark').toggle();
+                $('.circle-loader').toggleClass('load-complete');
+                $(".submit").removeAttr("disabled");
             }
             })
        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });

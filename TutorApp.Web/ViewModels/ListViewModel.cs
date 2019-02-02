@@ -58,5 +58,6 @@ namespace TutorApp.Web.ViewModels
         public string Search { get; internal set; }
         public Pager Pager { get; internal set; }
         public string Message { get; internal set; }
+        public List<Banners> Banner { get; internal set; }
     }
 }

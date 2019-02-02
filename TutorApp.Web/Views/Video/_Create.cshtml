@@ -1,8 +1,6 @@
 ﻿@using TutorApp.Web.Helper;
 @model TutorApp.Web.ViewModels.ListViewModel
 
-
-
 <form method="post" id="createVideo" class="form container-fluid row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -55,7 +53,11 @@
 
 
         <input id="VideoUrl" name="FilePath" type="hidden" />
-        <input type="file" id="VideoUpload" name="FilePath" /><br />
+        <input type="file" id="VideoUpload" name="FilePath" />
+        <div class="circle-loader">
+            <div class="checkmark draw"></div>
+        </div>
+        <br />
         <label class="size">500MB Size Limit</label>
         <br />
 
@@ -67,6 +69,9 @@
 </form>
 
 <script>
+    $("#createbtn").attr("disabled", "disabled");
+    $('.circle-loader').hide();
+   
     $("#cancelbtn").click(function () {
         $("#actioncontainer").html("");
     });
@@ -90,6 +95,8 @@
 
 
     $("#VideoUpload").change(function () {
+       
+        $('.circle-loader').show();
         var element = this;
         var formData = new FormData();
         var totalfiles = element.files.length;
@@ -101,7 +108,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Videouploader()',
+            url: '/Shared/UploadVideo',
             dataType: 'json',
             data: formData,
             contentType: false,
@@ -114,6 +121,9 @@
             if (response.Success) {
 
                 $("#VideoUrl").val(response.VideoUrl);
+                $('.checkmark').toggle();
+                $('.circle-loader').toggleClass('load-complete');
+                $("#createbtn").removeAttr("disabled");
             }
             })
        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
@@ -132,7 +142,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Imageuploader()',
+            url: '/Shared/UploadImage',
             dataType: 'json',
             data: formData,
             contentType: false,

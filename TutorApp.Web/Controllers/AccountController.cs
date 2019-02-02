@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using TutorApp.Entities;
 using TutorApp.Services;
-using TutorApp.Database;
 using TutorApp.Web.ViewModels;
 
 namespace TutorApp.Web.Controllers.Admin
@@ -23,6 +22,7 @@ namespace TutorApp.Web.Controllers.Admin
             model.InboxCount = InboxServices.Instance.GetInboxsCount();
             model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
             model.Inbox = InboxServices.Instance.GetInboxs();
+            model.Admin = AccountServices.Instance.GetAccounts().Where(x => x.Name == Session["username"].ToString()).ToList();
             return View(model);
         }
         public ActionResult _AccountTable(string Search, int? pageNo)

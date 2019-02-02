@@ -9,9 +9,9 @@
             <div class="row no-gutters">
               
                 <div class="col-lg-9">
-                    <div class="wrapper">
+                    <div class="wrapper row">
 
-                        <div class="price">
+                        <div class="price col-md-12">
                             <i class="fas fa-map-marker-alt"></i>
                             @if (job.Location == "Out")
                             {<text>Outdoor Locations</text>}
@@ -19,25 +19,38 @@
                             {<text>Teach at Home</text>}
                             @if (job.Location == "UC")
                             {<text>In University or College Premises</text>}
-                            
-                        </div>
-                        
-                        <small>Subject : @job.Course.Name</small>
-                        <h3>@job.Name</h3>
-                        <p>@job.Description</p>
-                        <small>Request By : @job.Student.Name</small><br />
-                        <small>Starting   
-                        @if (job.LessonBegins == "Today") {<text>From Today</text> }
-                        @if (job.LessonBegins == "Few") {<text>in a Few Days</text> }
-                        @if (job.LessonBegins == "Week") {<text>with in this Week</text> } 
-                        @if (job.LessonBegins == "Month") {<text>in a Month</text> } 
-                            </small><br />
-                        <small>Available Time : @job.Availability</small>
 
+                        </div>
+                        <div class="col-md-12">
+                            <small>Subject : @job.Course.Name</small>
+                            <h3>@job.Name</h3>
+                            <p>@job.Description</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <small>Request By : @job.Student.Name</small><br />
+                            <small>
+                                Starting
+                                @if (job.LessonBegins == "Today")
+                                {<text>From Today</text>}
+                                @if (job.LessonBegins == "Few")
+                                {<text>in a Few Days</text>}
+                                @if (job.LessonBegins == "Week")
+                                {<text>with in this Week</text>}
+                                @if (job.LessonBegins == "Month")
+                                {<text>in a Month</text>}
+                            </small>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <small>Available Time : @job.Availability</small><br />
+                            <small>Zip Code: @job.ZipCode</small>
+                        </div>
+                       
+                     
                     </div>
                     <ul>
                         <li><i class="icon_clock_alt"></i> @job.Date</li>
-                        <li><b>Zip Code:</b> @job.ZipCode</li>
+                       
                         <li>
                             <i class="icon-phone"></i> @if (job.Student.PhoneNumber != null)
                             {
@@ -46,7 +59,7 @@
                             {<text></text>
                         }
                         </li>
-                        <li><i class="icon-email"></i>@if (job.Student.Email != null) {
+                        <li class="text-right"><i class="icon-email"></i>@if (job.Student.Email != null) {
                         <text>@job.Student.Email</text>}
                         else{<text></text>
                         }</li>

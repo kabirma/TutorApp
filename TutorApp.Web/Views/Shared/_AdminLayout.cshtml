@@ -10,10 +10,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="~/Content/assets/img/basic/favicon.ico" type="image/x-icon">
-    <title>Tutor</title>
+    <meta name="description" content="Edutime">
+    <meta name="author" content="Edutime">
+    <link rel="icon" href="~/Content/Database_Images/57.png" type="image/x-icon">
+    <title>Edutime</title>
     <!-- CSS -->
     <link rel="stylesheet" href="~/Content/backend-style.css">
     <link rel="stylesheet" href="~/Content/assets/css/app.css">
@@ -95,7 +95,16 @@
                                     <div class="text-xs-center">
                                         <span class="font-weight-lighter s-18">Menu</span>
                                     </div>
-                                    <div class="badge badge-danger r-0">@Model.CompanyDetail[0].Name</div>
+                                    <div class="badge badge-danger r-0">
+                                        @if (Model.CompanyDetail != null && Model.CompanyDetail[0] != null)
+                                        {
+                                            <text> @Model.CompanyDetail[0].Name</text>
+                                        }
+                                        else
+                                        {
+                                            <text>Edutime</text>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                             <ul class="sidebar-menu">
@@ -172,7 +181,7 @@
                                 </li>
                                 <li class="treeview">
                                     <a href="#">
-                                        <i class="icon icon-question-circle-o s-24"></i> 
+                                        <i class="icon icon-question-circle-o s-24"></i>
                                         <span>Question & Answer</span>
                                         <i class=" icon-angle-left  pull-right"></i>
                                     </a>
@@ -194,7 +203,7 @@
                                     </a>
                                 </li>
                                 <li class="treeview">
-                                    <a href="@Url.Inbox()">
+                                    <a href="/Inbox/Index">
                                         <i class="icon icon-inbox2 s-24"></i>
                                         <span>Inbox</span>
                                         <span class="badge r-3 badge-primary pull-right">@Model.InboxCount</span>
@@ -202,7 +211,7 @@
                                     </a>
                                 </li>
                                 <li class="treeview">
-                                    <a href="@Url.Account()">
+                                    <a href="/Account/Index">
                                         <i class="icon icon-user-circle s-24"></i>
                                         <span>Admin</span>
                                         <span class="badge r-3 badge-primary pull-right">@Model.AdminCount</span>
@@ -213,14 +222,21 @@
                                     <a href="@Url.CompanyDetails()">
                                         <i class="icon icon-user-circle s-24"></i>
                                         <span>Company Information</span>
-                                     
+
+                                    </a>
+                                </li>
+                                <li class="treeview">
+                                    <a href="/Banner/Index">
+                                        <i class="icon icon-image s-24"></i>
+                                        <span>Banner Images</span>
+
                                     </a>
                                 </li>
 
                             </ul>
 
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
@@ -250,7 +266,16 @@
                     <div class="relative">
                         <div class="d-flex">
                             <div class="d-none d-md-block">
-                                <h1 class="nav-title">@Model.CompanyDetail[0].Name</h1>
+                                <h1 class="nav-title">
+                                    @if (Model.CompanyDetail != null && Model.CompanyDetail[0] != null)
+                                    {
+                                        <text> @Model.CompanyDetail[0].Name</text>
+                                    }
+                                    else
+                                    {
+                                        <text>Edutime</text>
+                                    }
+                                </h1>
                             </div>
                         </div>
                     </div>
@@ -268,76 +293,91 @@
                                         <!-- inner menu: contains the actual data -->
                                         <ul class="menu pl-2 pr-2">
                                             <!-- start message -->
-                                            @foreach (var inbox in Model.Inbox)
+                                            @if (Model.Inbox != null)
                                             {
+                                                foreach (var inbox in Model.Inbox)
+                                                {
 
-                                                <li>
-                                                    <a>
-                                                        <div class="avatar float-left">
-                                                            <img src="https://openclipart.org/image/2400px/svg_to_png/285440/1503577975.png" alt="@inbox.Name">
-                                                            <span class="avatar-badge online"></span>
-                                                        </div>
-                                                        <h4>
-                                                            @inbox.Email.ToUpper()
-                                                            <small><i class="icon icon-clock-o"></i>@inbox.Date</small>
-                                                        </h4>
-                                                        <p>
-                                                            @if(inbox.Message.Length > 50)
-                                                            {<text>@inbox.Message.Substring(0, 50)</text>}
-                                                        else
-                                                        {<text>@inbox.Message.Substring(0, inbox.Message.Length)</text>}...
-                                                                                                            </p>
-                                                    </a>
-                                                </li>
+                                                    <li>
+                                                        <a>
+                                                            <div class="avatar float-left">
+                                                                <img src="https://openclipart.org/image/2400px/svg_to_png/285440/1503577975.png" alt="@inbox.Name">
+                                                                <span class="avatar-badge online"></span>
+                                                            </div>
+                                                            <h4>
+                                                                @inbox.Email.ToUpper()
+                                                                <small><i class="icon icon-clock-o"></i>@inbox.Date</small>
+                                                            </h4>
+                                                            <p>
+                                                                @if (inbox.Message.Length > 50)
+                                                                {<text>@inbox.Message.Substring(0, 50)</text>}
+                                                            else
+                                                            {<text>@inbox.Message.Substring(0, inbox.Message.Length)</text>}...
+                                                            </p>
+                                                        </a>
+                                                    </li>
 
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <text>
+                                                    <li>No Message Found</li>
+                                                </text>
                                             }
                                         </ul>
                                     </li>
                                     <li class="footer s-12 p-2 text-center"><a href="@Model.Inbox">See All Messages</a></li>
                                 </ul>
                             </li>
-                                    <!-- Notifications -->
-                                    <!-- Right Sidebar Toggle Button -->
-                                    <!-- User Account-->
-                                    <li class="dropdown custom-dropdown user user-menu ">
-                                        <a href="#" class="nav-link" data-toggle="dropdown">
-                                            <img src="~/Content/assets/img/dummy/u8.png" class="user-image" alt="User Image">
-                                            <i class="icon-more_vert "></i>
-                                        </a>
-                                        <div class="dropdown-menu p-4 dropdown-menu-right">
-                                            <div class="row box justify-content-between my-4">
+                            <!-- Notifications -->
+                            <!-- Right Sidebar Toggle Button -->
+                            <!-- User Account-->
+                            <li class="dropdown custom-dropdown user user-menu ">
+                                <a href="#" class="nav-link" data-toggle="dropdown">
+                                    <img src="~/Content/assets/img/dummy/u8.png" class="user-image" alt="User Image">
+                                    <i class="icon-more_vert "></i>
+                                </a>
+                                <div class="dropdown-menu p-4 dropdown-menu-right">
+                                    <div class="row box justify-content-between my-4">
 
 
-                                                <a href="#">
-                                                    <i class="icon-supervisor_account indigo lighten-2 avatar  r-5"></i>
-                                                    <div class="pt-1">@if (Session["username"] != null) { @Session["username"].ToString();}
-                                                    else { <text>User</text>}</div>
-                                                </a>
-                                                <a href="@Url.Signout()">
-                                                    <i class="icon-sign-out indigo lighten-2 avatar  r-5"></i>
-                                                    <div class="pt-1">Logout</div>
-                                                </a>
-
-                                            </div>
+                                        <a href="#">
+                                            <i class="icon-supervisor_account indigo lighten-2 avatar  r-5"></i>
+                                            <div class="pt-1">
+                                                @if (Session["username"] != null)
+                                                {@Session["username"].ToString();
+                                            }
+                                            else
+                                            { <text>User</text>}
                                         </div>
-                                    </li>
-                                </ul>
-</div>
+                                    </a>
+                                    <a href="@Url.Signout()">
+                                        <i class="icon-sign-out indigo lighten-2 avatar  r-5"></i>
+                                        <div class="pt-1">Logout</div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <!--#navbar-->
-            <div class="container-fluid relative animatedParent animateOnce my-3">
-                @RenderBody()
-            </div>
-            <div class="control-sidebar-bg shadow white fixed"></div>
         </div>
+        <!--#navbar-->
+        <div class="container-fluid relative animatedParent animateOnce my-3">
+            @RenderBody()
         </div>
-        <!--/#app -->
-        <script src="~/Content/assets/js/app.js"></script>
-        <script>
-            $(".skin_handle").on("click", function () {
-                $("body").toggleClass("theme-dark")
-            });
-        </script>
+        <div class="control-sidebar-bg shadow white fixed"></div>
+    </div>
+</div>
+<!--/#app -->
+
+<script src="~/Content/assets/js/app.js"></script>
+<script>
+    $(".skin_handle").on("click", function () {
+        $("body").toggleClass("theme-dark")
+    });
+</script>
 </body>
 </html>

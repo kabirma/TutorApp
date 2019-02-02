@@ -50,6 +50,7 @@
     <Compile Include="AccountServices.cs" />
     <Compile Include="AdminServices.cs" />
     <Compile Include="AnswersServices.cs" />
+    <Compile Include="BannerServices.cs" />
     <Compile Include="BlogServices.cs" />
     <Compile Include="CompanyDetailServices.cs" />
     <Compile Include="CourseServices.cs" />
@@ -70,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TutorApp.Database\TutorApp.Database.csproj">
-      <Project>{ce45689d-ddaa-41c1-8e84-bc747f29ea7e}</Project>
+      <Project>{2CDFF274-AE3C-4986-AE93-CC02FEEF965C}</Project>
       <Name>TutorApp.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\TutorApp.Entities\TutorApp.Entities.csproj">

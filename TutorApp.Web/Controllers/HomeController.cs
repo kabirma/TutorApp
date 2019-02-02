@@ -6,21 +6,24 @@ using System.Web.Mvc;
 using TutorApp.Entities;
 using TutorApp.Services;
 using TutorApp.Web.ViewModels;
-using System.Data.Entity;
+
 
 namespace TutorApp.Web.Controllers
 {
     public class HomeController : Controller
     {
 
-
+        public ActionResult Error()
+        {
+            return View();
+        }
         int items = 20;
         public ActionResult Index()
         {
             ListViewModel model = new ListViewModel();
             model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
-
-            model.Courses = CourseServices.Instance.GetCourses().Where(courses => courses.IsFeatured).Distinct().Take(12).ToList();
+            model.CoursesCount = CourseServices.Instance.GetCoursesCount();
+            model.Courses = CourseServices.Instance.GetCourses();
             model.CourseFieldCount = CoursesFieldServices.Instance.GetCoursesFieldCount();
             model.Teachers = TeachersServices.Instance.GetTeachers().OrderBy(teacher => teacher.Rating).Take(10).ToList();
             model.FilesCount = FilesServices.Instance.GetFilesCount();
@@ -130,7 +133,7 @@ namespace TutorApp.Web.Controllers
         }
 
 
-
+        [HttpGet]
         public ActionResult OnlineVideos()
         {
             ListViewModel model = new ListViewModel();
@@ -517,12 +520,20 @@ namespace TutorApp.Web.Controllers
             FilesServices.Instance.SaveFiles(newFile);
             return RedirectToAction("TeacherProfile");
         }
-
         [HttpGet]
-        public ActionResult AskQuestion(int ID)
+        public ActionResult QuestionAnswer()
         {
             ListViewModel model = new ListViewModel();
-            model.SingleStudent = StudentServices.Instance.GetStudent(ID);
+            model.Question = QuestionsServices.Instance.GetQuestions();
+            model.QuestionCount = QuestionsServices.Instance.GetQuestionsCount(); 
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult AskQuestion()
+        {
+            ListViewModel model = new ListViewModel();
+            model.SingleStudent = StudentServices.Instance.GetStudent(Convert.ToInt16(Session["studentID"]));
             model.Courses = CourseServices.Instance.GetCourses();
             model.Question = QuestionsServices.Instance.GetQuestions();
             return View(model);
@@ -546,9 +557,11 @@ namespace TutorApp.Web.Controllers
         public ActionResult QuestionView()
         {
             ListViewModel model = new ListViewModel();
+            model.Banner = BannerServices.Instance.GetBanners();
             model.Question = QuestionsServices.Instance.GetQuestions();
             model.Student = StudentServices.Instance.GetStudents();
             model.Courses = CourseServices.Instance.GetCourses();
+            model.CourseField = CoursesFieldServices.Instance.GetCoursesField();
             model.CompanyDetail = CompanyDetailServices.Instance.GetCompanyDetails();
 
             return View(model);
@@ -650,6 +663,11 @@ namespace TutorApp.Web.Controllers
             ListViewModel model = new ListViewModel();
             model.Message = message.ToString();
             return View(model);
+        }
+
+        public ActionResult LoginCheck()
+        {
+            return View();
         }
     }
 }

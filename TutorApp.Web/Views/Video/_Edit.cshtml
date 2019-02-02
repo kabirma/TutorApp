@@ -43,7 +43,11 @@
         <br />
 
         <input id="VideoUrl" name="FilePath" type="hidden" value="@Model.FilePath" />
-        <input type="file" id="VideoUpload" name="FilePath" /><br />
+        <input type="file" id="VideoUpload" name="FilePath" />
+        <div class="circle-loader">
+            <div class="checkmark draw"></div>
+        </div>
+        <br />
         <label class="size">500MB Size Limit</label>
         <br />
         <button type="button" id="updatebtn">Update Record</button>
@@ -54,6 +58,9 @@
 </form>
 
 <script>
+    $("#updatebtn").attr("disabled", "disabled");
+    $('.circle-loader').hide();
+
     $("#cancelbtn").click(function () {
         $("#actioncontainer").html("");
     });
@@ -72,7 +79,11 @@
             .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
     });
 
- $("#VideoUpload").change(function () {
+
+
+    $("#VideoUpload").change(function () {
+
+        $('.circle-loader').show();
         var element = this;
         var formData = new FormData();
         var totalfiles = element.files.length;
@@ -84,25 +95,27 @@
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Videouploader()',
+            url: '/Shared/UploadVideo',
             dataType: 'json',
             data: formData,
             contentType: false,
             processData: false
 
         })
-        .done(function (response) {
-            console.log(response);
+            .done(function (response) {
+                console.log(response);
 
-            if (response.Success) {
+                if (response.Success) {
 
-                $("#VideoUrl").val(response.VideoUrl);
-            }
+                    $("#VideoUrl").val(response.VideoUrl);
+                    $('.checkmark').toggle();
+                    $('.circle-loader').toggleClass('load-complete');
+                    $("#updatebtn").removeAttr("disabled");
+                }
             })
-       .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
 
     });
-
     
       $("#ImageUpload").change(function () {
         var element = this;
@@ -116,7 +129,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Imageuploader()',
+            url: '/Shared/UploadImage',
             dataType: 'json',
             data: formData,
             contentType: false,

@@ -29,7 +29,11 @@
         <br />
         <input id="FileUrl" name="FilePath" type="hidden" value="@Model.FilePath" />
         <input type="file" id="FileUpload" name="FilePath" />
-
+        <div class="circle-loader">
+            <div class="checkmark draw"></div>
+        </div>
+        <br />
+        <label>Size:500 MB Limit</label>
         <br />
         <button type="button" id="updatebtn">Update Record</button>
 
@@ -39,6 +43,9 @@
 </form>
 
 <script>
+    $("#updatebtn").attr("disabled", "disabled");
+    $('.circle-loader').hide();
+
     $("#cancelbtn").click(function () {
         $("#actioncontainer").html("");
     });
@@ -57,7 +64,9 @@
             .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
     });
 
-     $("#FileUpload").change(function () {
+    $("#FileUpload").change(function () {
+
+        $('.circle-loader').show();
         var element = this;
         var formData = new FormData();
         var totalfiles = element.files.length;
@@ -69,7 +78,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Fileuploader()',
+            url: '/Shared/UploadFile',
             dataType: 'json',
             data: formData,
             contentType: false,
@@ -82,7 +91,9 @@
             if (response.Success) {
               
                 $("#FileUrl").val(response.FileUrl);
-
+                $('.checkmark').toggle();
+                $('.circle-loader').toggleClass('load-complete');
+                $("#updatebtn").removeAttr("disabled");
             }
             })
        .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });

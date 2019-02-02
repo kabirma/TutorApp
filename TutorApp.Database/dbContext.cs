@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TutorApp.Entities;
 using MySql.Data.Entity;
 using System.Data.Entity;
-using TutorApp.Entities;
 
 namespace TutorApp.Database
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
-    public class dbContext : DbContext, IDisposable
+    public class dbContext : DbContext , IDisposable
     {
-        public dbContext() : base("AppDatabase") { }
-
-        public DbSet<Students> StudentTable { get; set;}
+        public dbContext() : base("tutordb") { }
+        public DbSet<Banners> BannerTable { get; set; }
+        public DbSet<Students> StudentTable { get; set; }
         public DbSet<Teachers> TeacherTable { get; set; }
         public DbSet<Accounts> AccountTable { get; set; }
         public DbSet<Blogs> BlogTable { get; set; }

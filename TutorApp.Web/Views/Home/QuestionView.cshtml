@@ -5,7 +5,25 @@
     ViewBag.Title = "QuestionView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (Model.Banner != null)
+{
+    <text>
+<style>
+    #hero_in.courses:before {
+        background: url(@Model.Banner.Where(x=>x.Name=="questionview").FirstOrDefault().ImageUrl) center center no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
+    #hero_in.courses .wrapper {
+        background-color: #372675;
+        background-color: rgba(57, 39, 121, 0.8);
+    }
+</style>
+</text>
+}
 
 <main>
     <section id="hero_in" class="courses">
@@ -80,7 +98,7 @@
 
     $(".category-filter").on('change',function(e) {
         $.ajax({
-          url: "@Url.VideoData("")",
+          url: "@Url.QuestionData("")",
           data:
               {
                   Category: $(".category-filter").val()
@@ -92,7 +110,9 @@
             .fail(function(XMLHttpRequest, status, errorthrown) { alert("error"); });
     });
 
-      $(".period-filter").click(function() {
+    $(".period-filter").click(function () {
+        $(".period-filter").removeAttr("checked");
+        $(this).attr("checked");
         $.ajax({
           url: "@Url.QuestionData("")",
           data:

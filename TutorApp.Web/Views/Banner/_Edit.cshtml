@@ -1,0 +1,86 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Entities.Banners
+<h2>Operations</h2>
+<form method="post" id="updatebanner" class="form container-fluid row">
+
+
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+        <h1>Edit Form</h1><br>
+
+        <input name="ID" type="hidden" value="@Model.ID" />
+        <label>Name</label>
+        <input type="text" name="Name" value="@Model.Name" /><br />
+      
+        <br />
+        <input id="ImageUrl" name="ImageUrl" type="hidden" value="@Model.ImageUrl" />
+        <input type="file" id="ImageUpload" name="Image" />
+        <br />
+        <button type="button" id="updatebtn">Update Record</button>
+        <button type="button" id="cancelbtn">Cancel</button>
+    </div>
+    <div class="col-md-4">
+        <br /><br />
+        <img id="imagefile" class="image" src="@Model.ImageUrl" />
+    </div>
+
+</form>
+
+<script>
+    $("#cancelbtn").click(function () {
+        $("#actioncontainer").html("");
+        $([document.documentElement, document.body]).animate({
+            scrolldown: $("#tablecontainer").offset().top
+        }, 1000);
+    });
+
+
+    $("#updatebtn").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.EditBanner()",
+            data: $("#updatebanner").serialize()
+        })
+            .done(function (response) {
+                $("#tablecontainer").html(response);
+                $("#actioncontainer").html("");
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+
+    $("#ImageUpload").change(function () {
+
+        var element = this;
+        var formData = new FormData();
+        var totalfiles = element.files.length;
+
+        for (var i = 0; i < totalfiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/Shared/UploadImage',
+            dataType: 'json',
+            data: formData,
+            contentType: false,
+            processData: false
+
+        })
+            .done(function (response) {
+
+                if (response.Success) {
+                    $("#imagefile").attr("src", response.ImageUrl);
+
+                    $("#ImageUrl").val(response.ImageUrl);
+                }
+            })
+            .fail(function (XMLHttpRequest, status, errorthrown) { alert("error"); });
+
+    });
+</script>
+
+

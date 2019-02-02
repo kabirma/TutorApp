@@ -1,5 +1,52 @@
 ﻿@model TutorApp.Web.ViewModels.ListViewModel
-   
+
+<style>
+
+    .dropbtn {
+        background-color: dodgerblue;
+        color: white;
+        padding: 16px 64px;
+        font-size: 16px;
+        border: none;
+        border-radius:5px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: dodgerblue;
+            background-color:white;
+            padding: 12px 85px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: dodgerblue;
+                color:white;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: dodgerblue;
+    }
+</style>
+
 <main>
     <section class="hero_single version_2">
         <div class="wrapper">
@@ -8,8 +55,15 @@
                 <p>Increase your expertise in business, technology and personal development</p>
                 <form>
                     <div id="custom-search-input">
-                        <div class="input-group">
-                            <a class="btn btn-primary w-100">Check our Courses</a>
+                        <div class="dropdown">
+                            <button class="dropbtn">Our Courses</button>
+                            <div class="dropdown-content">
+                                @foreach (var course in Model.Courses.Take(3).ToList())
+                                {
+                                    <a href="/Home/LessonFields/@course.ID">@course.Name</a>
+                                }
+                                <a href="/Home/Lesson" style="color:white;background-color:dodgerblue;"><b>View Courses</b></a>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -39,35 +93,62 @@
     <div class="container-fluid margin_120_0">
         <div class="main_title_2">
             <span><em></em></span>
-            <h2>@Model.CompanyDetail[0].Name Popular Teachers</h2>
+            <h2>
+                @if (Model.CompanyDetail != null && Model.CompanyDetail[0] != null)
+                {
+                    <text> @Model.CompanyDetail[0].Name</text>
+                }
+                else
+                {
+                    <text>Edutime</text>
+                } Popular Teachers
+            </h2>
             <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
         </div>
         <div id="reccomended" class="owl-carousel owl-theme">
-           @foreach (var teachers in Model.Teachers)
-           {
-            <div class="item">
-                <div class="box_grid">
-                    <figure>
-                        <a href="#0" class="wish_bt"></a>
-                        <a href="course-detail.html"><img src="@teachers.ImageUrl" class="img-fluid" alt=""></a>
-                        <div class="price">$@teachers.HoulryRate/hr</div>
-                        <div class="preview"><span>Preview course</span></div>
-                    </figure>
-                    <div class="wrapper">
-                        <small>@teachers.UndergraduateMajor From @teachers.UndergraduateCollage</small>
-                        <h3>@teachers.Name @teachers.LName</h3>
-                        <p>@teachers.Bio</p>
-                        <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
+            @if (Model.Teachers != null)
+            {
+                foreach (var teachers in Model.Teachers)
+                {
+                    <div class="item">
+                        <div class="box_grid">
+                            @if (teachers.ImageUrl != null)
+                            {
+                                <figure style="height:600px;width:auto;">
+
+                                    <a href="/Home/TeacherDetails/@teachers.ID"><img src="@teachers.ImageUrl" /> </a><div class="price">$@teachers.HoulryRate/hr</div>
+
+                                </figure>
+                            }
+                            else
+                            {
+                                <figure>
+
+                                    <a href="/Home/TeacherDetails/@teachers.ID"><img src="http://www.tissueagora.com/CmsData/Agora/DefaultPortraitImage.png" height="100%" width="auto" /> </a><div class="price">$@teachers.HoulryRate/hr</div>
+
+                                </figure>
+                            }
+
+                            <div class="wrapper">
+                                <small>@teachers.UndergraduateMajor From @teachers.UndergraduateCollage</small>
+                                <h3>@teachers.Name @teachers.LName</h3>
+                                <p>@teachers.Bio</p>
+                                <div class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></div>
+                            </div>
+                            <ul>
+                                <li><a href="course-detail.html">View Profile</a></li>
+                                <li><i class="icon_like"></i> @teachers.Email</li>
+
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li><i class="icon_clock_alt"></i> @teachers.AvailableHours</li>
-                        <li><i class="icon_like"></i> @teachers.Email</li>
-                        <li><a href="course-detail.html">have a Look at my Profile</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /item -->
-           }
+                    <!-- /item -->
+                }
+            }
+            else
+            {
+                <div class="alert alert-danger">No Teachers Found!</div>
+            }
         </div>
         <!-- /carousel -->
         <div class="container">
@@ -80,17 +161,27 @@
     <div class="container margin_30_95">
         <div class="main_title_2">
             <span><em></em></span>
-            <h2>@Model.CompanyDetail[0].Name Categories Courses</h2>
+            <h2>
+                @if (Model.CompanyDetail != null && Model.CompanyDetail[0] != null)
+                {
+                    <text> @Model.CompanyDetail[0].Name</text>
+                }
+                else
+                {
+                    <text>Edutime</text>
+                } Categories Courses
+            </h2>
             <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
         </div>
         <div class="row">
-        @foreach (var courses in Model.Courses)
-        {
+       @if (Model.Courses != null) { 
+       foreach (var courses in Model.Courses.Where(courses => courses.IsFeatured).Take(12).ToList())
+       {
             <div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
-                <a href="#0" class="grid_item">
-                    <figure class="block-reveal">
+                <a href="/Home/LessonFields/@courses.ID" class="grid_item">
+                    <figure class="block-reveal" style="height:200px;width:auto;">
                         <div class="block-horizzontal"></div>
-                        <img src="@courses.Imageurl" class="img-fluid" alt="">
+                        <img src="@courses.Imageurl" height="100%" width="auto" class="img-fluid" alt="">
                         <div class="info">
                             <h3>@courses.Name</h3>
                         </div>
@@ -98,7 +189,12 @@
                 </a>
             </div>
             <!-- /grid_item -->
-        }
+           }
+       }
+       else
+       {
+                <div class="alert alert-danger">No Courses Found!</div>
+       }
         </div>
         <!-- /row -->
     </div>
@@ -107,33 +203,52 @@
         <div class="container margin_120_95">
             <div class="main_title_2">
                 <span><em></em></span>
-                <h2>@Model.CompanyDetail[0].Name Teaching Jobs</h2>
+                <h2>
+                    @if (Model.CompanyDetail != null && Model.CompanyDetail[0] != null)
+                    {
+                        <text> @Model.CompanyDetail[0].Name</text>
+                    }
+                    else
+                    {
+                        <text>Edutime</text>
+                    } Teaching Jobs
+                </h2>
                 <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
             </div>
             <div class="row">
-                @foreach (var jobs in Model.Job)
+                @if (Model.Job != null)
                 {
-                    <div class="col-lg-6">
-                        <a class="box_news" href="#0">
-                            <figure>
-                                <img src="https://www.thoughtco.com/thmb/45XWafEdDpIzg4Ze9943GM7fMi4=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-187244393-5a980ce743a1030037ba389f.jpg" alt="">
-                                <figcaption><strong>@jobs.Date.Substring(5,5).Replace("-", " ")</strong></figcaption>
-                            </figure>
-                            <ul>
-                                <li>Student: @jobs.Student.Name</li>
-                                <li>@jobs.Date</li>
-                            </ul>
-                            <h4>@jobs.Name</h4>
-                            <p>@if (jobs.Description.Length > 150) {<text>@jobs.Description.Substring(0,150)</text> } else {<text>@jobs.Description.Substring(0,jobs.Description.Length)</text> }</p>
- 
+                    foreach (var jobs in Model.Job)
+                    {
+                        <div class="col-lg-6">
+                            <a class="box_news" href="/Home/TutoringJobsView">
+                                <figure>
+                                    <img src="https://www.thoughtco.com/thmb/45XWafEdDpIzg4Ze9943GM7fMi4=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-187244393-5a980ce743a1030037ba389f.jpg" alt="">
+                                    <figcaption><strong>@jobs.Date.Substring(5, 5).Replace("-", " ")</strong></figcaption>
+                                </figure>
+                                <ul>
+                                    <li>Student: @jobs.Student.Name</li>
+                                    <li>@jobs.Date</li>
+                                </ul>
+                                <h4>@jobs.Name</h4>
+                                <p>@if (jobs.Description.Length > 150)
+                                {<text>@jobs.Description.Substring(0, 150)</text> }
+                            else
+                            {<text>@jobs.Description.Substring(0, jobs.Description.Length)</text>}</p>
 
-                          </a>
- 
 
-                      </div>
- 
+                            </a>
 
-                      <!-- /box_news -->
+
+                        </div>
+
+
+                        <!-- /box_news -->
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-danger">No Teaching Jobs Found Found!</div>
                 }
             </div>
             <!-- /row -->

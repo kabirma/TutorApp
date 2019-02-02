@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE45689D-DDAA-41C1-8E84-BC747F29EA7E}</ProjectGuid>
+    <ProjectGuid>{2CDFF274-AE3C-4986-AE93-CC02FEEF965C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TutorApp.Database</RootNamespace>
@@ -62,124 +62,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dbContext.cs" />
-    <Compile Include="Migrations\201901072032004_jobsupdatedagain.cs" />
-    <Compile Include="Migrations\201901072032004_jobsupdatedagain.Designer.cs">
-      <DependentUpon>201901072032004_jobsupdatedagain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901081539444_databaseupdated.cs" />
-    <Compile Include="Migrations\201901081539444_databaseupdated.Designer.cs">
-      <DependentUpon>201901081539444_databaseupdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901081816546_databupdated.cs" />
-    <Compile Include="Migrations\201901081816546_databupdated.Designer.cs">
-      <DependentUpon>201901081816546_databupdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901092256521_coursesupdated.cs" />
-    <Compile Include="Migrations\201901092256521_coursesupdated.Designer.cs">
-      <DependentUpon>201901092256521_coursesupdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901101903476_coursesup.cs" />
-    <Compile Include="Migrations\201901101903476_coursesup.Designer.cs">
-      <DependentUpon>201901101903476_coursesup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901101930223_coupdate.cs" />
-    <Compile Include="Migrations\201901101930223_coupdate.Designer.cs">
-      <DependentUpon>201901101930223_coupdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901121445565_comment.cs" />
-    <Compile Include="Migrations\201901121445565_comment.Designer.cs">
-      <DependentUpon>201901121445565_comment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901121448447_commentupdate.cs" />
-    <Compile Include="Migrations\201901121448447_commentupdate.Designer.cs">
-      <DependentUpon>201901121448447_commentupdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901202027317_videoupdate.cs" />
-    <Compile Include="Migrations\201901202027317_videoupdate.Designer.cs">
-      <DependentUpon>201901202027317_videoupdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901202038218_videoupdateas.cs" />
-    <Compile Include="Migrations\201901202038218_videoupdateas.Designer.cs">
-      <DependentUpon>201901202038218_videoupdateas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901221026003_teacherupdated.cs" />
-    <Compile Include="Migrations\201901221026003_teacherupdated.Designer.cs">
-      <DependentUpon>201901221026003_teacherupdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901231317285_studentupdated.cs" />
-    <Compile Include="Migrations\201901231317285_studentupdated.Designer.cs">
-      <DependentUpon>201901231317285_studentupdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901231322019_studentupdatedas.cs" />
-    <Compile Include="Migrations\201901231322019_studentupdatedas.Designer.cs">
-      <DependentUpon>201901231322019_studentupdatedas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901232101374_studentupdatedaas.cs" />
-    <Compile Include="Migrations\201901232101374_studentupdatedaas.Designer.cs">
-      <DependentUpon>201901232101374_studentupdatedaas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901232326597_studentupdatedaasas.cs" />
-    <Compile Include="Migrations\201901232326597_studentupdatedaasas.Designer.cs">
-      <DependentUpon>201901232326597_studentupdatedaasas.cs</DependentUpon>
+    <Compile Include="Migrations\201902012317538_banneradded.cs" />
+    <Compile Include="Migrations\201902012317538_banneradded.Designer.cs">
+      <DependentUpon>201902012317538_banneradded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TutorApp.Entities\TutorApp.Entities.csproj">
+      <Project>{78BB57F4-538E-4E48-B358-A57A9D9D2C4C}</Project>
+      <Name>TutorApp.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TutorApp.Entities\TutorApp.Entities.csproj">
-      <Project>{78bb57f4-538e-4e48-b358-a57a9d9d2c4c}</Project>
-      <Name>TutorApp.Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901072032004_jobsupdatedagain.resx">
-      <DependentUpon>201901072032004_jobsupdatedagain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901081539444_databaseupdated.resx">
-      <DependentUpon>201901081539444_databaseupdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901081816546_databupdated.resx">
-      <DependentUpon>201901081816546_databupdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901092256521_coursesupdated.resx">
-      <DependentUpon>201901092256521_coursesupdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901101903476_coursesup.resx">
-      <DependentUpon>201901101903476_coursesup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901101930223_coupdate.resx">
-      <DependentUpon>201901101930223_coupdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901121445565_comment.resx">
-      <DependentUpon>201901121445565_comment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901121448447_commentupdate.resx">
-      <DependentUpon>201901121448447_commentupdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901202027317_videoupdate.resx">
-      <DependentUpon>201901202027317_videoupdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901202038218_videoupdateas.resx">
-      <DependentUpon>201901202038218_videoupdateas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901221026003_teacherupdated.resx">
-      <DependentUpon>201901221026003_teacherupdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901231317285_studentupdated.resx">
-      <DependentUpon>201901231317285_studentupdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901231322019_studentupdatedas.resx">
-      <DependentUpon>201901231322019_studentupdatedas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901232101374_studentupdatedaas.resx">
-      <DependentUpon>201901232101374_studentupdatedaas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901232326597_studentupdatedaasas.resx">
-      <DependentUpon>201901232326597_studentupdatedaasas.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902012317538_banneradded.resx">
+      <DependentUpon>201902012317538_banneradded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

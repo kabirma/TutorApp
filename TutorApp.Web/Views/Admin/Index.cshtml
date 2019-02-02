@@ -5,7 +5,6 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-
 }
 <div class="container-fluid relative animatedParent animateOnce my-3">
     <div class="row row-eq-height my-3 mt-3">
@@ -107,8 +106,10 @@
                 <div class="card-body">
                     <table class="table table-hover earning-box">
                         <tbody>
-                            @foreach (var course in Model.Courses)
+                            @if (Model.Courses != null)
                             {
+                                foreach (var course in Model.Courses)
+                                {
                                 <tr>
                                     <td class="w-10">
                                         <a href="@Url.Courses()" class="avatar avatar-lg">
@@ -122,6 +123,11 @@
 
                                     <td>@course.Description</td>
                                 </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>No Courses Found!</tr>
                             }
                         </tbody>
                     </table>
@@ -133,21 +139,29 @@
                 <div class="card-body">
                     <table class="table table-hover earning-box">
                         <tbody>
-                            @foreach (var teacher in Model.Teachers)
+
+                            @if (Model.Teachers != null)
                             {
-                                <tr>
-                                    <td class="w-10">
-                                        <a href="@Url.Teacher()" class="avatar avatar-lg">
-                                            <img src="@teacher.ImageUrl" alt="">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <h6>@teacher.Name</h6>
-                                        <small class="text-muted">@teacher.UndergraduateMajor</small>
-                                    </td>
-                                    <td>@teacher.Experience</td>
-                                    <td>$@teacher.HoulryRate</td>
-                                </tr>
+                                foreach (var teacher in Model.Teachers)
+                                {
+                                    <tr>
+                                        <td class="w-10">
+                                            <a href="@Url.Teacher()" class="avatar avatar-lg">
+                                                <img src="@teacher.ImageUrl" alt="">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <h6>@teacher.Name</h6>
+                                            <small class="text-muted">@teacher.UndergraduateMajor</small>
+                                        </td>
+                                        <td>@teacher.Experience</td>
+                                        <td>$@teacher.HoulryRate</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>No Teachers Found!</tr>
                             }
                         </tbody>
                     </table>

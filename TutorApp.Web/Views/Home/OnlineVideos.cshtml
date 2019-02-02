@@ -16,6 +16,7 @@
     <div class="filters_listing sticky_horizontal">
         <div class="container">
             <ul class="clearfix">
+
                 <li>
                     <div class="switch-field">
                         <input type="radio" id="all" name="listing_filter" value="all">
@@ -25,21 +26,13 @@
                         <label class="period-filter" data-time="new" for="latest">Latest</label>
                     </div>
                 </li>
+
                 <li>
                     <div class="layout_view">
                         <input type="text" placeholder="Search File " id="searchtxt" class="search-input" />
                     </div>
                 </li>
 
-                <li>
-                    <select name="orderby" class="selectbox writer-filter">
-                        <option value="all" data-writer="all">All Writers</option>
-                        @foreach (var teacher in Model.Teacher)
-                        {
-                            <option value="@teacher.Name"  data-writer="@teacher.Name">@teacher.Name</option>
-                        }
-                    </select>
-                </li>
                 <li>
                     <select name="orderby" class="selectbox category-filter">
 
@@ -50,6 +43,7 @@
                         }
                     </select>
                 </li>
+
 
             </ul>
         </div>

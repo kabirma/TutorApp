@@ -10,7 +10,7 @@
 <form method="post" id="updateteacher" class="form container-fluid row">
     <div class="col-md-2"></div>
     <div class="col-md-8 text-center">
-        <h1>Create Form</h1><br>
+        <h1>Edit Form</h1><br>
         <div style="text-align:center">
             <img id="imagefile" class="image" src="@Model.ImageUrl">
 
@@ -19,7 +19,7 @@
             <input type="file" id="ImageUpload" name="Image" />
             <br />
         </div>
-        <input name="ID" type="hidden" value="@Model.ID" />
+        <input name="ID" type="text" value="@Model.ID" />
         <input value="@Model.TeachingSubjectID" name="TeachingSubjectID" type="hidden" />
         <input value="@Model.TeachingSubject2ID" name="TeachingSubject2ID" type="hidden" />
         <input value="@Model.TeachingSubject3ID" name="TeachingSubject3ID" type="hidden" />
@@ -49,7 +49,7 @@
             <select name="Experience">
                 @for (var i = 0; i < 16; i++)
                 {
-                    var selec = Model.Experience == @i.ToString() ? "selected" : string.Empty;
+                    var selec = Model.Experience == i.ToString() ? "selected" : string.Empty;
                     <option value="@i" @selec>
                         @i year
                     </option>
@@ -139,7 +139,7 @@
                 }
             </select>
         </div>
-
+        <br />
         <div class="select">
             <select name="Gender">
                 @{var selecml = Model.StudentType == "Male" ? "selected" : string.Empty;
@@ -158,7 +158,7 @@
         </div>
 
         <br />
-        <input type="date" name="DOB" value="@Model.DOB" />
+        <input type="hidden" name="DOB" value="@Model.DOB" />
         <br />
         <input type="text" name="UndergraduateCollage" placeholder="Type Undergraduate Collage Here" value="@Model.UndergraduateCollage" />
 
@@ -264,7 +264,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '@Url.Imageuploader()',
+            url: '/Shared/UploadImage',
             dataType: 'json',
             data: formData,
             contentType: false,

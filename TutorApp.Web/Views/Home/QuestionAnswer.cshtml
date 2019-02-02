@@ -1,0 +1,92 @@
+﻿@using TutorApp.Web.Helper;
+@model TutorApp.Web.ViewModels.ListViewModel
+@{
+    ViewBag.Title = "QuestionAnswer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <section id="hero_in" class="courses">
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="fadeInUp"><span></span>Question & Answer</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container-fluid row" style="margin:8% 0">
+        <div class="col-md-1"></div>
+        <div class="col-md-8 container row">
+            <div class="text-center">
+                <h2 class=" text-uppercase">
+                    Question & Answer
+                </h2>
+                <h6>
+                    Ask the question about the your queries from the collection of vast experienced teachers, or find the answer from previous asked question.
+                </h6>
+            </div>
+            <div class="col-md-6 text-center">
+               
+                    <a href="@if (Session["student"] != null) {<text>/Home/AskQuestion/@Session["studentID"]</text> } else { <text>/Home/LoginCheck</text>} " class="btn btn-primary btn-lg ">
+                        Ask a Question
+                    </a>
+
+            </div>
+            <div class="col-md-6 text-center">
+               
+                    <a href="/Home/QuestionView" class="btn btn-primary btn-lg ">
+                       Check Question.
+                    </a>
+
+            </div>
+            <br /><br />
+            <div class="row" style="margin:3% 0;">
+                <div class="col-md-4 text-center">
+                    <h4><i class="icon-hockey-stick"></i>Find tutoring jobs in your subjects</h4>
+                    <p>Active tutors receive over two tutoring job opportunities each week.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h4><i class="icon-hockey-stick"></i>Find tutoring jobs in your subjects</h4>
+                    <p>Active tutors receive over two tutoring job opportunities each week.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h4><i class="icon-hockey-stick"></i>Find tutoring jobs in your subjects</h4>
+                    <p>Active tutors receive over two tutoring job opportunities each week.</p>
+                </div>
+            </div>
+           
+
+
+        </div>
+
+        <div class="col-md-3">
+            <h4 style="text-transform:uppercase;">Recent Jobs Requests</h4>
+            <br />
+            @if (Model != null && Model.Question != null)
+            {
+                foreach (var questions in Model.Question.Take(4))
+                {
+                    <div class="jumbotron">
+                        <h4>@questions.Name</h4>
+                        <p>
+                            @if (questions.Description.Length > 40)
+                            {<text>@questions.Description.Substring(0, 40)</text>}
+                        else
+                        { <text>@questions.Description.Substring(0, questions.Description.Length)</text>}
+                        </p>
+                        <p style="opacity:.8;">Asked by @questions.Askedby.Name on @questions.Date</p>
+
+                    </div>
+
+                }
+            }
+            else
+            {
+                <div class="danger">
+                    <p>No Job request Found...</p>
+                </div>
+            }
+        </div>
+
+    </div>
+</main>
+
